@@ -334,9 +334,10 @@
     }
     .projekt-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr;
       gap: clamp(2rem, 6vw, 5rem);
       align-items: start;
+      max-width: 640px;
     }
 
     /* Timeline Stepper */
@@ -407,8 +408,49 @@
       margin-left: .25rem;
     }
 
+    /* Section Divider */
+    .sec-divider {
+      display: flex; align-items: center; justify-content: center;
+      gap: 1.25rem;
+      padding: 0;
+      background: var(--bg-root);
+      position: relative; z-index: 2;
+    }
+    .sec-divider-line {
+      flex: 1; height: 1px;
+      background: linear-gradient(to var(--dir, right), transparent, var(--border));
+    }
+    .sec-divider-line:last-child { --dir: left; }
+    .sec-divider-btn {
+      width: 42px; height: 42px; border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--bg-surface);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-3); text-decoration: none; flex-shrink: 0;
+      transition: border-color .2s, color .2s, background .2s;
+      animation: sec-bounce 2.4s var(--ease-out-quart) infinite;
+    }
+    .sec-divider-btn:hover {
+      border-color: var(--accent-c); color: var(--accent-c);
+      background: var(--bg-card-hi); text-decoration: none;
+    }
+    .sec-divider-btn svg { width: 16px; height: 16px; }
+    @keyframes sec-bounce {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(6px); }
+    }
+
+    /* Video Section */
+    #video {
+      background: var(--bg-surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: var(--sp-8) 0;
+    }
+    #video .wrap { max-width: 800px; }
+
     /* Video */
-    .video-container { position: sticky; top: 90px; }
+    .video-container { position: static; }
     .video-label {
       font-size: .6875rem; font-weight: 600; letter-spacing: .12em;
       text-transform: uppercase; color: var(--text-3);
@@ -950,6 +992,7 @@
   </div>
   <ul class="nav-center">
     <li><a href="#projekt">Projekt</a></li>
+    <li><a href="#video">Video</a></li>
     <li><a href="#quellen" id="quellenNavLink" onclick="openQuellen(event)">Quellen</a></li>
     <li><a href="#tools">Reha-Tools</a></li>
     <li><a href="#team">Team</a></li>
@@ -1063,24 +1106,43 @@
         </div>
       </div>
 
-      <div class="video-container reveal" style="transition-delay:.2s">
-        <p class="video-label">Hauptpräsentation</p>
-        <div class="video-frame">
-          <!--
-            YouTube einbetten: Kommentar entfernen & VIDEO_ID ersetzen:
-            <iframe src="https://www.youtube.com/embed/VIDEO_ID"
-              title="Rehaproject – Regeneration im Sport"
-              frameborder="0" allow="accelerometer; autoplay; clipboard-write;
-              encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          -->
-          <div class="video-placeholder">
-            <div class="play-btn">▶</div>
-            <p>YouTube-Video wird hier eingebettet</p>
-          </div>
-        </div>
-        <p class="video-caption">Das Video fasst alle Projektergebnisse zusammen<br>und ist das zentrale Präsentationsergebnis.</p>
-      </div>
+    </div>
+  </div>
+</section>
 
+<!-- ══ Section Divider ══════════════════════════════════════════ -->
+<div class="sec-divider">
+  <div class="sec-divider-line"></div>
+  <a class="sec-divider-btn" href="#video" aria-label="Zum Video scrollen">
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="3,6 8,11 13,6"/>
+    </svg>
+  </a>
+  <div class="sec-divider-line"></div>
+</div>
+
+<!-- ══ Video ════════════════════════════════════════════════════ -->
+<section id="video">
+  <div class="wrap">
+    <p class="section-eyebrow reveal">Hauptpräsentation</p>
+    <h2 class="section-title reveal" style="transition-delay:.08s">Unser<br>YouTube-Video</h2>
+    <p class="section-sub reveal" style="transition-delay:.14s;max-width:520px">
+      Das Video fasst alle Projektergebnisse zusammen und ist das zentrale Ergebnis unserer Arbeit.
+    </p>
+    <div class="video-container reveal" style="transition-delay:.2s">
+      <div class="video-frame">
+        <!--
+          YouTube einbetten: Kommentar entfernen & VIDEO_ID ersetzen:
+          <iframe src="https://www.youtube.com/embed/VIDEO_ID"
+            title="Rehaproject – Regeneration im Sport"
+            frameborder="0" allow="accelerometer; autoplay; clipboard-write;
+            encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        -->
+        <div class="video-placeholder">
+          <div class="play-btn">▶</div>
+          <p>YouTube-Video wird hier eingebettet</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -1490,7 +1552,7 @@
 
 <!-- ══ Footer ════════════════════════════════════════════════════ -->
 <footer>
-  <p>© Reha³ · Ben, Lasse &amp; Mick · Goethe Gymnasium Dortmund · v1.3.0</p>
+  <p>© Reha³ · Ben, Lasse &amp; Mick · Goethe Gymnasium Dortmund · v1.7.0</p>
   <div class="footer-links">
     <a href="https://github.com/RadDWB/Rehaprojectdoku" target="_blank">GitHub</a>
     <a href="#hero">Nach oben ↑</a>
