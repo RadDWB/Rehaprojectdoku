@@ -339,40 +339,73 @@
       align-items: start;
     }
 
-    /* Timeline */
-    .timeline { position: relative; padding-left: 2rem; }
-    .timeline::before {
-      content: ''; position: absolute; left: 0; top: 6px; bottom: 6px;
-      width: 1px;
-      background: linear-gradient(to bottom,
-        var(--accent-c), var(--accent-v) 60%, transparent);
+    /* Timeline Stepper */
+    .tl-stepper {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      overflow: hidden;
     }
-    .tl-item {
-      position: relative; margin-bottom: 2.4rem;
-      opacity: 0; transform: translateX(-16px);
-      transition: opacity .6s var(--ease-out-expo), transform .6s var(--ease-out-expo);
+    .tl-progress-bar {
+      display: flex; gap: 3px; padding: 1.25rem 1.5rem .25rem;
     }
-    .tl-item.visible { opacity: 1; transform: translateX(0); }
+    .tl-seg {
+      flex: 1; height: 3px; border-radius: 99px;
+      background: var(--border);
+      transition: background .4s var(--ease-out-quart);
+    }
+    .tl-seg.done { background: var(--accent-c); }
 
-    .tl-dot {
-      position: absolute; left: -2.5rem; top: .35rem;
-      width: 11px; height: 11px; border-radius: 50%;
-      background: var(--bg-root);
-      border: 2px solid var(--accent-c);
-      transition: background .3s;
+    .tl-track {
+      display: flex;
+      transition: transform .5s var(--ease-out-expo);
+      will-change: transform;
     }
-    .tl-item:hover .tl-dot { background: var(--accent-c); }
-
+    .tl-slide {
+      flex-shrink: 0; width: 100%;
+      padding: 1.25rem 1.5rem 1.5rem;
+    }
     .tl-step {
-      font-size: .6875rem; font-weight: 600; letter-spacing: .12em;
-      text-transform: uppercase; color: var(--accent-v);
-      margin-bottom: .25rem;
+      font-size: .6875rem; font-weight: 700; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--accent-c);
+      margin-bottom: .6rem;
+      display: flex; align-items: center; gap: .5rem;
     }
-    .tl-item h3 {
-      font-size: 1rem; font-weight: 600; margin-bottom: .35rem;
-      line-height: 1.4;
+    .tl-step::before {
+      content: ''; display: inline-block;
+      width: 18px; height: 2px; border-radius: 1px;
+      background: var(--accent-c);
     }
-    .tl-item p { font-size: .875rem; color: var(--text-2); line-height: 1.65; }
+    .tl-slide h3 {
+      font-size: 1.0625rem; font-weight: 700; margin-bottom: .5rem;
+      line-height: 1.35;
+    }
+    .tl-slide p { font-size: .875rem; color: var(--text-2); line-height: 1.65; }
+
+    .tl-nav {
+      display: flex; align-items: center; gap: .75rem;
+      padding: 1rem 1.5rem 1.25rem;
+      border-top: 1px solid var(--border);
+    }
+    .tl-arrow {
+      width: 36px; height: 36px; border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--bg-surface);
+      color: var(--text-1);
+      cursor: pointer; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .2s, border-color .2s, color .2s;
+    }
+    .tl-arrow:hover:not(:disabled) {
+      background: var(--bg-card-hi); border-color: var(--border-hi);
+      color: var(--accent-c);
+    }
+    .tl-arrow:disabled { opacity: .25; cursor: default; }
+    .tl-arrow svg { width: 14px; height: 14px; pointer-events: none; }
+    .tl-counter {
+      font-size: .8rem; font-weight: 600; color: var(--text-2);
+      margin-left: .25rem;
+    }
 
     /* Video */
     .video-container { position: sticky; top: 90px; }
@@ -983,36 +1016,49 @@
           YouTube-Präsentationsvideo — alle Schritte chronologisch dokumentiert.
         </p>
 
-        <div class="timeline">
-          <div class="tl-item">
-            <div class="tl-dot"></div>
-            <div class="tl-step">Schritt 01</div>
-            <h3>Themenfindung &amp; Fragestellung</h3>
-            <p>Das Team entschied sich für Regenerationstools im Sport. Zentrale Frage: Was wirkt wirklich — und was ist Marketing?</p>
+        <div class="tl-stepper">
+          <div class="tl-progress-bar">
+            <div class="tl-seg done"></div>
+            <div class="tl-seg"></div>
+            <div class="tl-seg"></div>
+            <div class="tl-seg"></div>
+            <div class="tl-seg"></div>
           </div>
-          <div class="tl-item">
-            <div class="tl-dot"></div>
-            <div class="tl-step">Schritt 02</div>
-            <h3>Literaturrecherche &amp; Studiensichtung</h3>
-            <p>Systematische Recherche zu allen sechs Tools auf Basis aktueller sportwissenschaftlicher Studien und Metaanalysen.</p>
+          <div class="tl-track">
+            <div class="tl-slide">
+              <div class="tl-step">Schritt 01</div>
+              <h3>Themenfindung &amp; Fragestellung</h3>
+              <p>Das Team entschied sich für Regenerationstools im Sport. Zentrale Frage: Was wirkt wirklich — und was ist Marketing?</p>
+            </div>
+            <div class="tl-slide">
+              <div class="tl-step">Schritt 02</div>
+              <h3>Literaturrecherche &amp; Studiensichtung</h3>
+              <p>Systematische Recherche zu allen sechs Tools auf Basis aktueller sportwissenschaftlicher Studien und Metaanalysen.</p>
+            </div>
+            <div class="tl-slide">
+              <div class="tl-step">Schritt 03</div>
+              <h3>Experten-Interview · Prof. Dr. Ferrauti, RUB</h3>
+              <p>Persönliches Gespräch mit einem Professor der Ruhr-Universität Bochum. Seine Perspektive fließt direkt in die Bewertung ein.</p>
+            </div>
+            <div class="tl-slide">
+              <div class="tl-step">Schritt 04</div>
+              <h3>Videoerstellung &amp; Postproduktion</h3>
+              <p>Dreharbeiten, Schnitt und Vertonung des YouTube-Videos als Hauptpräsentationsergebnis des Projekts.</p>
+            </div>
+            <div class="tl-slide">
+              <div class="tl-step">Schritt 05</div>
+              <h3>Webdokumentation</h3>
+              <p>Zusammenstellung aller Ergebnisse, Quellen und Erkenntnisse in dieser Webseite für die schulische Präsentation und Dokumentation.</p>
+            </div>
           </div>
-          <div class="tl-item">
-            <div class="tl-dot"></div>
-            <div class="tl-step">Schritt 03</div>
-            <h3>Experten-Interview · Prof. Dr. Ferrauti, RUB</h3>
-            <p>Persönliches Gespräch mit einem Professor der Ruhr-Universität Bochum. Seine Perspektive fließt direkt in die Bewertung ein.</p>
-          </div>
-          <div class="tl-item">
-            <div class="tl-dot"></div>
-            <div class="tl-step">Schritt 04</div>
-            <h3>Videoerstellung &amp; Postproduktion</h3>
-            <p>Dreharbeiten, Schnitt und Vertonung des YouTube-Videos als Hauptpräsentationsergebnis des Projekts.</p>
-          </div>
-          <div class="tl-item">
-            <div class="tl-dot"></div>
-            <div class="tl-step">Schritt 05</div>
-            <h3>Webdokumentation</h3>
-            <p>Zusammenstellung aller Ergebnisse, Quellen und Erkenntnisse in dieser Webseite für die schulische Präsentation und Dokumentation.</p>
+          <div class="tl-nav">
+            <button class="tl-arrow" id="tl-prev" aria-label="Vorheriger Schritt">
+              <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9,2 4,7 9,12"/></svg>
+            </button>
+            <button class="tl-arrow" id="tl-next" aria-label="Nächster Schritt">
+              <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="5,2 10,7 5,12"/></svg>
+            </button>
+            <span class="tl-counter" id="tl-counter">1 / 5</span>
           </div>
         </div>
       </div>
@@ -1498,19 +1544,38 @@ const revealObs = new IntersectionObserver((entries) => {
 }, { threshold: 0.12 });
 document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 
-/* ── Timeline items ──────────────────────────────────────────── */
-const tlObs = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.classList.add('visible');
-      tlObs.unobserve(e.target);
-    }
-  });
-}, { threshold: 0.15 });
-document.querySelectorAll('.tl-item').forEach((el, i) => {
-  el.style.transitionDelay = `${i * 0.1}s`;
-  tlObs.observe(el);
-});
+/* ── Timeline Stepper ────────────────────────────────────────── */
+(function() {
+  const track   = document.querySelector('.tl-track');
+  const segs    = document.querySelectorAll('.tl-seg');
+  const prevBtn = document.getElementById('tl-prev');
+  const nextBtn = document.getElementById('tl-next');
+  const counter = document.getElementById('tl-counter');
+  const total   = document.querySelectorAll('.tl-slide').length;
+  let cur = 0;
+
+  function go(n, dir) {
+    cur = Math.max(0, Math.min(total - 1, n));
+    track.style.transform = `translateX(-${cur * 100}%)`;
+    prevBtn.disabled = cur === 0;
+    nextBtn.disabled = cur === total - 1;
+    counter.textContent = `${cur + 1} / ${total}`;
+    segs.forEach((s, i) => s.classList.toggle('done', i <= cur));
+  }
+
+  prevBtn.addEventListener('click', () => go(cur - 1));
+  nextBtn.addEventListener('click', () => go(cur + 1));
+
+  /* swipe support */
+  let tx = 0;
+  track.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
+  track.addEventListener('touchend',   e => {
+    const dx = e.changedTouches[0].clientX - tx;
+    if (Math.abs(dx) > 40) go(dx < 0 ? cur + 1 : cur - 1);
+  }, { passive: true });
+
+  go(0);
+})();
 
 /* ── Accordion ───────────────────────────────────────────────── */
 function toggleAcc(btn) {
