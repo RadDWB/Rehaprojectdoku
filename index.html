@@ -511,8 +511,10 @@
       background: var(--bg-surface);
       border: 1px solid var(--border);
       display: flex; align-items: center; justify-content: center;
-      font-size: 1.25rem; flex-shrink: 0;
+      flex-shrink: 0; color: var(--accent-c);
     }
+    .tool-icon svg { width: 22px; height: 22px; }
+    .result-icon svg { width: 18px; height: 18px; color: var(--accent-c); }
     .tool-card h3 { font-size: 1rem; font-weight: 600; line-height: 1.35; }
     .tool-card > p { font-size: .875rem; color: var(--text-2); line-height: 1.65; }
 
@@ -815,6 +817,36 @@
       #hero h1       { font-size: clamp(2.5rem, 12vw, 4rem); }
       .hero-stats    { gap: 1.5rem; }
     }
+
+    /* ═══════════════════════════════════════════════════════════
+       GLOSSARY TOOLTIPS
+    ═══════════════════════════════════════════════════════════ */
+    .gloss {
+      border-bottom: 1px dashed var(--accent-c);
+      cursor: help;
+      color: inherit;
+      transition: color .15s;
+    }
+    .gloss:hover { color: var(--accent-c); }
+    #gloss-tip {
+      position: fixed;
+      z-index: 9999;
+      max-width: 280px;
+      background: var(--bg-card-hi);
+      border: 1px solid var(--border-hi);
+      border-radius: var(--r-md);
+      padding: .6rem .85rem;
+      font-size: .78rem;
+      line-height: 1.55;
+      color: var(--text-1);
+      box-shadow: 0 8px 32px rgba(0,0,0,.35);
+      pointer-events: none;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity .15s, transform .15s;
+    }
+    #gloss-tip.show { opacity: 1; transform: translateY(0); }
+    #gloss-tip strong { color: var(--accent-c); display: block; margin-bottom: .2rem; font-size: .8rem; }
   </style>
 </head>
 <body>
@@ -1084,7 +1116,7 @@
 
       <!-- FASZIENROLLE -->
       <div class="tool-card reveal">
-        <div class="tool-header"><div class="tool-icon">🔵</div>
+        <div class="tool-header"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="12" rx="10" ry="5"/><ellipse cx="12" cy="12" rx="10" ry="5" transform="rotate(90 12 12)"/><line x1="2" y1="12" x2="22" y2="12"/></svg></div>
           <h3>Faszienrolle<br><span style="font-weight:400;color:var(--text-2);font-size:.85em">Foam Rolling</span></h3>
         </div>
         <div class="tool-specs">
@@ -1121,7 +1153,7 @@
 
       <!-- MASSAGEPISTOLE -->
       <div class="tool-card reveal" style="transition-delay:.07s">
-        <div class="tool-header"><div class="tool-icon">💆</div>
+        <div class="tool-header"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h.01M18 8h.01"/><path d="M3 12h18"/><path d="M7 16c0 2.21 2.239 4 5 4s5-1.79 5-4"/><path d="M12 4a4 4 0 0 1 4 4H8a4 4 0 0 1 4-4z"/></svg></div>
           <h3>Massagepistole<br><span style="font-weight:400;color:var(--text-2);font-size:.85em">Perkussive Therapie</span></h3>
         </div>
         <div class="tool-specs">
@@ -1153,7 +1185,7 @@
 
       <!-- EISBAD -->
       <div class="tool-card reveal" style="transition-delay:.13s">
-        <div class="tool-header"><div class="tool-icon">🧊</div>
+        <div class="tool-header"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/><line x1="19.07" y1="4.93" x2="4.93" y2="19.07"/><circle cx="12" cy="12" r="2.5"/></svg></div>
           <h3>Eisbad<br><span style="font-weight:400;color:var(--text-2);font-size:.85em">Cold Water Immersion</span></h3>
         </div>
         <div class="tool-specs">
@@ -1184,7 +1216,7 @@
 
       <!-- SAUNA -->
       <div class="tool-card reveal" style="transition-delay:.2s">
-        <div class="tool-header"><div class="tool-icon">🔥</div>
+        <div class="tool-header"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c0 6-6 8-6 13a6 6 0 0 0 12 0c0-5-6-7-6-13z"/><path d="M12 12c0 3-2 4-2 6a2 2 0 0 0 4 0c0-2-2-3-2-6z"/></svg></div>
           <h3>Sauna</h3>
         </div>
         <div class="tool-specs">
@@ -1220,7 +1252,7 @@
 
       <!-- ERNÄHRUNG -->
       <div class="tool-card reveal" style="transition-delay:.27s">
-        <div class="tool-header"><div class="tool-icon">🥗</div>
+        <div class="tool-header"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg></div>
           <h3>Ernährung</h3>
         </div>
         <div class="tool-specs">
@@ -1252,7 +1284,7 @@
 
       <!-- SCHLAF -->
       <div class="tool-card reveal" style="transition-delay:.34s">
-        <div class="tool-header"><div class="tool-icon">😴</div>
+        <div class="tool-header"><div class="tool-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></div>
           <h3>Schlaf</h3>
         </div>
         <div class="tool-specs">
@@ -1328,14 +1360,11 @@
         <span class="section-eyebrow" style="margin:0">Experten-Interview</span>
       </div>
       <div class="expert-card">
-        <picture>
-          <source srcset="Alexander_Ferrauti.avif" type="image/avif">
-          <img src="portraet_ferrauti_3.jpg" alt="Prof. Dr. Alexander Ferrauti"
-               style="width:88px;height:88px;border-radius:50%;object-fit:cover;
-                      object-position:center top;flex-shrink:0;
-                      border:2px solid var(--border-hi);
-                      box-shadow:0 0 0 4px rgba(0,208,230,.15);" />
-        </picture>
+        <img src="Alexander_Ferrauti.avif" alt="Prof. Dr. Alexander Ferrauti"
+             style="width:88px;height:88px;border-radius:50%;object-fit:cover;
+                    object-position:center top;flex-shrink:0;
+                    border:2px solid var(--border-hi);
+                    box-shadow:0 0 0 4px rgba(0,208,230,.15);" />
         <div class="expert-info">
           <h4>Prof. Dr. Alexander Ferrauti</h4>
           <p class="expert-role">Lehr- und Forschungsbereich Trainingswissenschaft</p>
@@ -1350,7 +1379,7 @@
 
 <!-- ══ Footer ════════════════════════════════════════════════════ -->
 <footer>
-  <p>© Reha³ · Ben, Lasse &amp; Mick · Goethe Gymnasium Dortmund · v1.1.0</p>
+  <p>© Reha³ · Ben, Lasse &amp; Mick · Goethe Gymnasium Dortmund · v1.2.0</p>
   <div class="footer-links">
     <a href="https://github.com/RadDWB/Rehaprojectdoku" target="_blank">GitHub</a>
     <a href="#hero">Nach oben ↑</a>
@@ -1425,12 +1454,12 @@ function toggleAcc(btn) {
 /* ── Sport-Reha-Matcher ──────────────────────────────────────── */
 (function() {
   const TOOLS = [
-    { key:'faszienrolle',   name:'Faszienrolle',   icon:'🔵' },
-    { key:'massagepistole', name:'Massagepistole',  icon:'💆' },
-    { key:'eisbad',         name:'Eisbad',          icon:'🧊' },
-    { key:'sauna',          name:'Sauna',           icon:'🔥' },
-    { key:'ernaehrung',     name:'Ernährung',       icon:'🥗' },
-    { key:'schlaf',         name:'Schlaf',          icon:'😴' },
+    { key:'faszienrolle',   name:'Faszienrolle',   icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="12" rx="10" ry="5"/><ellipse cx="12" cy="12" rx="10" ry="5" transform="rotate(90 12 12)"/><line x1="2" y1="12" x2="22" y2="12"/></svg>' },
+    { key:'massagepistole', name:'Massagepistole',  icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h.01M18 8h.01"/><path d="M3 12h18"/><path d="M7 16c0 2.21 2.239 4 5 4s5-1.79 5-4"/><path d="M12 4a4 4 0 0 1 4 4H8a4 4 0 0 1 4-4z"/></svg>' },
+    { key:'eisbad',         name:'Eisbad',          icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/><line x1="19.07" y1="4.93" x2="4.93" y2="19.07"/><circle cx="12" cy="12" r="2.5"/></svg>' },
+    { key:'sauna',          name:'Sauna',           icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c0 6-6 8-6 13a6 6 0 0 0 12 0c0-5-6-7-6-13z"/><path d="M12 12c0 3-2 4-2 6a2 2 0 0 0 4 0c0-2-2-3-2-6z"/></svg>' },
+    { key:'ernaehrung',     name:'Ernährung',       icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>' },
+    { key:'schlaf',         name:'Schlaf',          icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>' },
   ];
 
   // Scores [faszienrolle, massagepistole, eisbad, sauna, ernaehrung, schlaf]
@@ -1857,6 +1886,147 @@ document.querySelectorAll('.tool-card').forEach(card => barObs.observe(card));
   window.addEventListener('resize', resize, { passive: true });
   resize();
   requestAnimationFrame(loop);
+})();
+</script>
+
+<!-- Glossary tooltip -->
+<div id="gloss-tip"></div>
+
+<script>
+/* ── Glossary Tooltip System ─────────────────────────────────── */
+(function() {
+  const GLOSSARY = {
+    'DOMS': 'Delayed Onset Muscle Soreness – verzögert einsetzender Muskelkater, der 24–72 h nach ungewohnter Belastung durch Mikrotraumata in der Muskelstruktur entsteht.',
+    'Mikrotrauma': 'Kleinste Risse in Muskelfasern nach intensiver Belastung. Lösen Entzündungsreaktion aus, die zur Muskelanpassung und -hypertrophie führt.',
+    'Mikrotraumata': 'Plural von Mikrotrauma – kleinste Risse in Muskelfasern nach intensiver Belastung, die Ausgangspunkt für Reparatur und Hypertrophie sind.',
+    'CNS': 'Zentrales Nervensystem (ZNS). Koordiniert Muskelaktivierung und -ermüdung. Nach intensivem Training kann die neuromuskuläre Ansteuerung bis zu 72 h beeinträchtigt sein.',
+    'ZNS': 'Zentrales Nervensystem. Koordiniert Muskelaktivierung und -ermüdung. Neuromuskuläre Erholung dauert nach Hochintensitätstraining 24–72 h.',
+    'CNS-Erholung': 'Regeneration des zentralen Nervensystems. Limitierender Faktor nach extrem intensiven Einheiten; erfordert Schlaf und kalorische Zufuhr.',
+    'RSF': 'Repeated Sprint Fatigue – Ermüdung bei wiederholten Kurzsprints. Entsteht durch PCr-Depletion, Azidose und ZNS-Erschöpfung.',
+    'Repeated Sprint Fatigue': 'Ermüdung bei wiederholten Kurzsprints durch PCr-Depletion, Azidose und ZNS-Erschöpfung. Limitierender Faktor in Teamsportarten.',
+    'Glykogendepletion': 'Entleerung der Glykogenspeicher (Kohlenhydratspeicher) in Muskulatur und Leber nach intensiver/langer Belastung. Verlangsamt Regeneration deutlich.',
+    'Glykogenspeicher': 'Kohlenhydratspeicher in Muskulatur und Leber. Werden bei intensiver Belastung geleert; Wiederauffüllung dauert 24–48 h und benötigt ausreichend Kohlenhydrate.',
+    'Plasmavolumen': 'Flüssigkeitsanteil des Blutes. Nimmt bei Hitzebelastung ab (Schwitzen), bei regelmäßigem Ausdauertraining zu. Beeinflusst Sauerstofftransport und Herzfrequenz.',
+    'REM-Schlaf': 'Rapid Eye Movement Schlaf – Traumschlafphase mit intensiver Gedächtniskonsolidierung und emotionaler Verarbeitung. Anteil ca. 20–25 % des Schlafs.',
+    'Laktatclearance': 'Abbau von Laktat (Milchsäure) nach intensiver Belastung. Aktive Erholung (leichtes Laufen) beschleunigt den Prozess im Vergleich zur passiven Pause.',
+    'Laktat': 'Stoffwechselprodukt bei anaerober Energiegewinnung. Wird fälschlicherweise als Ursache für Muskelkater gesehen; tatsächlich rasch abgebaut (30–60 min).',
+    'reaktive Vasodilatation': 'Erweiterung der Blutgefäße als Reaktion auf Wärme oder erhöhten Blutfluss. Verbessert Nährstoff- und Sauerstoffzufuhr in belastete Gewebe.',
+    'Vasodilatation': 'Erweiterung der Blutgefäße. Wird durch Wärme, Stickstoffmonoxid und metabolische Produkte ausgelöst. Verbessert Durchblutung und Regeneration.',
+    'Vasokonstriktion': 'Verengung der Blutgefäße, z.B. durch Kälte. Reduziert Schwellung und Entzündung unmittelbar nach Belastung (Kälteanwendung).',
+    'proinflammatorische Zytokine': 'Botenstoffe (z.B. IL-6, TNF-α), die Entzündungsreaktionen auslösen und koordinieren. Nach Training erhöht; signalisieren Reparaturbedarf.',
+    'Zytokine': 'Immunologische Botenstoffe, die Entzündung, Reparatur und Immunantwort regulieren. IL-6 steigt stark nach intensiver körperlicher Belastung an.',
+    'HSP70': 'Heat Shock Protein 70 – Stressprotein, das bei Wärmebelastung (Sauna) verstärkt gebildet wird. Schützt Zellen, fördert Proteinreparatur und Immunfunktion.',
+    'Heat Shock Protein': 'Stressprotein (z.B. HSP70), das bei Wärme oder zellulären Stresssituationen gebildet wird. Wirkt zellschützend und fördert Proteinreparatur.',
+    'mTOR': 'Mechanistic Target of Rapamycin – zentrale Signalkaskade für Muskelproteinsynthese. Wird durch Aminosäuren (bes. Leucin) und Trainingsreize aktiviert.',
+    'Proteinsynthese': 'Aufbau von Proteinen in der Zelle. Muskelreparatur und -wachstum erfordern ausreichend Protein (1,6–2,2 g/kg KG/d) und Aminosäuren.',
+    'Leucin': 'Essentielle Aminosäure; stärkster Aktivator der mTOR-Signalkaskade. Essenziell für maximale Muskelproteinsynthese nach dem Training.',
+    'Aminosäuren': 'Bausteine der Proteine. Essenzielle Aminosäuren (inkl. Leucin) müssen über die Nahrung zugeführt werden und sind Voraussetzung für Muskelreparatur.',
+    'mitochondriale Adaptationen': 'Anpassungen der Mitochondrien (Zellkraftwerke) an Ausdauertraining: mehr Mitochondrien, höhere Enzymaktivität, bessere Fettsäureoxidation.',
+    'Mitochondrien': 'Zellkraftwerke, in denen aerobe Energiegewinnung stattfindet. Anzahl und Leistungsfähigkeit steigen mit Ausdauertraining.',
+    'IT-Band-Spannung': 'Spannung im Iliotibialband – Bindegewebsstreifen außen am Oberschenkel. Häufige Ursache für Knieschmerzen bei Läufern.',
+    'Iliotibialband': 'Bindegewebsstreifen außen am Oberschenkel (Tractus iliotibialis). Häufige Schmerzquelle bei Läufern; spricht gut auf Faszienrolle an.',
+    'GH': 'Wachstumshormon (Growth Hormone/Somatotropin). Wird primär im Tiefschlaf ausgeschüttet; fördert Proteinsynthese, Fettabbau und Gewebereparatur.',
+    'Wachstumshormon': 'Growth Hormone (GH/Somatotropin). Wird im Tiefschlaf ausgeschüttet; fördert Proteinsynthese, Fettabbau und Gewebereparatur.',
+    'Somatotropin': 'Wachstumshormon (GH). Wird im Tiefschlaf ausgeschüttet; fördert Proteinsynthese, Fettabbau und Gewebereparatur.',
+    'Schulter-Overuse': 'Überlastungssyndrom der Schulter durch repetitive Überkopfbewegungen (Schwimmen, Volleyball). Betrifft Rotatorenmanschette und Schleimbeutel.',
+    'Extensor carpi': 'Unterarm-Streckmuskel (Musculus extensor carpi). Häufig überbeansprucht bei Schlägersportarten (Tennis-/Golfer-Ellenbogen).',
+    'Konsolidierung': 'Verfestigung von Gedächtnisinhalten während des Schlafs. Motorische Lernprozesse (Techniktraining) werden im Schlaf neuronal gefestigt.',
+    'Match-to-Match-Recovery': 'Erholungszeit zwischen zwei Wettkämpfen. In Teamsportarten oft <72 h; unvollständige Regeneration erhöht Verletzungsrisiko und senkt Leistung.',
+    'neuromuskuläre Ermüdung': 'Beeinträchtigung der Signalübertragung zwischen Nerv und Muskel nach intensiver Belastung. Äußert sich in reduzierter Kraft und Koordination.',
+    'Golgi-Sehnenorgane': 'Mechanorezeptoren in Sehnen, die Muskelspannung messen und bei Überlastung reflektorische Entspannung auslösen. Werden durch Faszienarbeit beeinflusst.',
+    'PCr': 'Phosphokreatin – unmittelbarer Energieträger für explosive Kurzsprint-Leistungen. Wird in 5–10 s aufgebraucht, Repletion dauert 3–5 min.',
+    'Phosphokreatin': 'Unmittelbarer Energieträger für explosive Kurzsprint-Leistungen (PCr). Wird in 5–10 s aufgebraucht; Repletion dauert 3–5 min.',
+    'Azidose': 'Versauerung des Muskelgewebes durch Ansammlung von H⁺-Ionen bei intensiver anaerober Belastung. Beeinträchtigt Muskelkontraktion und Enzymaktivität.',
+    'Hyperhydratation': 'Übermäßige Flüssigkeitszufuhr. Kann Elektrolythaushalt (bes. Natrium) stören. Ziel ist Euhydration, nicht maximale Flüssigkeitszufuhr.',
+    'Elektrolyte': 'Mineralien (Na⁺, K⁺, Mg²⁺, Ca²⁺), die elektrische Ladungen tragen und für Nerven-/Muskelfunktion essenziell sind. Gehen mit Schweiß verloren.',
+    'Kortisol': 'Stresshormon, das katabol wirkt (Muskelabbau). Erhöhter Spiegel nach intensivem Training normalisiert sich mit ausreichend Schlaf und Erholung.',
+    'Insulin': 'Hormon, das Glukoseaufnahme in Zellen fördert. Postexerzitionell erhöhte Insulinsensitivität erleichtert Glykogenresynthese.',
+    'IGF-1': 'Insulin-like Growth Factor 1 – muskelaufbauendes Hormon, das in Reaktion auf GH und Training ausgeschüttet wird.',
+    'Testosteron': 'Anabol wirkendes Hormon, das Muskelproteinsynthese und Erholung fördert. Schlafmangel reduziert Testosteronspiegel signifikant.',
+    'Inflammation': 'Entzündungsreaktion – nach Training notwendig für Reparatur und Adaptation. Übermäßige/chronische Entzündung verzögert Regeneration.',
+    'Hypertrophie': 'Vergrößerung des Muskelquerschnitts durch Trainingsreiz und anschließende Regeneration mit ausreichend Protein und Kalorien.',
+    'Faszie': 'Bindegewebshülle um Muskeln und Organe. Kann nach intensivem Training verkleben; Faszienrolle löst Adhäsionen und verbessert Mobilität.',
+    'Faszien': 'Bindegewebsstrukturen, die Muskeln umhüllen. Können nach intensivem Training verkleben; Faszienarbeit löst Adhäsionen und verbessert Beweglichkeit.',
+    'Tiefschlaf': 'Slow-Wave-Sleep (SWS) – tiefste Schlafphase. Maximale GH-Ausschüttung, Gewebereparatur und immunologische Regeneration finden hier statt.',
+    'Slow-Wave-Sleep': 'Tiefste Schlafphase (SWS/Tiefschlaf). Maximale GH-Ausschüttung; Zeitpunkt größter physischer Regeneration.',
+    'oxidativer Stress': 'Schädigung durch freie Radikale, die bei intensivem Training entstehen. Antioxidantien (Vit. C, E) aus der Nahrung helfen, ihn zu neutralisieren.',
+    'Antioxidantien': 'Verbindungen (z.B. Vitamin C, E, Polyphenole), die freie Radikale neutralisieren und oxidativen Stress reduzieren. In Obst/Gemüse reichlich vorhanden.',
+  };
+
+  const tip = document.getElementById('gloss-tip');
+
+  /* Walk all text nodes and wrap matching terms */
+  function wrapTerms(root) {
+    const terms = Object.keys(GLOSSARY).sort((a,b) => b.length - a.length);
+    const regex = new RegExp('(' + terms.map(t => t.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('|') + ')', 'g');
+
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+      acceptNode(node) {
+        const p = node.parentNode;
+        if (!p) return NodeFilter.FILTER_REJECT;
+        const tag = p.tagName && p.tagName.toLowerCase();
+        if (['script','style','a','button','h1','h2','h3','h4','nav','footer'].includes(tag)) return NodeFilter.FILTER_REJECT;
+        if (p.classList && p.classList.contains('gloss')) return NodeFilter.FILTER_REJECT;
+        if (node.textContent.trim() === '') return NodeFilter.FILTER_REJECT;
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    });
+
+    const nodes = [];
+    let n;
+    while ((n = walker.nextNode())) nodes.push(n);
+
+    nodes.forEach(node => {
+      if (!regex.test(node.textContent)) return;
+      regex.lastIndex = 0;
+      const frag = document.createDocumentFragment();
+      let last = 0, m;
+      while ((m = regex.exec(node.textContent)) !== null) {
+        if (m.index > last) frag.appendChild(document.createTextNode(node.textContent.slice(last, m.index)));
+        const span = document.createElement('span');
+        span.className = 'gloss';
+        span.dataset.term = m[1];
+        span.textContent = m[1];
+        frag.appendChild(span);
+        last = m.index + m[1].length;
+      }
+      if (last < node.textContent.length) frag.appendChild(document.createTextNode(node.textContent.slice(last)));
+      node.parentNode.replaceChild(frag, node);
+    });
+  }
+
+  /* Show/hide tooltip */
+  let activeEl = null;
+  document.addEventListener('mouseover', e => {
+    const el = e.target.closest('.gloss');
+    if (!el || el === activeEl) return;
+    activeEl = el;
+    const def = GLOSSARY[el.dataset.term];
+    if (!def) return;
+    tip.innerHTML = '<strong>' + el.dataset.term + '</strong>' + def;
+    tip.classList.add('show');
+  });
+  document.addEventListener('mouseout', e => {
+    if (!e.target.closest('.gloss')) { tip.classList.remove('show'); activeEl = null; }
+  });
+  document.addEventListener('mousemove', e => {
+    if (!tip.classList.contains('show')) return;
+    const vw = window.innerWidth, vh = window.innerHeight;
+    let x = e.clientX + 14, y = e.clientY + 14;
+    tip.style.left = '0'; tip.style.top = '0';
+    const tw = tip.offsetWidth, th = tip.offsetHeight;
+    if (x + tw > vw - 8) x = e.clientX - tw - 14;
+    if (y + th > vh - 8) y = e.clientY - th - 14;
+    tip.style.left = x + 'px';
+    tip.style.top  = y + 'px';
+  });
+
+  /* Run after DOM is ready */
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => wrapTerms(document.body));
+  } else {
+    wrapTerms(document.body);
+  }
 })();
 </script>
 
