@@ -185,6 +185,15 @@
     .wrap { max-width: 1160px; margin: 0 auto; padding: 0 clamp(1.5rem, 5vw, 3rem); }
     section { position: relative; z-index: 2; }
 
+    /* ── Cinematic section transitions ───────────────────────── */
+    section:not(#hero) {
+      opacity: 0;
+      transform: translateY(64px);
+      transition: opacity .9s cubic-bezier(0.19,1,0.22,1),
+                  transform .9s cubic-bezier(0.19,1,0.22,1);
+    }
+    section.sec-in { opacity: 1; transform: translateY(0); }
+
     .section-eyebrow {
       font-size: .6875rem; font-weight: 600;
       letter-spacing: .15em; text-transform: uppercase;
@@ -448,6 +457,7 @@
     .t-buch     { background: rgba(245,162,70,.1);  color: var(--accent-w); }
     .t-online   { background: rgba(78,217,160,.1);  color: var(--accent-g); }
 
+    a.source-card { color: var(--text-1); }
     .source-card h4 { font-size: .9375rem; font-weight: 600; line-height: 1.4; }
     .source-card p  { font-size: .8125rem; color: var(--text-2); line-height: 1.6; flex: 1; }
     .source-link {
@@ -568,7 +578,7 @@
       display: flex; flex-direction: column; align-items: center; gap: .25rem;
       transition: all .2s; line-height: 1.3;
     }
-    .sport-emoji { font-size: 1.25rem; }
+    .sport-btn svg { width: 20px; height: 20px; flex-shrink: 0; }
     .sport-btn:hover { border-color: var(--border-hi); color: var(--text-1); }
     .sport-btn.active { border-color: var(--accent-c); background: rgba(0,208,230,.08); color: var(--accent-c); }
     .intensity-row { display: flex; gap: .5rem; }
@@ -611,6 +621,34 @@
       background: var(--bg-surface); border: 1px solid var(--border);
       border-radius: var(--r-pill); padding: .18rem .65rem; color: var(--text-2);
     }
+    /* ── Two-block visible accordion headers ─────────────────── */
+    .acc2-btn {
+      display: flex; align-items: center; justify-content: space-between;
+      width: 100%; padding: .75rem 1.1rem; border-radius: var(--r-sm); cursor: pointer;
+      font-size: .8125rem; font-weight: 700; font-family: var(--f-body);
+      transition: all .22s; text-align: left; letter-spacing: .02em;
+    }
+    .acc2-btn .ch { transition: transform .3s var(--ease-out-quart); font-size: .8rem; flex-shrink: 0; }
+    .acc2-btn.open .ch { transform: rotate(180deg); }
+    .acc2-body { max-height: 0; overflow: hidden; transition: max-height .6s var(--ease-out-quart); }
+    .acc2-body.open { max-height: 1000px; }
+    .acc2-inner { padding-top: .9rem; display: flex; flex-direction: column; gap: .7rem; }
+
+    .acc2-desc {
+      background: rgba(245,162,70,.10); border: 1.5px solid rgba(245,162,70,.35);
+      color: var(--accent-w);
+    }
+    .acc2-desc:hover { background: rgba(245,162,70,.17); border-color: rgba(245,162,70,.55); }
+    .acc2-desc.open { background: rgba(245,162,70,.14); border-color: var(--accent-w); }
+
+    .acc2-sci {
+      background: rgba(0,208,230,.07); border: 1.5px solid rgba(0,208,230,.28);
+      color: var(--accent-c);
+    }
+    .acc2-sci:hover { background: rgba(0,208,230,.14); border-color: rgba(0,208,230,.5); }
+    .acc2-sci.open { background: rgba(0,208,230,.11); border-color: var(--accent-c); }
+
+    /* legacy inner accordion (kept for compatibility) */
     .accordion-toggle {
       display: flex; align-items: center; justify-content: space-between;
       width: 100%; background: none; border: 1px solid var(--border);
@@ -683,6 +721,29 @@
     }
     .team-card h4 { font-size: .9rem; font-weight: 600; margin-bottom: .2rem; }
     .team-card p  { font-size: .75rem; color: var(--text-3); }
+
+    .expert-wrap {
+      margin-top: var(--sp-7); border-top: 1px solid var(--border);
+      padding-top: var(--sp-6);
+    }
+    .expert-label { margin-bottom: var(--sp-4); }
+    .expert-card {
+      display: flex; align-items: flex-start; gap: 1.5rem;
+      background: var(--bg-card); border: 1px solid var(--border-hi);
+      border-radius: var(--r-lg); padding: 1.75rem;
+      box-shadow: var(--shadow-glow);
+    }
+    .expert-avatar {
+      width: 64px; height: 64px; border-radius: 50%; flex-shrink: 0;
+      background: linear-gradient(135deg, var(--accent-v), var(--accent-c));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; font-weight: 700; color: #fff;
+    }
+    .expert-info h4 { font-size: 1.05rem; font-weight: 700; margin-bottom: .25rem; }
+    .expert-role { font-size: .8rem; color: var(--accent-c); font-weight: 600; margin-bottom: .15rem; }
+    .expert-inst { font-size: .78rem; color: var(--text-3); margin-bottom: .75rem; }
+    .expert-desc { font-size: .8375rem; color: var(--text-2); line-height: 1.65; }
+    @media (max-width: 600px) { .expert-card { flex-direction: column; } }
 
     /* ═══════════════════════════════════════════════════════════
        FOOTER
@@ -868,8 +929,8 @@
     <div class="sources-grid">
       <div class="source-card reveal">
         <span class="source-type t-experte">Experten-Interview</span>
-        <h4>Prof. [Name], Ruhr-Universität Bochum</h4>
-        <p>Persönliches Interview zu Regenerationsmethoden und deren physiologischer Wirksamkeit im Leistungssport. Transkript in Bearbeitung.</p>
+        <h4>Prof. Dr. Alexander Ferrauti · Ruhr-Universität Bochum</h4>
+        <p>Lehr- und Forschungsbereich Trainingswissenschaft, Fakultät für Sportwissenschaft. Persönliches Interview zu Regenerationsmethoden und deren physiologischer Wirksamkeit im Leistungssport.</p>
         <span class="source-link">Transkript folgt →</span>
       </div>
       <div class="source-card reveal" style="transition-delay:.06s">
@@ -908,6 +969,12 @@
         <p>Einfluss von Protein-, Kohlenhydrat- und Mikronährstoffzufuhr auf die muskuläre Reparatur nach intensivem Training.</p>
         <span class="source-link">Quelle eintragen →</span>
       </div>
+      <a class="source-card reveal" style="transition-delay:.3s;text-decoration:none;display:block;cursor:pointer" href="https://www.spektrum.de/kolumne/regeneration-nach-dem-sport-wie-viel-erholung-muss-sein/1915714" target="_blank" rel="noopener">
+        <span class="source-type t-online">Online · Spektrum.de</span>
+        <h4>Regeneration nach dem Sport — wie viel Erholung muss sein?</h4>
+        <p>Wissenschaftliche Einordnung von Regenerationsmethoden: individuelle Wirksamkeit, Gabbets Akut-Chronisch-Verhältnis und warum keine Methode universell überlegen ist.</p>
+        <span class="source-link">Zum Artikel → spektrum.de</span>
+      </a>
     </div>
   </div>
 </section>
@@ -933,18 +1000,30 @@
         <div>
           <div class="sport-label">1 · Sportart wählen</div>
           <div class="sport-grid">
-            <button class="sport-btn" data-sport="fussball"><span class="sport-emoji">⚽</span>Fußball</button>
-            <button class="sport-btn" data-sport="laufen"><span class="sport-emoji">🏃</span>Laufen</button>
-            <button class="sport-btn" data-sport="kraft"><span class="sport-emoji">🏋️</span>Kraftsport</button>
-            <button class="sport-btn" data-sport="schwimmen"><span class="sport-emoji">🏊</span>Schwimmen</button>
-            <button class="sport-btn" data-sport="radfahren"><span class="sport-emoji">🚴</span>Radfahren</button>
-            <button class="sport-btn" data-sport="basketball"><span class="sport-emoji">🏀</span>Basketball</button>
-            <button class="sport-btn" data-sport="tennis"><span class="sport-emoji">🎾</span>Tennis</button>
-            <button class="sport-btn" data-sport="kampfsport"><span class="sport-emoji">🥋</span>Kampfsport</button>
-            <button class="sport-btn" data-sport="sprint100"><span class="sport-emoji">⚡</span>100m Sprint</button>
-            <button class="sport-btn" data-sport="stabhoch"><span class="sport-emoji">🏅</span>Stabhoch&shy;sprung</button>
-            <button class="sport-btn" data-sport="lauf400"><span class="sport-emoji">🔥</span>400m Lauf</button>
-            <button class="sport-btn" data-sport="lauf5000"><span class="sport-emoji">🏃</span>5000m Lauf</button>
+            <button class="sport-btn" data-sport="fussball">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7l1.5 4h-3L12 7zM7.5 14.5l1.5-3M16.5 14.5l-1.5-3M10 18h4"/></svg>Fußball</button>
+            <button class="sport-btn" data-sport="laufen">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="15" cy="4" r="2"/><path d="M13 6.5L9 12l4 2-2 5.5M13 6.5l3 4-2.5 3.5"/></svg>Laufen</button>
+            <button class="sport-btn" data-sport="kraft">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="9" width="3" height="6" rx="1"/><rect x="19" y="9" width="3" height="6" rx="1"/><line x1="5" y1="12" x2="19" y2="12"/><line x1="8" y1="8.5" x2="8" y2="15.5"/><line x1="16" y1="8.5" x2="16" y2="15.5"/></svg>Kraftsport</button>
+            <button class="sport-btn" data-sport="schwimmen">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 9 Q5 5 8 9 Q11 13 14 9 Q17 5 20 9 Q22 11 24 9"/><path d="M2 15 Q5 11 8 15 Q11 19 14 15 Q17 11 20 15 Q22 17 24 15"/></svg>Schwimmen</button>
+            <button class="sport-btn" data-sport="radfahren">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2"/><line x1="12" y1="3" x2="12" y2="10"/><line x1="12" y1="14" x2="12" y2="21"/><line x1="3" y1="12" x2="10" y2="12"/><line x1="14" y1="12" x2="21" y2="12"/></svg>Radfahren</button>
+            <button class="sport-btn" data-sport="volleyball">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M3.5 8.5 Q12 6 20.5 8.5"/><path d="M12 3v9M12 12 Q7 16 3.5 15.5"/><path d="M12 12 Q17 16 20.5 15.5"/></svg>Volleyball</button>
+            <button class="sport-btn" data-sport="tennis">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><ellipse cx="11" cy="9" rx="6" ry="7"/><line x1="11" y1="16" x2="14" y2="22"/><line x1="5" y1="9" x2="17" y2="9"/><line x1="11" y1="2" x2="11" y2="16"/><line x1="6.5" y1="4.5" x2="15.5" y2="13.5"/><line x1="6.5" y1="13.5" x2="15.5" y2="4.5"/></svg>Tennis</button>
+            <button class="sport-btn" data-sport="kampfsport">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10V7a2 2 0 014 0v1M11 8V6a2 2 0 014 0v3"/><path d="M7 10h10v5a4 4 0 01-4 4H10a3 3 0 01-3-3v-6z"/></svg>Kampfsport</button>
+            <button class="sport-btn" data-sport="sprint100">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg>100m Sprint</button>
+            <button class="sport-btn" data-sport="stabhoch">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="19" cy="5" r="2"/><path d="M5 21L9 21L9 13 Q9 4 17 4"/><line x1="2" y1="15" x2="22" y2="15"/></svg>Stabhoch&shy;sprung</button>
+            <button class="sport-btn" data-sport="lauf400">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="14" rx="7"/><rect x="6" y="8.5" width="12" height="7" rx="3.5" fill="var(--bg-surface)" stroke="none"/><line x1="3" y1="12" x2="21" y2="12"/></svg>400m Lauf</button>
+            <button class="sport-btn" data-sport="lauf5000">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 12 Q18 6 21 12 Q19 20 12 20 Q5 20 3 13 Q4 4 13 3 Q21 3 22 11"/></svg>5000m Lauf</button>
           </div>
           <div class="intensity-label">2 · Intensität</div>
           <div class="intensity-row">
@@ -973,19 +1052,22 @@
           <span class="spec-pill">⏱ 5–15 Min</span><span class="spec-pill">🔄 2 cm/Sek.</span>
           <span class="spec-pill">📍 Pre &amp; Post</span><span class="spec-pill">⏸ 30–60 Sek./Gruppe</span>
         </div>
-        <p>Myofasziale Selbstmassage mit der Schaumstoffrolle. Weit verbreitet im Warm-up und Cool-down — mit solider wissenschaftlicher Basis.</p>
-        <ul class="tool-facts">
-          <li>Verbessert Beweglichkeit um 12–17 % ohne Kraftverlust</li>
-          <li>Reduziert DOMS (Muskelkater) um ca. 6 %</li>
-          <li>Kein negativer Effekt auf Schnellkraft</li>
-          <li>Ideal bei hoher Trainingsfrequenz</li>
-        </ul>
+        <button class="acc2-btn acc2-desc open" onclick="toggleAcc(this)">↗ Übersicht &amp; Wirkung <span class="ch">▾</span></button>
+        <div class="acc2-body open"><div class="acc2-inner">
+          <p style="font-size:.875rem;color:var(--text-2);line-height:1.65">Myofasziale Selbstmassage mit der Schaumstoffrolle. Weit verbreitet im Warm-up und Cool-down — mit solider wissenschaftlicher Basis.</p>
+          <ul class="tool-facts">
+            <li>Verbessert Beweglichkeit um 12–17 % ohne Kraftverlust</li>
+            <li>Reduziert DOMS (Muskelkater) um ca. 6 %</li>
+            <li>Kein negativer Effekt auf Schnellkraft</li>
+            <li>Ideal bei hoher Trainingsfrequenz</li>
+          </ul>
+        </div></div>
         <div class="evidence-bar">
           <div class="evidence-meta"><span>Evidenzlevel</span><span>Mittel</span></div>
           <div class="bar-track"><div class="bar-fill" data-width="60"></div></div>
         </div>
-        <button class="accordion-toggle" onclick="toggleAcc(this)">Wissenschaft im Detail <span class="arr">▾</span></button>
-        <div class="accordion-body"><div class="accordion-inner">
+        <button class="acc2-btn acc2-sci" onclick="toggleAcc(this)">🔬 Wissenschaft im Detail <span class="ch">▾</span></button>
+        <div class="acc2-body"><div class="acc2-inner">
           <div class="acc-block"><h5>Mechanismus</h5><p>Foam Rolling erzeugt Scherkräfte auf das myofasziale Gewebe und aktiviert Mechanorezeptoren. Der Haupteffekt ist neurologischer Natur: über das Gate-Control-Prinzip wird die Schmerzwahrnehmung gehemmt, nicht das Gewebe physisch "gelöst". Gleichzeitig verbessert sich die lokale Durchblutung.</p></div>
           <div class="study-box"><div class="slabel">🔬 Schlüsselstudie</div><p><strong>Wiewelhove et al. (2019)</strong> – Metaanalyse über 21 Studien: Foam Rolling reduziert DOMS signifikant (~6 %) und verbessert Beweglichkeit um 12–17 %. Kein negativer Effekt auf Muskelkraft oder Sprungkraft nachgewiesen.</p></div>
           <div class="myth-box"><div class="mlabel">💡 Mythos-Check</div><p><strong>Mythos:</strong> „Faszien werden durch Rollen gelöst." <strong>Fakt:</strong> Faszien sind zu zäh, um durch Körpergewicht verformbar zu sein — der Effekt ist primär neurologisch (Schmerzgating, neuromuskuläre Ansteuerung).</p></div>
@@ -1007,19 +1089,22 @@
           <span class="spec-pill">⏱ 15–30 Sek./Muskel</span><span class="spec-pill">🔊 30–40 Hz</span>
           <span class="spec-pill">📍 Pre &amp; Post</span>
         </div>
-        <p>Perkussive Vibration für gezielte Muskelstimulation. Im Breitensport sehr beliebt — die Wissenschaft holt mit guter Evidenz auf.</p>
-        <ul class="tool-facts">
-          <li>Verbessert Beweglichkeit um bis zu 22 % (Einzelanwendung)</li>
-          <li>Reduziert subjektiv wahrgenommenen Muskelkater</li>
-          <li>Frequenz (Hz) entscheidender als Andruckkraft</li>
-          <li>Aktiviert Golgi-Sehnenorgane → Muskelrelaxation</li>
-        </ul>
+        <button class="acc2-btn acc2-desc open" onclick="toggleAcc(this)">↗ Übersicht &amp; Wirkung <span class="ch">▾</span></button>
+        <div class="acc2-body open"><div class="acc2-inner">
+          <p style="font-size:.875rem;color:var(--text-2);line-height:1.65">Perkussive Vibration für gezielte Muskelstimulation. Im Breitensport sehr beliebt — die Wissenschaft holt mit guter Evidenz auf.</p>
+          <ul class="tool-facts">
+            <li>Verbessert Beweglichkeit um bis zu 22 % (Einzelanwendung)</li>
+            <li>Reduziert subjektiv wahrgenommenen Muskelkater</li>
+            <li>Frequenz (Hz) entscheidender als Andruckkraft</li>
+            <li>Aktiviert Golgi-Sehnenorgane → Muskelrelaxation</li>
+          </ul>
+        </div></div>
         <div class="evidence-bar">
           <div class="evidence-meta"><span>Evidenzlevel</span><span>Mittel</span></div>
           <div class="bar-track"><div class="bar-fill" data-width="55"></div></div>
         </div>
-        <button class="accordion-toggle" onclick="toggleAcc(this)">Wissenschaft im Detail <span class="arr">▾</span></button>
-        <div class="accordion-body"><div class="accordion-inner">
+        <button class="acc2-btn acc2-sci" onclick="toggleAcc(this)">🔬 Wissenschaft im Detail <span class="ch">▾</span></button>
+        <div class="acc2-body"><div class="acc2-inner">
           <div class="acc-block"><h5>Mechanismus</h5><p>Perkussive Vibration bei 30–40 Hz aktiviert die Golgi-Sehnenorgane im Muskel-Sehnen-Übergang. Diese lösen eine reflektorische Entspannung der Muskulatur aus (autogene Inhibition). Gleichzeitig wird die lokale Durchblutung erhöht und Schmerzsignale durch Vibrationssignale überdeckt.</p></div>
           <div class="study-box"><div class="slabel">🔬 Schlüsselstudie</div><p><strong>Lee et al. (2022), J. Sports Science & Medicine:</strong> Signifikante Verbesserung der Beweglichkeit um bis zu 22 % nach einer einzigen Anwendung — vergleichbar mit statischem Dehnen, jedoch ohne anschließenden Kraftverlust.</p></div>
           <div class="myth-box"><div class="mlabel">💡 Mythos-Check</div><p><strong>Mythos:</strong> „Mehr Druck bringt mehr Wirkung." <strong>Fakt:</strong> Die Frequenz (Hz) ist entscheidend — zu viel Druck kann Mikroverletzungen erzeugen. Leichter Kontakt mit richtiger Frequenz ist optimal.</p></div>
@@ -1036,19 +1121,22 @@
           <span class="spec-pill">🌡 10–15 °C</span><span class="spec-pill">⏱ 10–15 Min</span>
           <span class="spec-pill">📍 Direkt post</span>
         </div>
-        <p>Kurzzeitiges Eintauchen in eiskaltes Wasser nach Belastung. Eines der am besten erforschten Regenerationstools im Profisport.</p>
-        <ul class="tool-facts">
-          <li>DOMS-Reduktion signifikant 24–96 h nach Training</li>
-          <li>Vasokonstriktion hemmt Ödembildung im Gewebe</li>
-          <li>Standard-Recovery-Tool in Profiteams nach Spielen</li>
-          <li>Achtung: kann Hypertrophie-Adaptation hemmen</li>
-        </ul>
+        <button class="acc2-btn acc2-desc open" onclick="toggleAcc(this)">↗ Übersicht &amp; Wirkung <span class="ch">▾</span></button>
+        <div class="acc2-body open"><div class="acc2-inner">
+          <p style="font-size:.875rem;color:var(--text-2);line-height:1.65">Kurzzeitiges Eintauchen in eiskaltes Wasser nach Belastung. Eines der am besten erforschten Regenerationstools im Profisport.</p>
+          <ul class="tool-facts">
+            <li>DOMS-Reduktion signifikant 24–96 h nach Training</li>
+            <li>Vasokonstriktion hemmt Ödembildung im Gewebe</li>
+            <li>Standard-Recovery-Tool in Profiteams nach Spielen</li>
+            <li>Achtung: kann Hypertrophie-Adaptation hemmen</li>
+          </ul>
+        </div></div>
         <div class="evidence-bar">
           <div class="evidence-meta"><span>Evidenzlevel</span><span>Hoch</span></div>
           <div class="bar-track"><div class="bar-fill" data-width="85"></div></div>
         </div>
-        <button class="accordion-toggle" onclick="toggleAcc(this)">Wissenschaft im Detail <span class="arr">▾</span></button>
-        <div class="accordion-body"><div class="accordion-inner">
+        <button class="acc2-btn acc2-sci" onclick="toggleAcc(this)">🔬 Wissenschaft im Detail <span class="ch">▾</span></button>
+        <div class="acc2-body"><div class="acc2-inner">
           <div class="acc-block"><h5>Mechanismus</h5><p>Die Kälte bewirkt eine Vasokonstriktion — weniger Blutfluss, weniger Ödembildung, reduzierte Entzündungsreaktion. Bei der anschließenden Erwärmung setzt eine reaktive Vasodilatation ein ("venöse Rückpumpe"), die metabolische Abfallprodukte wie Laktat effizienter abführt.</p></div>
           <div class="study-box"><div class="slabel">🔬 Schlüsselstudie</div><p><strong>Machado et al. (2016)</strong> – Metaanalyse über 17 RCTs: CWI ist signifikant effektiver als passive Ruhe für DOMS-Reduktion 24–96 h nach Training. Optimum: 11–15 °C für 11–15 Minuten.</p></div>
           <div class="warn-box"><div class="wlabel">⚠ Wichtiger Hinweis</div><p><strong>Roberts et al. (2015), J. Physiology:</strong> Regelmäßiges Eisbad nach Krafttraining hemmt den mTOR-Signalweg und kann langfristigen Muskelaufbau um bis zu 20 % reduzieren. In Aufbauphasen gezielt einsetzen!</p></div>
@@ -1064,19 +1152,22 @@
           <span class="spec-pill">🌡 80–100 °C</span><span class="spec-pill">⏱ 15–20 Min</span>
           <span class="spec-pill">🔁 2–3 Durchgänge</span><span class="spec-pill">📍 Min. 1h post</span>
         </div>
-        <p>Passives Wärmebad mit tiefen physiologischen Effekten. Regelmäßige Nutzung zeigt beeindruckende Langzeitwirkungen auf Herz, Hormone und Muskelregeneration.</p>
-        <ul class="tool-facts">
-          <li>Heat Shock Proteins (HSP70) reparieren Muskelproteine</li>
-          <li>Wachstumshormon-Ausschüttung +200–300 %</li>
-          <li>Plasma-Volumen-Expansion wie leichtes Ausdauertraining</li>
-          <li>40 % reduziertes Herzkreislauf-Risiko (4×/Woche)</li>
-        </ul>
+        <button class="acc2-btn acc2-desc open" onclick="toggleAcc(this)">↗ Übersicht &amp; Wirkung <span class="ch">▾</span></button>
+        <div class="acc2-body open"><div class="acc2-inner">
+          <p style="font-size:.875rem;color:var(--text-2);line-height:1.65">Passives Wärmebad mit tiefen physiologischen Effekten. Regelmäßige Nutzung zeigt beeindruckende Langzeitwirkungen auf Herz, Hormone und Muskelregeneration.</p>
+          <ul class="tool-facts">
+            <li>Heat Shock Proteins (HSP70) reparieren Muskelproteine</li>
+            <li>Wachstumshormon-Ausschüttung +200–300 %</li>
+            <li>Plasma-Volumen-Expansion wie leichtes Ausdauertraining</li>
+            <li>40 % reduziertes Herzkreislauf-Risiko (4×/Woche)</li>
+          </ul>
+        </div></div>
         <div class="evidence-bar">
           <div class="evidence-meta"><span>Evidenzlevel</span><span>Mittel–Hoch</span></div>
           <div class="bar-track"><div class="bar-fill" data-width="72"></div></div>
         </div>
-        <button class="accordion-toggle" onclick="toggleAcc(this)">Wissenschaft im Detail <span class="arr">▾</span></button>
-        <div class="accordion-body"><div class="accordion-inner">
+        <button class="acc2-btn acc2-sci" onclick="toggleAcc(this)">🔬 Wissenschaft im Detail <span class="ch">▾</span></button>
+        <div class="acc2-body"><div class="acc2-inner">
           <div class="acc-block"><h5>Mechanismus</h5><p>Hitze löst die Produktion von Heat Shock Proteins (HSP70/72) aus, die fehlgefaltete Proteine in Muskelzellen reparieren. Die Hypophyse schüttet bei &gt;80 °C signifikant mehr Wachstumshormon aus (+200–300 %). Das Plasmavolumen expandiert — vergleichbar einem leichten Ausdauerreiz.</p></div>
           <div class="study-box"><div class="slabel">🔬 Schlüsselstudie</div><p><strong>Laukkanen et al. (2018), JAMA Internal Medicine:</strong> Probanden mit 4×/Woche Sauna zeigten 40 % reduziertes kardiovaskuläres Risiko und signifikant erhöhte Ausdauerleistung über 20 Jahre Follow-up.</p></div>
           <div class="acc-block"><h5>Optimales Protokoll</h5><div class="protocol">
@@ -1098,19 +1189,22 @@
           <span class="spec-pill">🥩 0,3–0,4 g/kg Protein</span>
           <span class="spec-pill">💧 150 % Flüssigkeitsausgleich</span>
         </div>
-        <p>Der stärkste Hebel der Regeneration. Gezielte Nährstoffzufuhr aktiviert molekulare Reparaturprozesse — mit der höchsten Evidenz aller Tools.</p>
-        <ul class="tool-facts">
-          <li>Leucin triggert mTOR → Muskelproteinsynthese</li>
-          <li>1,0–1,2 g/kg KG/h Kohlenhydrate für Glykogen-Resynthese</li>
-          <li>Omega-3 (2–4 g/Tag) hemmt Entzündungszytokine</li>
-          <li>Kreatin (3–5 g/Tag) verbessert ATP-Resynthese</li>
-        </ul>
+        <button class="acc2-btn acc2-desc open" onclick="toggleAcc(this)">↗ Übersicht &amp; Wirkung <span class="ch">▾</span></button>
+        <div class="acc2-body open"><div class="acc2-inner">
+          <p style="font-size:.875rem;color:var(--text-2);line-height:1.65">Der stärkste Hebel der Regeneration. Gezielte Nährstoffzufuhr aktiviert molekulare Reparaturprozesse — mit der höchsten Evidenz aller Tools.</p>
+          <ul class="tool-facts">
+            <li>Leucin triggert mTOR → Muskelproteinsynthese</li>
+            <li>1,0–1,2 g/kg KG/h Kohlenhydrate für Glykogen-Resynthese</li>
+            <li>Omega-3 (2–4 g/Tag) hemmt Entzündungszytokine</li>
+            <li>Kreatin (3–5 g/Tag) verbessert ATP-Resynthese</li>
+          </ul>
+        </div></div>
         <div class="evidence-bar">
           <div class="evidence-meta"><span>Evidenzlevel</span><span>Sehr hoch</span></div>
           <div class="bar-track"><div class="bar-fill" data-width="95"></div></div>
         </div>
-        <button class="accordion-toggle" onclick="toggleAcc(this)">Wissenschaft im Detail <span class="arr">▾</span></button>
-        <div class="accordion-body"><div class="accordion-inner">
+        <button class="acc2-btn acc2-sci" onclick="toggleAcc(this)">🔬 Wissenschaft im Detail <span class="ch">▾</span></button>
+        <div class="acc2-body"><div class="acc2-inner">
           <div class="acc-block"><h5>Mechanismus</h5><p>Die essentielle Aminosäure Leucin aktiviert direkt den mTOR-Komplex — den zentralen Schalter der Muskelproteinsynthese. Kohlenhydrate stimulieren Insulinausschüttung, die Nährstoffaufnahme in Muskelzellen beschleunigt. Omega-3-Fettsäuren hemmen proinflammatorische Zytokine (IL-6, TNF-α).</p></div>
           <div class="study-box"><div class="slabel">🔬 Schlüsselstudie</div><p><strong>Phillips &amp; Van Loon (2011):</strong> Protein + Kohlenhydrate direkt nach Training erhöhen Muskelproteinsynthese um bis zu 50 %. IOC-Konsens (Thomas et al., 2016): Gesamtproteinzufuhr am Tag (1,6–2,2 g/kg KG) ist wichtiger als exaktes Timing.</p></div>
           <div class="myth-box"><div class="mlabel">💡 Mythos-Check</div><p><strong>Mythos:</strong> „Das anabole Fenster schließt sich nach 30 Min." <strong>Fakt:</strong> Das Fenster ist 2–4 Stunden post-exercise. Die tägliche Gesamtproteinzufuhr schlägt das genaue Timing.</p></div>
@@ -1127,21 +1221,24 @@
           <span class="spec-pill">💤 Nap: 20–26 Min</span>
           <span class="spec-pill">🌡 Zimmer 18–20 °C</span>
         </div>
-        <p>Der mächtigste Regenerator — kostenlos, ohne Equipment, höchste Evidenz. Kein anderes Tool kann ihn ersetzen.</p>
-        <ul class="tool-facts">
-          <li>70 % der täglichen GH-Ausschüttung im Tiefschlaf</li>
-          <li>+1 h Schlaf → 9 % schnellere Sprintzeiten (Stanford, 2011)</li>
-          <li>&lt;6 h Schlaf → 1,7× höheres Verletzungsrisiko</li>
-          <li>REM-Schlaf konsolidiert motorische Bewegungsmuster</li>
-        </ul>
+        <button class="acc2-btn acc2-desc open" onclick="toggleAcc(this)">↗ Übersicht &amp; Wirkung <span class="ch">▾</span></button>
+        <div class="acc2-body open"><div class="acc2-inner">
+          <p style="font-size:.875rem;color:var(--text-2);line-height:1.65">Der mächtigste Regenerator — kostenlos, ohne Equipment, höchste Evidenz. Kein anderes Tool kann ihn ersetzen.</p>
+          <ul class="tool-facts">
+            <li>70 % der täglichen GH-Ausschüttung im Tiefschlaf</li>
+            <li>+1 h Schlaf → 9 % schnellere Sprintzeiten (Stanford, 2011)</li>
+            <li>&lt;6 h Schlaf → 1,7× höheres Verletzungsrisiko</li>
+            <li>REM-Schlaf konsolidiert motorische Bewegungsmuster</li>
+          </ul>
+        </div></div>
         <div class="evidence-bar">
           <div class="evidence-meta"><span>Evidenzlevel</span><span>Sehr hoch</span></div>
           <div class="bar-track"><div class="bar-fill" data-width="98"></div></div>
         </div>
-        <button class="accordion-toggle" onclick="toggleAcc(this)">Wissenschaft im Detail <span class="arr">▾</span></button>
-        <div class="accordion-body"><div class="accordion-inner">
+        <button class="acc2-btn acc2-sci" onclick="toggleAcc(this)">🔬 Wissenschaft im Detail <span class="ch">▾</span></button>
+        <div class="acc2-body"><div class="acc2-inner">
           <div class="acc-block"><h5>Mechanismus</h5><p>Im Tiefschlaf (N3) werden 70 % der täglichen Wachstumshormone ausgeschüttet, die Gewebereparatur und Muskelwachstum antreiben. REM-Schlaf konsolidiert motorische Gedächtnisinhalte — Bewegungsabläufe werden "eingespeichert". Das Immunsystem produziert nachts die meisten Zytokine zur Reparatur entzündeter Gewebe.</p></div>
-          <div class="study-box"><div class="slabel">🔬 Schlüsselstudie</div><p><strong>Mah et al. (2011), Sleep (Stanford):</strong> Basketballspieler mit 10 h Schlaf verbesserten Sprintzeiten um 9 %, Freiwurfquote um 9 %. <strong>Milewski et al. (2014):</strong> Athleten mit &lt;8 h Schlaf haben 1,7× höheres Verletzungsrisiko.</p></div>
+          <div class="study-box"><div class="slabel">🔬 Schlüsselstudie</div><p><strong>Mah et al. (2011), Sleep (Stanford):</strong> Athleten mit verlängertem Schlaf (10 h) verbesserten Sprintzeiten um 9 %. <strong>Milewski et al. (2014):</strong> Athleten mit &lt;8 h Schlaf haben 1,7× höheres Verletzungsrisiko.</p></div>
           <div class="acc-block"><h5>Schlaf-Hacks für Athleten</h5><div class="protocol">
             <div class="p-step"><div class="p-num">1</div><p>Konstante Schlaf- und Aufstehzeiten — auch am Wochenende</p></div>
             <div class="p-step"><div class="p-num">2</div><p>Schlafzimmer dunkel, kühl (18–20 °C) und ruhig halten</p></div>
@@ -1185,13 +1282,29 @@
         </div>
       </div>
     </div>
+
+    <!-- Expert -->
+    <div class="expert-wrap reveal" style="transition-delay:.1s">
+      <div class="expert-label">
+        <span class="section-eyebrow" style="margin:0">Experten-Interview</span>
+      </div>
+      <div class="expert-card">
+        <div class="expert-avatar">F</div>
+        <div class="expert-info">
+          <h4>Prof. Dr. Alexander Ferrauti</h4>
+          <p class="expert-role">Lehr- und Forschungsbereich Trainingswissenschaft</p>
+          <p class="expert-inst">Fakultät für Sportwissenschaft · Ruhr-Universität Bochum</p>
+          <p class="expert-desc">Im Rahmen unseres Projekts haben wir Prof. Dr. Ferrauti an der RUB interviewt — zu wissenschaftlicher Evidenz, Praxistransfer und den Grenzen von Regenerationstools im Leistungssport.</p>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 </div><!-- /z-index wrapper -->
 
 <!-- ══ Footer ════════════════════════════════════════════════════ -->
 <footer>
-  <p>© 2025 Rehaproject · Schulprojekt</p>
+  <p>© Reha³ · Ben, Lasse &amp; Mick · Goethe Gymnasium Dortmund · v1.1.0</p>
   <div class="footer-links">
     <a href="https://github.com/RadDWB/Rehaprojectdoku" target="_blank">GitHub</a>
     <a href="#hero">Nach oben ↑</a>
@@ -1218,6 +1331,17 @@ const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
   nav.classList.toggle('scrolled', window.scrollY > 20);
 }, { passive: true });
+
+/* ── Cinematic section slide-in ──────────────────────────────── */
+const secObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('sec-in');
+      secObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.06, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('section:not(#hero)').forEach(s => secObs.observe(s));
 
 /* ── Scroll reveal (generic .reveal) ────────────────────────── */
 const revealObs = new IntersectionObserver((entries) => {
@@ -1271,7 +1395,7 @@ function toggleAcc(btn) {
     kraft:      [[58,68,42,75,88,84],[65,75,52,82,93,90],[72,80,60,87,96,95]],
     schwimmen:  [[58,50,65,68,75,85],[63,56,72,72,82,90],[70,60,80,75,88,94]],
     radfahren:  [[82,60,58,68,83,88],[86,66,72,72,88,92],[91,70,80,75,93,96]],
-    basketball: [[72,70,65,70,80,88],[77,75,78,74,85,92],[83,80,90,76,91,96]],
+    volleyball: [[68,72,62,68,78,88],[74,76,74,72,83,92],[80,82,86,74,89,96]],
     tennis:     [[74,72,58,68,78,86],[78,76,68,72,83,91],[84,80,76,74,88,95]],
     kampfsport: [[75,78,72,72,82,88],[80,83,82,75,87,92],[86,88,90,78,92,96]],
     sprint100:  [[72,78,65,70,82,90],[76,82,78,72,87,94],[80,88,93,68,90,97]],
@@ -1287,7 +1411,7 @@ function toggleAcc(btn) {
     kraft:      'Krafttraining erzeugt hohe mechanische Spannung im Muskelgewebe — DOMS tritt besonders nach exzentrischen Phasen (Negative) auf.',
     schwimmen:  'Schwimmen ist gelenkschonend, beansprucht aber Schulter, Rücken und Hüfte intensiv. Ausdauer- und Technikkomponente dominieren.',
     radfahren:  'Radfahren belastet primär Oberschenkel und Gesäß bei geringer Gelenkbelastung. Metabolische Erschöpfung steht im Vordergrund.',
-    basketball: 'Basketball: explosive Sprünge, schnelle Richtungswechsel, hohes Spieltempo. Knie und Sprunggelenk sind besonders gefährdet.',
+    volleyball: 'Volleyball: explosive Sprünge, Schmetterball-Schulterbelastung und schnelle Richtungswechsel. Schulter, Knie und Sprunggelenk stehen im Belastungsfokus.',
     tennis:     'Tennis fordert Schulter, Unterarm und Beinmuskulatur asymmetrisch. Muskuläre Dysbalancen sind ein häufiges Langzeitproblem.',
     kampfsport: 'Kampfsport vereint Kraft, Explosivität und Ausdauer. CNS-Erschöpfung und Kontaktverletzungen sind typische Regenerationsfaktoren.',
     sprint100:  '100m Sprint (Wettkampf): maximale neuromuskuläre Entladung in 10–12 Sek. Die CNS-Erschöpfung überwiegt — vollständige Erholung dauert 24–48 h.',
@@ -1296,8 +1420,72 @@ function toggleAcc(btn) {
     lauf5000:   '5000m Lauf (Wettkampf): aerob-anaerobe Mischbelastung über ~13–15 Min. Starke Glykogendepletion, moderate Muskeltraumata, hohe kardiovaskuläre Beanspruchung.',
   };
 
-  // Sport-specific tool reasons for the 4 competition disciplines (override generic)
+  // Sport-specific tool reasons (override generic per sport)
   const SPECIFIC = {
+    fussball: {
+      faszienrolle:   'Oberschenkel, IT-Band und Waden nach Sprint-Richtungswechsel-Belastung systematisch bearbeiten — Repeated Sprint Fatigue (RSF) akkumuliert in diesen Gruppen messbar.',
+      massagepistole: 'Quadrizeps und Gluteus nach 90 Minuten Spielbelastung gezielt behandeln — reaktive Sprungkraft für nächste Trainingseinheit schneller wiederherstellen.',
+      eisbad:         'Standard-Tool im Profifußball nach Spielen: reduziert inflammatorische Marker nach RSF-Belastung und beschleunigt Match-to-Match-Recovery signifikant.',
+      sauna:          'Am Folgetag (aktive Ruhe): fördert Glykogenresynthese indirekt über verbesserte Durchblutung und psychologische Erholung nach hoher Gesamtbelastung.',
+      ernaehrung:     'Glykogen ist nach 90 Minuten Fußball stark depletiert — 1,0–1,2 g/kg KG Kohlenhydrate in der ersten Stunde post-match sind entscheidend für schnelle Erholung.',
+      schlaf:         'Repeated Sprint Fatigue erholt sich primär im Tiefschlaf — 8+ Stunden sind besonders in englischen Wochen (3 Spiele/Woche) für CNS-Regeneration unersetzlich.',
+    },
+    laufen: {
+      faszienrolle:   'IT-Band, Wadenmuskulatur und Plantarfaszie nach Laufbelastung bearbeiten — exzentrische Kontraktionen bei jedem Bodenkontakt erzeugen akkumulierte Spannung.',
+      massagepistole: 'Tibialis anterior und Gastrocnemius nach langen Einheiten gezielt behandeln — besonders wirksam zur Prävention von Schienbeinkantensyndrom bei hohem Laufvolumen.',
+      eisbad:         'Nach langen Läufen (>10 km) oder Tempoeinheiten empfohlen: reduziert DOMS in der Laufmuskulatur und Entzündungsmarker in Achillessehne und Kniegelenk messbar.',
+      sauna:          'Ausdauerläufer profitieren langfristig besonders: Plasma-Volumen-Expansion durch regelmäßige Sauna erhöht Schlagvolumen und verbessert Sauerstofftransportkapazität.',
+      ernaehrung:     'Glykogen ist bei Läufen ab 60 Minuten limitierender Faktor — Kohlenhydratzufuhr direkt nach dem Lauf (1,0 g/kg KG/h) und Protein für Sehnenheilung priorisieren.',
+      schlaf:         'Aerobe Enzymsysteme (Mitochondriendichte, oxidative Kapazität) werden im Tiefschlaf adaptiert — für Ausdauerläufer ist 8–9 h Schlaf direkt leistungsrelevant.',
+    },
+    kraft: {
+      faszienrolle:   'Nach Krafttraining mit exzentrischen Phasen gezielt einsetzen — mechanisch beschädigte Muskelgruppen (v.a. nach Negatives) profitieren von der myofaszialen Lockerung.',
+      massagepistole: 'Sehr effektiv nach schwerem Krafttraining: Golgi-Sehnenorgane werden aktiviert und reduzieren post-exercise Muskelsteifigkeit — besonders bei Squat/Deadlift-Belastung.',
+      eisbad:         'Vorsicht: Eisbad nach Krafttraining hemmt den mTOR-Signalweg und kann Hypertrophie-Adaptation um bis zu 20 % reduzieren. In Wettkampfvorbereitung einsetzen, nicht in Aufbauphasen.',
+      sauna:          'Nach Krafttraining sehr sinnvoll (frühestens 60 Min): HSP70 repariert mechanisch beschädigte Myosin-Filamente, GH-Ausschüttung +200 % unterstützt Muskelaufbau aktiv.',
+      ernaehrung:     'Leucin-reiche Proteinquellen (Whey, Hühnchen) direkt nach dem Training aktivieren mTOR maximally — entscheidend für Hypertrophie-Signaling im anabolen Fenster.',
+      schlaf:         '70 % der täglichen GH-Ausschüttung im Tiefschlaf — bei Kraftsportlern ist Schlaf der stärkste anabole Stimulus überhaupt. Weniger als 7 h blockiert messbar den Muskelaufbau.',
+    },
+    schwimmen: {
+      faszienrolle:   'Brustwirbelsäule, Schulter-Außenrotatoren und Latissimus nach Schwimmtraining lockern — Rotatorenmanschette und oberer Rücken sind die Hauptbelastungszonen im Schwimmsport.',
+      massagepistole: 'Schulter (Supraspinatus, Infraspinatus) und Trizeps gezielt behandeln — im Schwimmen werden diese Muskelgruppen häufig überlastet und durch Vibration effizient entspannt.',
+      eisbad:         'Wirksam nach intensiven Schwimmeinheiten: reduziert Schulterentzündungen und DOMS in der Zugmuskulatur. Ganzkörper-Immersion besonders effizient nach langen Trainingsblöcken.',
+      sauna:          'Gelenkschonend und sehr geeignet nach Schwimmtraining — fördert Durchblutung von Schulter und Hüfte ohne mechanische Belastung. Hydration danach besonders wichtig.',
+      ernaehrung:     'Schwimmer haben durch Wasserabkühlung oft erhöhten Energiebedarf — Kohlenhydratbedarf nach Ausdauereinheiten ähnlich wie beim Laufen, Protein für Schultermuskulatur.',
+      schlaf:         'Motorische Konsolidierung technisch komplexer Bewegungsmuster (Armzug, Atemrhythmus) findet im REM-Schlaf statt — für Schwimmer ist Schlaf auch ein Technik-Optimierer.',
+    },
+    radfahren: {
+      faszienrolle:   'Quadrizeps, Iliotibialband und Hüftbeuger nach langen Ausfahrten bearbeiten — die statische Haltungsposition akkumuliert Muskelspannungen besonders in Oberschenkel und Lendenbereich.',
+      massagepistole: 'Oberschenkel-Vorderseite und Gluteus maximus nach intensiven Einheiten gezielt behandeln — besonders effektiv zur Vorbereitung auf die nächste Einheit bei hohem Trainingsvolumen.',
+      eisbad:         'Nach langen oder hochintensiven Ausfahrten geeignet: reduziert metabolische Erschöpfung in der Beinmuskulatur — weniger DOMS-relevant als beim Laufen, aber dennoch wirksam.',
+      sauna:          'Besonders wertvoll für Radfahrer: regelmäßige Sauna erhöht Plasmavolumen und damit Schlagvolumen — messbare Verbesserung der VO₂max-Ausdauerleistung über Zeit.',
+      ernaehrung:     'Radfahren depletiert Glykogen extrem — bei Ausfahrten über 90 Minuten ist Kohlenhydratzufuhr während und direkt nach dem Training (1,2 g/kg KG/h) limitierender Faktor der Regeneration.',
+      schlaf:         'Aerobe Kapazität und mitochondriale Adaptationen werden im Tiefschlaf konsolidiert. Für Radfahrer mit hohem Volumen ist Schlaf direkter Leistungs- und Regenerationsfaktor.',
+    },
+    volleyball: {
+      faszienrolle:   'Schulter-Außenrotatoren, Quadrizeps und Sprunggelenk-Umgebung nach Volleyball bearbeiten — explosive Sprünge und Schmetterschläge erzeugen asymmetrische Belastungsmuster.',
+      massagepistole: 'Schultermuskulatur (Wurfarm) und Oberschenkel nach Spielbelastung gezielt behandeln — besonders wichtig bei Spielern mit hohem Angriffsvolumen für Schultergesundheit.',
+      eisbad:         'Nach Spielen mit vielen Sprüngen empfohlen: reduziert reaktive Entzündung in Knie- und Sprunggelenken sowie DOMS in der Sprungmuskulatur (Gastrocnemius, Gluteus).',
+      sauna:          'Am Folgetag sinnvoll: fördert Durchblutung der Schulterregion und Erholung nach den asymmetrischen Belastungen durch Angriff und Aufschlag.',
+      ernaehrung:     'Explosive Sprungkraft und Schnelligkeit werden durch vollständige Glykogenresynthese wiederhergestellt — Kohlenhydrate post-game priorisieren, Protein für Schultermuskulatur.',
+      schlaf:         'Technische Fähigkeiten (Angriffswinkel, Aufschlagtechnik) werden im REM-Schlaf neuronal gefestigt — für Volleyballer ist Schlaf auch ein direkter Technik-Optimierer.',
+    },
+    tennis: {
+      faszienrolle:   'Unterarm-Flexoren, Schulter und Oberschenkel-Außenseite nach Tennisbelastung bearbeiten — asymmetrische Belastung durch Schlagarm erzeugt chronische muskuläre Dysbalancen.',
+      massagepistole: 'Schlagarm-Unterarm und Schulter gezielt behandeln — perkussive Vibration reduziert Tennisellenbogen-Risiko durch Entspannung des Extensor carpi radialis brevis wirksam.',
+      eisbad:         'Nach langen Matches (3+ Stunden) sehr sinnvoll: reduziert Gelenkentzündung in Schulter und Ellenbogen und beschleunigt Match-to-Match-Recovery bei Turnierbelastung.',
+      sauna:          'Fördert Durchblutung der asymmetrisch belasteten Schultermuskulatur. Bei regelmäßiger Nutzung: verbesserte Sehnen-Durchblutung hilft gegen chronische Schlagarm-Probleme.',
+      ernaehrung:     'Lange Matches erschöpfen Glykogenspeicher erheblich — Kohlenhydratzufuhr auch während des Spiels und Protein danach für Schulter- und Unterarm-Muskelreparatur.',
+      schlaf:         'Koordination und Reaktionszeit im Tennis werden im REM-Schlaf optimiert. Schlafdeprivation reduziert Reaktionszeit nachweislich — direkte Auswirkung auf Spielleistung.',
+    },
+    kampfsport: {
+      faszienrolle:   'Halswirbelsäulen-Umgebung, Schultern und Hüftbeuger nach Kampfsporttraining bearbeiten — Kontaktbelastungen erzeugen diffuse Muskelspannungen im ganzen Körper.',
+      massagepistole: 'Schulter, Nacken und Oberschenkel nach Sparring oder Wettkampf gezielt behandeln — perkussive Vibration wirkt auch auf stumpf-traumatisch belastetes Gewebe entspannend.',
+      eisbad:         'Besonders empfohlen nach Kontaktsportbelastung: reduziert stumpfe Traumata-Entzündung, Hämatome und neuromuskuläre CNS-Erschöpfung nach intensivem Sparring gleichzeitig.',
+      sauna:          'Am Folgetag nach hartem Sparring: fördert Reparatur stumpf-traumatisch belasteter Gewebe und psychologische Erholung — CNS braucht erste 12–24 h Ruhe.',
+      ernaehrung:     'Kampfsport kombiniert anaerobe Explosivität mit Ausdauer — Kohlenhydrate für Glykogenresynthese und Protein für Muskelreparatur und Immunsystem-Unterstützung nach Kontakt.',
+      schlaf:         'CNS-Erschöpfung nach intensivem Kampfsport erholt sich ausschließlich im Tiefschlaf — 9+ Stunden nach Wettkampftagen sind für vollständige Regeneration essentiell.',
+    },
     sprint100: {
       faszienrolle:   'Verkürzte Hüftbeuger und Hamstrings nach Sprintbelastung gezielt behandeln — besonders nach vielen Technikwiederholungen oder Serienläufen.',
       massagepistole: 'Gluteus und Oberschenkelrückseite nach explosiven Sprints lockern. Kurze Anwendung (15–20 Sek./Gruppe) ist ausreichend und wirksam.',
