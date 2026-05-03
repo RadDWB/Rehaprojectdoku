@@ -364,6 +364,7 @@
 
     .tl-track {
       display: flex;
+      align-items: flex-start;
       transition: transform .5s var(--ease-out-expo);
       will-change: transform;
     }
@@ -1094,7 +1095,7 @@
 
     /* Kein Seitenumbruch vor jeder Section — nur gezielt */
     section { padding: 1rem 0 !important; }
-    #tools, #experte { break-before: page; }
+    #tools, #matcher, #experte { break-before: page; }
 
     /* Alle Accordions aufklappen */
     .acc2-body, .acc-body {
@@ -1106,8 +1107,12 @@
     .tl-track   { transform: none !important; flex-wrap: wrap !important; height: auto !important; }
     .tl-slide   { width: 100% !important; break-inside: avoid; border-bottom: 1px solid #eee; }
 
-    /* Matcher: keine interaktiven Elemente */
+    /* Akkordeon-Buttons ausblenden (Inhalt immer sichtbar) */
+    .acc2-btn { display: none !important; }
+
+    /* Matcher: interaktives UI ausblenden, Erklärung einblenden */
     .matcher { display: none !important; }
+    #print-matcher-desc { display: block !important; }
 
     /* Quellen-Overlay inline */
     #quellen-overlay {
@@ -1150,6 +1155,7 @@
     <li><a href="#video">Video</a></li>
     <li><a href="#quellen" id="quellenNavLink" onclick="openQuellen(event)">Quellen</a></li>
     <li><a href="#tools">Reha-Tools</a></li>
+    <li><a href="#matcher">Matcher</a></li>
     <li><a href="#experte">Der Experte</a></li>
     <li><a href="#team">Team</a></li>
   </ul>
@@ -1179,6 +1185,7 @@
     <a href="#video"    onclick="closeMobileMenu()">Video</a>
     <a href="#quellen"  onclick="openQuellen(event);closeMobileMenu()">Quellen</a>
     <a href="#tools"    onclick="closeMobileMenu()">Reha-Tools</a>
+    <a href="#matcher"  onclick="closeMobileMenu()">Matcher</a>
     <a href="#experte"  onclick="closeMobileMenu()">Der Experte</a>
     <a href="#team"     onclick="closeMobileMenu()">Team</a>
   </nav>
@@ -1194,8 +1201,7 @@
   <h1>Regeneration<br>im <em>Sport</em></h1>
   <p class="hero-body">
     Wir haben die Wirksamkeit von sechs Regenerationstools wissenschaftlich untersucht —
-    von Eisbädern über Sauna bis hin zu Schlaf und Ernährung.
-    Mit Experten-Interview an der Ruhr-Universität Bochum.
+    von Eisbädern über Sauna bis hin zu Schlaf und Ernährung. Wir haben ein Experten-Interview mit einem Trainingswissenschaftler der Ruhr-Universität Bochum geführt und mit den gesammelten Informationen eine Software entwickelt, die dir das beste Tool zur Regeneration nach dem Training zeigt.
   </p>
   <div class="hero-ctas">
     <a href="#projekt" class="btn btn-primary">
@@ -1206,16 +1212,16 @@
   </div>
   <div class="hero-stats">
     <div>
+      <div class="stat-num">3</div>
+      <div class="stat-label">Team-<br>mitglieder</div>
+    </div>
+    <div>
       <div class="stat-num">6</div>
       <div class="stat-label">Tools untersucht</div>
     </div>
     <div>
       <div class="stat-num">1</div>
       <div class="stat-label">Experten-Interview geführt</div>
-    </div>
-    <div>
-      <div class="stat-num">3</div>
-      <div class="stat-label">Teammitglieder</div>
     </div>
     <div>
       <div class="stat-num">1</div>
@@ -1576,58 +1582,6 @@
       <p class="section-sub reveal" style="transition-delay:.14s;margin-bottom:0">Sechs Methoden, eine Frage:<br>Was sagt die Wissenschaft wirklich?</p>
     </div>
 
-    <!-- Sport-Reha-Matcher -->
-    <div class="matcher reveal">
-      <div class="matcher-header">
-        <h3>Sport-Reha-Matcher <span class="matcher-badge">Interaktiv</span></h3>
-        <p>Wähle deine Sportart und Belastungsintensität — der Matcher zeigt dir, welche Tools am meisten bringen.</p>
-      </div>
-      <div class="matcher-inner">
-        <div>
-          <div class="sport-label">1 · Sportart wählen</div>
-          <div class="sport-grid">
-            <button class="sport-btn" data-sport="fussball">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7l1.5 4h-3L12 7zM7.5 14.5l1.5-3M16.5 14.5l-1.5-3M10 18h4"/></svg>Fußball</button>
-            <button class="sport-btn" data-sport="laufen">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="15" cy="4" r="2"/><path d="M13 6.5L9 12l4 2-2 5.5M13 6.5l3 4-2.5 3.5"/></svg>Laufen</button>
-            <button class="sport-btn" data-sport="kraft">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="9" width="3" height="6" rx="1"/><rect x="19" y="9" width="3" height="6" rx="1"/><line x1="5" y1="12" x2="19" y2="12"/><line x1="8" y1="8.5" x2="8" y2="15.5"/><line x1="16" y1="8.5" x2="16" y2="15.5"/></svg>Kraftsport</button>
-            <button class="sport-btn" data-sport="schwimmen">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 9 Q5 5 8 9 Q11 13 14 9 Q17 5 20 9 Q22 11 24 9"/><path d="M2 15 Q5 11 8 15 Q11 19 14 15 Q17 11 20 15 Q22 17 24 15"/></svg>Schwimmen</button>
-            <button class="sport-btn" data-sport="radfahren">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2"/><line x1="12" y1="3" x2="12" y2="10"/><line x1="12" y1="14" x2="12" y2="21"/><line x1="3" y1="12" x2="10" y2="12"/><line x1="14" y1="12" x2="21" y2="12"/></svg>Radfahren</button>
-            <button class="sport-btn" data-sport="volleyball">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M3.5 8.5 Q12 6 20.5 8.5"/><path d="M12 3v9M12 12 Q7 16 3.5 15.5"/><path d="M12 12 Q17 16 20.5 15.5"/></svg>Volleyball</button>
-            <button class="sport-btn" data-sport="tennis">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><ellipse cx="11" cy="9" rx="6" ry="7"/><line x1="11" y1="16" x2="14" y2="22"/><line x1="5" y1="9" x2="17" y2="9"/><line x1="11" y1="2" x2="11" y2="16"/><line x1="6.5" y1="4.5" x2="15.5" y2="13.5"/><line x1="6.5" y1="13.5" x2="15.5" y2="4.5"/></svg>Tennis</button>
-            <button class="sport-btn" data-sport="kampfsport">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10V7a2 2 0 014 0v1M11 8V6a2 2 0 014 0v3"/><path d="M7 10h10v5a4 4 0 01-4 4H10a3 3 0 01-3-3v-6z"/></svg>Kampfsport</button>
-            <button class="sport-btn" data-sport="sprint100">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg>100m Sprint</button>
-            <button class="sport-btn" data-sport="stabhoch">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="19" cy="5" r="2"/><path d="M5 21L9 21L9 13 Q9 4 17 4"/><line x1="2" y1="15" x2="22" y2="15"/></svg>Stabhoch&shy;sprung</button>
-            <button class="sport-btn" data-sport="lauf400">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="14" rx="7"/><rect x="6" y="8.5" width="12" height="7" rx="3.5" fill="var(--bg-surface)" stroke="none"/><line x1="3" y1="12" x2="21" y2="12"/></svg>400m Lauf</button>
-            <button class="sport-btn" data-sport="lauf5000">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 12 Q18 6 21 12 Q19 20 12 20 Q5 20 3 13 Q4 4 13 3 Q21 3 22 11"/></svg>5000m Lauf</button>
-          </div>
-          <div class="intensity-label">2 · Intensität</div>
-          <div class="intensity-row">
-            <button class="int-btn" data-int="0">Leicht</button>
-            <button class="int-btn" data-int="1">Mittel</button>
-            <button class="int-btn" data-int="2">Intensiv</button>
-          </div>
-          <div class="sport-profile-box" id="sportProfile"></div>
-        </div>
-        <div>
-          <div class="intensity-label">Deine Top-Empfehlung</div>
-          <div class="matcher-results" id="matcherResults">
-            <div class="matcher-placeholder">← Sport &amp; Intensität wählen,<br>um die Empfehlung zu sehen.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <div class="tools-grid">
 
       <!-- FASZIENROLLE -->
@@ -1847,6 +1801,87 @@
 <!-- ══ Section Divider ══════════════════════════════════════════ -->
 <div class="sec-divider">
   <div class="sec-divider-line"></div>
+  <a class="sec-divider-btn" href="#matcher" aria-label="Zum Matcher scrollen">
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3,6 8,11 13,6"/></svg>
+  </a>
+  <div class="sec-divider-line"></div>
+</div>
+
+<!-- ══ Matcher ══════════════════════════════════════════════════ -->
+<section id="matcher">
+  <div class="wrap">
+    <div class="tools-intro">
+      <div>
+        <p class="section-eyebrow reveal">Eigene Software</p>
+        <h2 class="section-title reveal" style="transition-delay:.08s;margin-bottom:0">Sport-Reha-Matcher</h2>
+      </div>
+      <p class="section-sub reveal" style="transition-delay:.14s;margin-bottom:0">Wähle deine Sportart und Belastungsintensität — der Matcher zeigt dir, welche Tools am meisten bringen.</p>
+    </div>
+    <!-- Nur im Druck sichtbar -->
+    <div id="print-matcher-desc" style="display:none; margin-top:1.5rem; padding:1.25rem 1.5rem; border:1px solid #ddd; border-radius:8px; background:#f9f9f9;">
+      <p style="font-size:10.5pt; line-height:1.7; color:#222; margin-bottom:.75rem">
+        Im Rahmen unseres Projekts haben wir eine eigene interaktive Web-Anwendung entwickelt: den <strong>Sport-Reha-Matcher</strong>. Die Software ist direkt in unsere Projektwebsite integriert und unter <strong>rehaprojectdoku.vercel.app</strong> abrufbar.
+      </p>
+      <p style="font-size:10.5pt; line-height:1.7; color:#222; margin-bottom:.75rem">
+        Nutzer wählen ihre <strong>Sportart</strong> (z.B. Fußball, Kraftsport, 100m Sprint — insgesamt 11 Sportarten) sowie die <strong>Belastungsintensität</strong> (leicht / mittel / intensiv). Der Matcher berechnet anhand eines sport- und intensitätsspezifischen Bewertungsalgorithmus eine gewichtete Rangliste aller sechs untersuchten Regenerationstools und gibt eine individuelle Empfehlung mit Begründung aus.
+      </p>
+      <p style="font-size:10.5pt; line-height:1.7; color:#222;">
+        Die Bewertungslogik basiert auf den wissenschaftlichen Erkenntnissen aus unserer Recherche sowie den Einschätzungen von Prof. Dr. Alexander Ferrauti (RUB). Der Matcher ist vollständig in HTML, CSS und JavaScript realisiert — ohne externe Frameworks oder Datenbank.
+      </p>
+    </div>
+
+    <div class="matcher reveal" style="transition-delay:.1s">
+      <div class="matcher-inner">
+        <div>
+          <div class="sport-label">1 · Sportart wählen</div>
+          <div class="sport-grid">
+            <button class="sport-btn" data-sport="fussball">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7l1.5 4h-3L12 7zM7.5 14.5l1.5-3M16.5 14.5l-1.5-3M10 18h4"/></svg>Fußball</button>
+            <button class="sport-btn" data-sport="laufen">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="15" cy="4" r="2"/><path d="M13 6.5L9 12l4 2-2 5.5M13 6.5l3 4-2.5 3.5"/></svg>Laufen</button>
+            <button class="sport-btn" data-sport="kraft">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="9" width="3" height="6" rx="1"/><rect x="19" y="9" width="3" height="6" rx="1"/><line x1="5" y1="12" x2="19" y2="12"/><line x1="8" y1="8.5" x2="8" y2="15.5"/><line x1="16" y1="8.5" x2="16" y2="15.5"/></svg>Kraftsport</button>
+            <button class="sport-btn" data-sport="schwimmen">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 9 Q5 5 8 9 Q11 13 14 9 Q17 5 20 9 Q22 11 24 9"/><path d="M2 15 Q5 11 8 15 Q11 19 14 15 Q17 11 20 15 Q22 17 24 15"/></svg>Schwimmen</button>
+            <button class="sport-btn" data-sport="radfahren">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2"/><line x1="12" y1="3" x2="12" y2="10"/><line x1="12" y1="14" x2="12" y2="21"/><line x1="3" y1="12" x2="10" y2="12"/><line x1="14" y1="12" x2="21" y2="12"/></svg>Radfahren</button>
+            <button class="sport-btn" data-sport="volleyball">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M3.5 8.5 Q12 6 20.5 8.5"/><path d="M12 3v9M12 12 Q7 16 3.5 15.5"/><path d="M12 12 Q17 16 20.5 15.5"/></svg>Volleyball</button>
+            <button class="sport-btn" data-sport="tennis">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><ellipse cx="11" cy="9" rx="6" ry="7"/><line x1="11" y1="16" x2="14" y2="22"/><line x1="5" y1="9" x2="17" y2="9"/><line x1="11" y1="2" x2="11" y2="16"/><line x1="6.5" y1="4.5" x2="15.5" y2="13.5"/><line x1="6.5" y1="13.5" x2="15.5" y2="4.5"/></svg>Tennis</button>
+            <button class="sport-btn" data-sport="kampfsport">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 10V7a2 2 0 014 0v1M11 8V6a2 2 0 014 0v3"/><path d="M7 10h10v5a4 4 0 01-4 4H10a3 3 0 01-3-3v-6z"/></svg>Kampfsport</button>
+            <button class="sport-btn" data-sport="sprint100">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg>100m Sprint</button>
+            <button class="sport-btn" data-sport="stabhoch">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="19" cy="5" r="2"/><path d="M5 21L9 21L9 13 Q9 4 17 4"/><line x1="2" y1="15" x2="22" y2="15"/></svg>Stabhoch&shy;sprung</button>
+            <button class="sport-btn" data-sport="lauf400">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="14" rx="7"/><rect x="6" y="8.5" width="12" height="7" rx="3.5" fill="var(--bg-surface)" stroke="none"/><line x1="3" y1="12" x2="21" y2="12"/></svg>400m Lauf</button>
+            <button class="sport-btn" data-sport="lauf5000">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M12 12 Q18 6 21 12 Q19 20 12 20 Q5 20 3 13 Q4 4 13 3 Q21 3 22 11"/></svg>5000m Lauf</button>
+          </div>
+          <div class="intensity-label">2 · Intensität</div>
+          <div class="intensity-row">
+            <button class="int-btn" data-int="0">Leicht</button>
+            <button class="int-btn" data-int="1">Mittel</button>
+            <button class="int-btn" data-int="2">Intensiv</button>
+          </div>
+          <div class="sport-profile-box" id="sportProfile"></div>
+        </div>
+        <div>
+          <div class="intensity-label">Deine Top-Empfehlung</div>
+          <div class="matcher-results" id="matcherResults">
+            <div class="matcher-placeholder">← Sport &amp; Intensität wählen,<br>um die Empfehlung zu sehen.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ Section Divider ══════════════════════════════════════════ -->
+<div class="sec-divider">
+  <div class="sec-divider-line"></div>
   <a class="sec-divider-btn" href="#experte" aria-label="Zum Experten scrollen">
     <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3,6 8,11 13,6"/></svg>
   </a>
@@ -1874,6 +1909,7 @@
         <p class="expert-inst">Fakultät für Sportwissenschaft · Ruhr-Universität Bochum</p>
         <p class="expert-desc" style="margin-top:.75rem">
           Im Rahmen unseres Projekts haben wir Prof. Dr. Ferrauti an der RUB interviewt — zu wissenschaftlicher Evidenz, Praxistransfer und den Grenzen von Regenerationstools im Sport. Seine Einschätzungen fließen direkt in unsere Bewertungen ein.
+          Das vollständige Interview ist in unserem <a href="#video" style="color:var(--accent-c);font-weight:600;text-decoration:none">Projektvideo</a> zu sehen.
         </p>
         <p class="expert-desc" style="margin-top:.5rem">
           Ferrauti leitete gemeinsam mit Prof. Kellmann (RUB), Prof. Meyer (Saarland) und Prof. Pfeiffer (Mainz) das <strong>REGman</strong>-Projekt des Bundesinstituts für Sportwissenschaft — ein neunjähriges Multicenterprogramm (2012–2021) mit über 15 Teilstudien an Leistungssportlern. Es ist damit eine der umfangreichsten deutschen Studienreihen zur Regeneration im Sport überhaupt.
