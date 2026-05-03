@@ -592,6 +592,42 @@
     .int-btn:hover { border-color: var(--border-hi); color: var(--text-1); }
     .int-btn.active { border-color: var(--accent-v); background: rgba(155,132,240,.08); color: var(--accent-v); }
     .matcher-results { display: flex; flex-direction: column; gap: .55rem; }
+
+    /* sport profile explanation box */
+    .sport-profile-box {
+      margin-top: 1.1rem;
+      background: var(--bg-root); border-radius: var(--r-md);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      transition: max-height .5s var(--ease-out-quart), opacity .4s;
+      max-height: 0; opacity: 0;
+    }
+    .sport-profile-box.visible { max-height: 600px; opacity: 1; }
+    .spb-header {
+      display: flex; align-items: center; gap: .55rem;
+      padding: .65rem 1rem;
+      background: linear-gradient(135deg, rgba(155,132,240,.12), rgba(0,208,230,.08));
+      border-bottom: 1px solid var(--border);
+    }
+    .spb-label {
+      font-size: .6rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+      color: var(--accent-v);
+    }
+    .spb-body { padding: .9rem 1rem; display: flex; flex-direction: column; gap: .65rem; }
+    .spb-load {
+      font-size: .78rem; color: var(--text-1); font-weight: 600; line-height: 1.45;
+    }
+    .spb-why {
+      font-size: .75rem; color: var(--text-2); line-height: 1.6;
+    }
+    .spb-tag {
+      display: inline-block; font-size: .6rem; font-weight: 700;
+      letter-spacing: .08em; text-transform: uppercase;
+      padding: .15rem .55rem; border-radius: var(--r-pill);
+      margin-right: .3rem; margin-bottom: .2rem;
+    }
+    .spb-tag-hi { background: rgba(78,217,160,.15); color: var(--accent-g); }
+    .spb-tag-lo { background: rgba(245,162,70,.12); color: var(--accent-w); }
     .matcher-placeholder {
       color: var(--text-3); font-size: .875rem; text-align: center;
       padding: 2rem 1rem; border: 1px dashed var(--border); border-radius: var(--r-md);
@@ -792,7 +828,7 @@
     <img src="https://raw.githubusercontent.com/RadDWB/Rehaprojectdoku/main/goethe_logo_end-scaled.jpg"
          alt="Goethe Gymnasium Logo"
          style="height:34px;width:auto;border-radius:4px;object-fit:contain;" />
-    Rehaproject
+    Reha<sup style="font-size:.65em;letter-spacing:0">3</sup>
   </div>
   <ul class="nav-center">
     <li><a href="#projekt">Projekt</a></li>
@@ -1033,6 +1069,7 @@
             <button class="int-btn" data-int="1">Mittel</button>
             <button class="int-btn" data-int="2">Intensiv</button>
           </div>
+          <div class="sport-profile-box" id="sportProfile"></div>
         </div>
         <div>
           <div class="intensity-label">Deine Top-Empfehlung</div>
@@ -1291,7 +1328,14 @@
         <span class="section-eyebrow" style="margin:0">Experten-Interview</span>
       </div>
       <div class="expert-card">
-        <div class="expert-avatar">F</div>
+        <picture>
+          <source srcset="Alexander_Ferrauti.avif" type="image/avif">
+          <img src="portraet_ferrauti_3.jpg" alt="Prof. Dr. Alexander Ferrauti"
+               style="width:88px;height:88px;border-radius:50%;object-fit:cover;
+                      object-position:center top;flex-shrink:0;
+                      border:2px solid var(--border-hi);
+                      box-shadow:0 0 0 4px rgba(0,208,230,.15);" />
+        </picture>
         <div class="expert-info">
           <h4>Prof. Dr. Alexander Ferrauti</h4>
           <p class="expert-role">Lehr- und Forschungsbereich Trainingswissenschaft</p>
@@ -1538,6 +1582,39 @@ function toggleAcc(btn) {
       : GENERIC[toolKey][intensity];
   }
 
+  // Physiological sport profiles explaining the ranking logic
+  const SPORT_PROFILE = {
+    fussball:   { load: 'Dominante Last: Repeated Sprint Fatigue (RSF) + Glykogendepletion', why: 'Nach 90 Minuten mit ~1.000 Sprints sind Glykogenspeicher stark geleert und Entzündungsmarker erhöht. Schlaf und Ernährung dominieren, weil CNS-Erholung und Glykogenresynthese Zeit brauchen. Das Eisbad ist im Profifußball Post-Game-Standard, weil es Match-to-Match-Recovery verkürzt.', hi: ['Schlaf','Ernährung','Eisbad'], lo: ['Sauna'] },
+    laufen:     { load: 'Dominante Last: Exzentrische Muskelkontraktionen → starkes DOMS', why: 'Bei jedem Bodenkontakt bremst die Muskulatur exzentrisch — besonders Waden, Hamstrings und IT-Band. Ernährung (Glykogen) und Schlaf (Reparatur) dominieren. Faszienrolle sehr wirksam für IT-Band-Spannung. Eisbad reduziert DOMS messbar.', hi: ['Schlaf','Ernährung','Faszienrolle'], lo: ['Massagepistole'] },
+    kraft:      { load: 'Dominante Last: Mechanisches Mikrotrauma durch exzentrische Phasen', why: 'Schwere Negative (Squat, Deadlift) zerreißen Myosin-Filamente kontrolliert — das ist der Wachstumsreiz. Schlaf produziert 70 % des täglichen GH. Sauna verstärkt HSP70 und GH weiter. Vorsicht: Eisbad hemmt mTOR und bremst nachweislich den Muskelaufbau.', hi: ['Schlaf','Ernährung','Sauna'], lo: ['Eisbad'] },
+    schwimmen:  { load: 'Dominante Last: Schulter-Overuse, technische Ausdauer, wenig DOMS', why: 'Schwimmen ist gelenkschonend — kein Bodenkontakt, kein starkes DOMS. Schulter (Rotatorenmanschette) ist die Hauptrisikozone. Massagepistole am Schlagarm und Eisbad für Schulterentzündung sind besonders relevant. Schlaf konsolidiert komplexe Technik im REM-Schlaf.', hi: ['Schlaf','Ernährung','Eisbad'], lo: ['Faszienrolle'] },
+    radfahren:  { load: 'Dominante Last: Glykogendepletion, metabolische Erschöpfung', why: 'Radfahren erzeugt kaum mechanisches Mikrotrauma (kein Stoß), aber massive Glykogendepletion bei langen Ausfahrten. Ernährung ist der kritischste Hebel. Sauna verbessert Plasmavolumen und damit VO₂max langfristig — besonders wertvoll für Ausdauerradfahrer.', hi: ['Ernährung','Schlaf','Sauna'], lo: ['Massagepistole'] },
+    volleyball: { load: 'Dominante Last: Explosive Sprünge + asymmetrische Schulterbelastung', why: 'Viele maximale Vertikalsprünge belasten Knie und Sprunggelenk, der Schlagarm (Schulter, Trizeps) wird asymmetrisch überlastet. Eisbad für Sprunggelenk und Kniegelenk post-Game. Massagepistole wichtig für Schulter. Schlaf konsolidiert Angriffswinkel im REM-Schlaf.', hi: ['Schlaf','Ernährung','Eisbad'], lo: ['Sauna'] },
+    tennis:     { load: 'Dominante Last: Asymmetrische Schulter/Unterarm-Belastung, lange Matchdauer', why: 'Tennis erzeugt ausgeprägte muskuläre Dysbalancen: Schlagarm ist deutlich stärker als der andere. Lange Matches erschöpfen Glykogenspeicher. Chronische Überlastungen (Tennisellenbogen) entstehen durch akkumulierte Belastung — Massagepistole am Extensor carpi ist präventiv entscheidend.', hi: ['Schlaf','Ernährung','Massagepistole'], lo: ['Sauna'] },
+    kampfsport: { load: 'Dominante Last: Stumpfe Traumata + CNS-Erschöpfung + Laktat', why: 'Kampfsport kombiniert drei Stressoren gleichzeitig: Kontakt-Inflammation (stumpfe Traumata), CNS-Erschöpfung durch maximale Explosivität und Laktatakkumulation. Eisbad wirkt auf alle drei: reduziert Hämatombildung, hemmt Inflammation und unterstützt Laktatclearance.', hi: ['Schlaf','Eisbad','Ernährung'], lo: ['Sauna'] },
+    sprint100:  { load: 'Dominante Last: Maximale CNS-Entladung, kaum Glykogendepletion', why: '10–12 Sekunden maximale neuromuskuläre Aktivierung erschöpfen das ZNS vollständig — nicht die Glykogenspeicher. Schlaf ist das einzige Tool, das CNS-Erschöpfung vollständig behebt (Tiefschlaf). Eisbad hilft bei neuromuskulärer Ermüdung. Sauna erst nach 12–24 h, nicht akut.', hi: ['Schlaf','Eisbad','Ernährung'], lo: ['Sauna'] },
+    stabhoch:   { load: 'Dominante Last: CNS + Schulter + technische Komplexität', why: 'Stabhochsprung ist ein technisch höchst anspruchsvoller Bewegungsablauf. REM-Schlaf "speichert" den Stabablauf neuronal — Schlaf ist deshalb besonders leistungsrelevant. Schultermuskulatur wird beim Stab stark belastet. Lange Wettkampftage mit Wartezeiten machen die Ernährungsstrategie komplex.', hi: ['Schlaf','Ernährung','Faszienrolle'], lo: ['Eisbad'] },
+    lauf400:    { load: 'Dominante Last: Extremes Laktat (bis 22 mmol/L) + maximale CNS-Belastung', why: '400m gilt als härteste Laufdisziplin: Laktatwerte bis 22 mmol/L (Normalwert Ruhe: 1–2 mmol/L). Das Eisbad beschleunigt die Laktatclearance durch reaktive Vasodilatation nach der Kältebehandlung. Sauna erst am Folgetag — das System braucht zunächst Ruhe. Schlaf für CNS-Recovery.', hi: ['Schlaf','Ernährung','Eisbad'], lo: ['Sauna'] },
+    lauf5000:   { load: 'Dominante Last: Glykogendepletion + mitochondriale Erschöpfung', why: '5000m erschöpft aerobe Enzymsysteme und Glykogenspeicher. Ernährung ist akut entscheidend (1,0–1,2 g KH/kg KG in Stunde 1). Schlaf konsolidiert mitochondriale Adaptationen im Tiefschlaf. Sauna verbessert Plasmavolumen langfristig — besonders wertvoll für Ausdauerathleten.', hi: ['Ernährung','Schlaf','Sauna'], lo: ['Massagepistole'] },
+  };
+
+  function renderProfile(sport) {
+    const pb = document.getElementById('sportProfile');
+    const p = SPORT_PROFILE[sport];
+    if (!p) { pb.classList.remove('visible'); return; }
+    pb.innerHTML = `
+      <div class="spb-header"><span class="spb-label">⚡ Sportart-Physiologie &amp; Ranking-Logik</span></div>
+      <div class="spb-body">
+        <div class="spb-load">${p.load}</div>
+        <div class="spb-why">${p.why}</div>
+        <div>
+          ${p.hi.map(t=>`<span class="spb-tag spb-tag-hi">↑ ${t}</span>`).join('')}
+          ${p.lo.map(t=>`<span class="spb-tag spb-tag-lo">↓ ${t}</span>`).join('')}
+        </div>
+      </div>`;
+    pb.classList.add('visible');
+  }
+
   const MEDAL = ['🥇','🥈','🥉','4.','5.','6.'];
   const RANK_CLS = ['gold','silver','bronze','','',''];
   let selectedSport = null, selectedInt = null;
@@ -1562,6 +1639,7 @@ function toggleAcc(btn) {
   function render() {
     const el = document.getElementById('matcherResults');
     if (selectedSport === null || selectedInt === null) return;
+    renderProfile(selectedSport);
     const scores = S[selectedSport][selectedInt];
     const ranked = TOOLS.map((t, i) => ({ ...t, score: scores[i] }))
                         .sort((a, b) => b.score - a.score);
