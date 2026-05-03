@@ -819,6 +819,59 @@
     }
 
     /* ═══════════════════════════════════════════════════════════
+       QUELLEN OVERLAY
+    ═══════════════════════════════════════════════════════════ */
+    #quellen-overlay {
+      position: fixed; inset: 0; z-index: 500;
+      display: flex; align-items: flex-end; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity .35s var(--ease-out-quart);
+    }
+    #quellen-overlay.open { opacity: 1; pointer-events: all; }
+
+    #quellen-backdrop {
+      position: absolute; inset: 0;
+      background: rgba(0,0,0,.65);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+
+    #quellen-panel {
+      position: relative; z-index: 1;
+      width: 100%; max-width: 900px;
+      max-height: 88vh;
+      background: var(--bg-card);
+      border: 1px solid var(--border-hi);
+      border-bottom: none;
+      border-radius: var(--r-lg) var(--r-lg) 0 0;
+      overflow-y: auto;
+      padding: clamp(1.5rem,4vw,2.5rem) clamp(1.5rem,4vw,3rem) 3rem;
+      transform: translateY(60px);
+      transition: transform .45s var(--ease-out-expo);
+      box-shadow: 0 -12px 60px rgba(0,0,0,.4), 0 0 0 1px rgba(0,208,230,.08);
+    }
+    #quellen-overlay.open #quellen-panel { transform: translateY(0); }
+
+    #quellen-close {
+      position: sticky; top: 0; float: right;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-pill);
+      color: var(--text-2);
+      font-size: .8125rem; font-weight: 600;
+      padding: .35rem .9rem;
+      cursor: pointer;
+      transition: background .2s, color .2s;
+      margin-bottom: 1rem;
+      z-index: 2;
+    }
+    #quellen-close:hover { background: var(--bg-card-hi); color: var(--text-1); }
+
+    #quellen-panel .section-eyebrow { margin-top: .25rem; }
+    #quellen-panel .section-title   { font-size: clamp(1.5rem,4vw,2.25rem); margin-bottom: .5rem; }
+    #quellen-panel .section-sub     { margin-bottom: 2rem; }
+
+    /* ═══════════════════════════════════════════════════════════
        GLOSSARY TOOLTIPS
     ═══════════════════════════════════════════════════════════ */
     .gloss {
@@ -864,7 +917,7 @@
   </div>
   <ul class="nav-center">
     <li><a href="#projekt">Projekt</a></li>
-    <li><a href="#quellen">Quellen</a></li>
+    <li><a href="#quellen" id="quellenNavLink" onclick="openQuellen(event)">Quellen</a></li>
     <li><a href="#tools">Reha-Tools</a></li>
     <li><a href="#team">Team</a></li>
   </ul>
@@ -986,60 +1039,63 @@
   </div>
 </section>
 
-<!-- ══ Quellen ═══════════════════════════════════════════════════ -->
-<section id="quellen">
-  <div class="wrap">
-    <p class="section-eyebrow reveal">Wissenschaftliche Grundlage</p>
-    <h2 class="section-title reveal" style="transition-delay:.08s">Quellenverzeichnis</h2>
-    <p class="section-sub reveal" style="transition-delay:.14s">
+<!-- ══ Quellen Overlay ════════════════════════════════════════════ -->
+<div id="quellen-overlay" role="dialog" aria-modal="true" aria-label="Quellenverzeichnis">
+  <div id="quellen-backdrop" onclick="closeQuellen()"></div>
+  <div id="quellen-panel">
+    <button id="quellen-close" onclick="closeQuellen()" aria-label="Schließen">✕ Schließen</button>
+
+    <p class="section-eyebrow">Wissenschaftliche Grundlage</p>
+    <h2 class="section-title">Quellenverzeichnis</h2>
+    <p class="section-sub">
       Alle verwendeten Studien, Interviews und Quellen auf einen Blick.
       Klicke auf eine Karte, um zur Originalquelle zu gelangen.
     </p>
 
     <div class="sources-grid">
-      <div class="source-card reveal">
+      <div class="source-card">
         <span class="source-type t-experte">Experten-Interview</span>
         <h4>Prof. Dr. Alexander Ferrauti · Ruhr-Universität Bochum</h4>
         <p>Lehr- und Forschungsbereich Trainingswissenschaft, Fakultät für Sportwissenschaft. Persönliches Interview zu Regenerationsmethoden und deren physiologischer Wirksamkeit im Leistungssport.</p>
         <span class="source-link">Transkript folgt →</span>
       </div>
-      <div class="source-card reveal" style="transition-delay:.06s">
+      <div class="source-card">
         <span class="source-type t-studie">Studie</span>
         <h4>Cold Water Immersion &amp; Muskelregeneration</h4>
         <p>Metaanalyse zur Wirksamkeit von Kältebädern auf Muskelkater und Erholungszeit nach intensiven Belastungen.</p>
         <span class="source-link">Quelle eintragen →</span>
       </div>
-      <div class="source-card reveal" style="transition-delay:.1s">
+      <div class="source-card">
         <span class="source-type t-studie">Studie</span>
         <h4>Sauna &amp; sportliche Erholung</h4>
         <p>Untersuchung der Auswirkungen regelmäßiger Saunagänge auf Herzkreislaufsystem und Regenerationszeit im Sport.</p>
         <span class="source-link">Quelle eintragen →</span>
       </div>
-      <div class="source-card reveal" style="transition-delay:.14s">
+      <div class="source-card">
         <span class="source-type t-online">Onlinequelle</span>
         <h4>Massagepistolen im Athletenalltag</h4>
         <p>Überblick aktueller Forschung zu perkussiver Massage und deren Einfluss auf Beweglichkeit und wahrgenommenen Schmerz.</p>
         <span class="source-link">Quelle eintragen →</span>
       </div>
-      <div class="source-card reveal" style="transition-delay:.18s">
+      <div class="source-card">
         <span class="source-type t-buch">Buch</span>
         <h4>Schlaf als Regenerationsfaktor</h4>
         <p>Wissenschaftliche Grundlagen zur Bedeutung von Schlafqualität und -dauer für sportliche Leistungsfähigkeit und Muskelwachstum.</p>
         <span class="source-link">Quelle eintragen →</span>
       </div>
-      <div class="source-card reveal" style="transition-delay:.22s">
+      <div class="source-card">
         <span class="source-type t-studie">Studie</span>
         <h4>Faszienrolle &amp; myofasziale Entspannung</h4>
         <p>RCT-Studie zur Wirksamkeit von Foam Rolling auf Beweglichkeit, Muskeltonus und empfundene Erholung nach dem Sport.</p>
         <span class="source-link">Quelle eintragen →</span>
       </div>
-      <div class="source-card reveal" style="transition-delay:.26s">
+      <div class="source-card">
         <span class="source-type t-studie">Studie</span>
         <h4>Ernährung &amp; Post-Exercise Recovery</h4>
         <p>Einfluss von Protein-, Kohlenhydrat- und Mikronährstoffzufuhr auf die muskuläre Reparatur nach intensivem Training.</p>
         <span class="source-link">Quelle eintragen →</span>
       </div>
-      <a class="source-card reveal" style="transition-delay:.3s;text-decoration:none;display:block;cursor:pointer" href="https://www.spektrum.de/kolumne/regeneration-nach-dem-sport-wie-viel-erholung-muss-sein/1915714" target="_blank" rel="noopener">
+      <a class="source-card" style="text-decoration:none;display:block;cursor:pointer" href="https://www.spektrum.de/kolumne/regeneration-nach-dem-sport-wie-viel-erholung-muss-sein/1915714" target="_blank" rel="noopener">
         <span class="source-type t-online">Online · Spektrum.de</span>
         <h4>Regeneration nach dem Sport — wie viel Erholung muss sein?</h4>
         <p>Wissenschaftliche Einordnung von Regenerationsmethoden: individuelle Wirksamkeit, Gabbets Akut-Chronisch-Verhältnis und warum keine Methode universell überlegen ist.</p>
@@ -1047,7 +1103,7 @@
       </a>
     </div>
   </div>
-</section>
+</div>
 
 <!-- ══ Reha-Tools ════════════════════════════════════════════════ -->
 <section id="tools">
@@ -1391,6 +1447,19 @@
      JAVASCRIPT
 ═══════════════════════════════════════════════════════════════ -->
 <script>
+/* ── Quellen Overlay ─────────────────────────────────────────── */
+function openQuellen(e) {
+  if (e) e.preventDefault();
+  const ov = document.getElementById('quellen-overlay');
+  ov.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeQuellen() {
+  document.getElementById('quellen-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeQuellen(); });
+
 /* ── Theme Toggle ────────────────────────────────────────────── */
 const html   = document.documentElement;
 const toggle = document.getElementById('themeToggle');
