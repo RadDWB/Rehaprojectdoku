@@ -505,7 +505,7 @@
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
       gap: var(--sp-4);
-      margin-top: var(--sp-7);
+      margin-top: var(--sp-6);
     }
     .source-card {
       background: var(--bg-card);
@@ -532,6 +532,16 @@
     .t-experte  { background: rgba(155,132,240,.1); color: var(--accent-v); }
     .t-buch     { background: rgba(245,162,70,.1);  color: var(--accent-w); }
     .t-online   { background: rgba(78,217,160,.1);  color: var(--accent-g); }
+
+    .source-cat {
+      grid-column: 1 / -1;
+      font-size: .6875rem; font-weight: 700; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--text-3);
+      padding-bottom: .4rem;
+      border-bottom: 1px solid var(--border);
+      margin-top: .75rem;
+    }
+    .source-cat:first-child { margin-top: 0; }
 
     a.source-card { color: var(--text-1); }
     .source-card h4 { font-size: .9375rem; font-weight: 600; line-height: 1.4; }
@@ -1162,57 +1172,168 @@
 
     <div class="sources-grid">
 
+      <!-- ── Experten-Interview ── -->
+      <p class="source-cat">Experten-Interview</p>
+
       <div class="source-card">
-        <span class="source-type t-experte">Experten-Interview</span>
+        <span class="source-type t-experte">Interview</span>
         <h4>Prof. Dr. Alexander Ferrauti · Ruhr-Universität Bochum</h4>
         <p>Lehr- und Forschungsbereich Trainingswissenschaft, Fakultät für Sportwissenschaft. Persönliches Interview zu Regenerationsmethoden und deren physiologischer Wirksamkeit im Leistungssport.</p>
         <span class="source-link">Transkript folgt →</span>
       </div>
 
+      <!-- ── Grundlagen & Übertraining ── -->
+      <p class="source-cat">Grundlagen · Regeneration &amp; Übertraining</p>
+
+      <div class="source-card">
+        <span class="source-type t-studie">Konsensusdokument · 2013</span>
+        <h4>Prevention, Diagnosis and Treatment of the Overtraining Syndrome</h4>
+        <p>Meeusen, R. et al. · <em>European Journal of Sport Science</em> · Grundlegendes Konsensusdokument zu Übertraining, Belastungssteuerung und Erholungsmanagement im Leistungssport.</p>
+      </div>
+
+      <div class="source-card">
+        <span class="source-type t-studie">Review · 2010</span>
+        <h4>Preventing Overtraining — Stress/Recovery Monitoring</h4>
+        <p>Kellmann, M. · Übersicht zu Methoden der Belastungs- und Erholungsüberwachung bei Hochleistungsathleten zur Prävention von Überlastungssyndromen.</p>
+      </div>
+
+      <a class="source-card" style="text-decoration:none;cursor:pointer" href="https://pubmed.ncbi.nlm.nih.gov/29755354/" target="_blank" rel="noopener">
+        <span class="source-type t-studie">Übersicht · 2018</span>
+        <h4>An Evidence-Based Approach for Choosing Recovery Techniques</h4>
+        <p>Dupuy, O. et al. · <em>Frontiers in Physiology</em> · Evidenzbasierter Vergleich aller gängigen Regenerationsmethoden — eine der meistzitierten Übersichtsarbeiten im Sportbereich.</p>
+        <span class="source-link">PubMed →</span>
+      </a>
+
+      <!-- ── Schlaf ── -->
+      <p class="source-cat">Schlaf &amp; Regeneration</p>
+
+      <a class="source-card" style="text-decoration:none;cursor:pointer" href="https://pubmed.ncbi.nlm.nih.gov/25315509/" target="_blank" rel="noopener">
+        <span class="source-type t-studie">Review · 2015</span>
+        <h4>Sleep and Athletic Performance</h4>
+        <p>Fullagar, H. et al. · <em>Sports Medicine</em> · Umfassende Übersicht zu den Auswirkungen von Schlafmangel auf sportliche Leistung, Reaktionszeit und Verletzungsrisiko.</p>
+        <span class="source-link">PubMed →</span>
+      </a>
+
+      <a class="source-card" style="text-decoration:none;cursor:pointer" href="https://pubmed.ncbi.nlm.nih.gov/21550729/" target="_blank" rel="noopener">
+        <span class="source-type t-studie">Originalstudie · 2011</span>
+        <h4>Sleep and Muscle Recovery — Endocrinological &amp; Molecular Basis</h4>
+        <p>Dattilo, M. et al. · Hormonelle und molekulare Grundlagen für die zentrale Rolle des Schlafs bei der Muskelregeneration (GH, IGF-1, Proteinsynthese).</p>
+        <span class="source-link">PubMed →</span>
+      </a>
+
+      <div class="source-card">
+        <span class="source-type t-studie">Review · 2017</span>
+        <h4>Sleep and Inflammation</h4>
+        <p>Simpson, N. et al. · Zusammenhang zwischen Schlafdauer, -qualität und systemischer Entzündungsreaktion — relevant für Regeneration nach intensiver Belastung.</p>
+      </div>
+
+      <!-- ── Ernährung ── -->
+      <p class="source-cat">Ernährung &amp; Muskelregeneration</p>
+
+      <a class="source-card" style="text-decoration:none;cursor:pointer" href="https://pubmed.ncbi.nlm.nih.gov/28642676/" target="_blank" rel="noopener">
+        <span class="source-type t-studie">Position Stand · 2017</span>
+        <h4>ISSN Position Stand: Protein and Exercise</h4>
+        <p>Jäger, R. et al. · <em>Journal of the International Society of Sports Nutrition</em> · Offizielle Empfehlungen zur Proteinzufuhr für Sportler — Timing, Menge, Qualität.</p>
+        <span class="source-link">PubMed →</span>
+      </a>
+
+      <div class="source-card">
+        <span class="source-type t-studie">Position Stand · 2016</span>
+        <h4>Nutrition and Athletic Performance</h4>
+        <p>Thomas, D.T. et al. · <em>Academy of Nutrition and Dietetics</em> · Offizielle Ernährungsempfehlungen für Sportler zu Makronährstoffen, Hydratation und Timing.</p>
+      </div>
+
+      <div class="source-card">
+        <span class="source-type t-studie">Review · 2011</span>
+        <h4>Carbohydrates for Training and Competition</h4>
+        <p>Burke, L. et al. · Evidenzbasierte Empfehlungen zur Kohlenhydratzufuhr rund ums Training — Glykogenresynthese, Verfügbarkeit und Leistungseffekte.</p>
+      </div>
+
+      <!-- ── Faszienrolle ── -->
+      <p class="source-cat">Faszienrolle · Foam Rolling</p>
+
+      <a class="source-card" style="text-decoration:none;cursor:pointer" href="https://pubmed.ncbi.nlm.nih.gov/31040799/" target="_blank" rel="noopener">
+        <span class="source-type t-studie">Metaanalyse · 2019</span>
+        <h4>Effects of Foam Rolling on Performance and Recovery</h4>
+        <p>Wiewelhove, T. et al. · <em>Frontiers in Physiology</em> · Metaanalyse zu Leistungs- und Erholungseffekten des Foam Rollings — differenziert nach Zeitpunkt und Protokoll.</p>
+        <span class="source-link">PubMed →</span>
+      </a>
+
       <a class="source-card" style="text-decoration:none;cursor:pointer" href="https://pubmed.ncbi.nlm.nih.gov/32825976/" target="_blank" rel="noopener">
-        <span class="source-type t-studie">Systematisches Review · 2020</span>
-        <h4>Foam Rolling — Range of Motion, Recovery &amp; Athletic Performance</h4>
-        <p>Skinner, Moss &amp; Hammond · <em>Journal of Bodywork and Movement Therapies</em> · Metaanalyse zur Wirksamkeit von Faszienrollen auf Beweglichkeit, Muskelkater und sportliche Leistung.</p>
+        <span class="source-type t-studie">Syst. Review · 2020</span>
+        <h4>Foam Rolling — ROM, Recovery &amp; Athletic Performance</h4>
+        <p>Skinner, B. et al. · <em>Journal of Bodywork and Movement Therapies</em> · Systematisches Review und Metaanalyse zu Beweglichkeit, Muskelkater und Leistung.</p>
         <span class="source-link">DOI 10.1016/j.jbmt.2020.01.007 →</span>
       </a>
 
+      <div class="source-card">
+        <span class="source-type t-studie">Originalstudie · 2021</span>
+        <h4>Foam Rolling vs. Stretching — Performance Parameters</h4>
+        <p>Konrad, A. et al. · Direktvergleich von Foam Rolling und statischem Dehnen auf Kraft, Flexibilität und neuromuskuläre Parameter.</p>
+      </div>
+
+      <!-- ── Massagepistole ── -->
+      <p class="source-cat">Massagepistole · Percussive Therapy</p>
+
+      <a class="source-card" style="text-decoration:none;cursor:pointer" href="https://pubmed.ncbi.nlm.nih.gov/37113949/" target="_blank" rel="noopener">
+        <span class="source-type t-studie">Syst. Review · 2023</span>
+        <h4>Effects of Massage Guns on Performance and Recovery</h4>
+        <p>Ferreira, R.M. et al. · Systematisches Review zu den Auswirkungen von Massagepistolen auf sportliche Leistung und Erholung.</p>
+        <span class="source-link">PubMed →</span>
+      </a>
+
       <a class="source-card" style="text-decoration:none;cursor:pointer" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10069390/" target="_blank" rel="noopener">
-        <span class="source-type t-studie">Systematisches Review · 2023</span>
-        <h4>Percussive Therapy — Muskuloskelettale Leistung &amp; Schmerz</h4>
-        <p>Sams et al. · <em>International Journal of Sports Physical Therapy</em> · Systematisches Review zur Wirkung perkussiver Massagegeräte auf Muskelleistung und Schmerzempfinden.</p>
+        <span class="source-type t-studie">Syst. Review · 2023</span>
+        <h4>Percussive Therapy — Musculoskeletal Performance &amp; Pain</h4>
+        <p>Sams, L. et al. · <em>Int. Journal of Sports Physical Therapy</em> · Systematisches Review zur Wirkung perkussiver Geräte auf Muskelleistung und Schmerzempfinden.</p>
         <span class="source-link">DOI 10.26603/001c.73795 →</span>
       </a>
 
+      <!-- ── Eisbad ── -->
+      <p class="source-cat">Eisbad · Cold Water Immersion</p>
+
       <a class="source-card" style="text-decoration:none;cursor:pointer" href="https://pubmed.ncbi.nlm.nih.gov/36527593/" target="_blank" rel="noopener">
         <span class="source-type t-studie">Metaanalyse · 2023</span>
-        <h4>Cold Water Immersion — Vergleich mit anderen Regenerationsmethoden</h4>
-        <p>Moore et al. · <em>Sports Medicine</em> · Systematische Metaanalyse: Kältebad im direkten Vergleich zu anderen Erholungsformen nach intensiver Belastung.</p>
+        <h4>CWI vs. Other Recovery Modalities — Athletic Performance</h4>
+        <p>Moore, E. et al. · <em>Sports Medicine</em> · Systematische Metaanalyse und Meta-Regression: Kältebad im direkten Vergleich zu anderen Erholungsformen.</p>
         <span class="source-link">DOI 10.1007/s40279-022-01800-1 →</span>
       </a>
 
-      <a class="source-card" style="text-decoration:none;cursor:pointer" href="https://pubmed.ncbi.nlm.nih.gov/35785965/" target="_blank" rel="noopener">
-        <span class="source-type t-studie">RCT · 2022</span>
-        <h4>Sauna &amp; Training — Kardiovaskuläre Effekte</h4>
-        <p>Lee, Kolunsarka et al. · <em>Am. J. Physiology — Regulatory, Integrative &amp; Comparative Physiology</em> · Randomisierte Studie zu Saunaeffekten auf Herz-Kreislauf-Funktion in Kombination mit Sport.</p>
-        <span class="source-link">DOI 10.1152/ajpregu.00076.2022 →</span>
+      <a class="source-card" style="text-decoration:none;cursor:pointer" href="https://pubmed.ncbi.nlm.nih.gov/22002736/" target="_blank" rel="noopener">
+        <span class="source-type t-studie">Metaanalyse · 2012</span>
+        <h4>Cold Water Immersion and Recovery — Meta-Analysis</h4>
+        <p>Leeder, J. et al. · Metaanalyse zur Wirksamkeit von Kältebädern nach intensiver Belastung auf Muskelkater, Kraft und subjektive Erholung.</p>
+        <span class="source-link">PubMed →</span>
       </a>
 
-      <a class="source-card" style="text-decoration:none;cursor:pointer" href="https://pubmed.ncbi.nlm.nih.gov/41227002/" target="_blank" rel="noopener">
-        <span class="source-type t-studie">Review · 2025</span>
-        <h4>Schlaf &amp; Sportliche Leistung — Physiologische Mechanismen</h4>
-        <p>Kaczmarek et al. · <em>Journal of Clinical Medicine</em> · Multidimensionales Review physiologischer und molekularer Mechanismen hinter dem Zusammenhang von Schlaf und Athletenleistung.</p>
-        <span class="source-link">DOI 10.3390/jcm14217606 →</span>
+      <!-- ── Sauna ── -->
+      <p class="source-cat">Sauna &amp; Wärme</p>
+
+      <a class="source-card" style="text-decoration:none;cursor:pointer" href="https://pubmed.ncbi.nlm.nih.gov/17312320/" target="_blank" rel="noopener">
+        <span class="source-type t-studie">Originalstudie · 2007</span>
+        <h4>Post-Exercise Sauna Bathing and Endurance Performance</h4>
+        <p>Scoon, G.S.M. et al. · Effekt regelmäßiger Saunagänge nach dem Training auf Ausdauerleistung und Blutvolumen bei Ausdauersportlern.</p>
+        <span class="source-link">PubMed →</span>
       </a>
 
-      <a class="source-card" style="text-decoration:none;cursor:pointer" href="https://pubmed.ncbi.nlm.nih.gov/32269860/" target="_blank" rel="noopener">
-        <span class="source-type t-studie">Metaanalyse · 2020</span>
-        <h4>Kohlenhydrate &amp; Protein — Glykogenresynthese nach dem Training</h4>
-        <p>Margolis, Allen et al. · <em>Medicine &amp; Science in Sports &amp; Exercise</em> · Metaanalyse zur kombinierten Kohlenhydrat-Protein-Zufuhr auf muskuläre Glykogenresynthese.</p>
-        <span class="source-link">DOI 10.1249/MSS.0000000000002476 →</span>
+      <a class="source-card" style="text-decoration:none;cursor:pointer" href="https://pubmed.ncbi.nlm.nih.gov/29620540/" target="_blank" rel="noopener">
+        <span class="source-type t-studie">Review · 2018</span>
+        <h4>Sauna Bathing and Systemic Inflammation</h4>
+        <p>Laukkanen, T. et al. · Zusammenhang zwischen Saunanutzung und systemischer Entzündung — relevante Biomarker und physiologische Mechanismen.</p>
+        <span class="source-link">PubMed →</span>
       </a>
+
+      <div class="source-card">
+        <span class="source-type t-studie">Studie · 2013</span>
+        <h4>Effects of Sauna on Cardiovascular &amp; Hormonal Responses</h4>
+        <p>Pilch, W. et al. · Auswirkungen von Saunagängen auf Herz-Kreislauf-Parameter und Hormonausschüttung bei Athleten.</p>
+      </div>
+
+      <!-- ── Online ── -->
+      <p class="source-cat">Online</p>
 
       <a class="source-card" style="text-decoration:none;cursor:pointer" href="https://www.spektrum.de/kolumne/regeneration-nach-dem-sport-wie-viel-erholung-muss-sein/1915714" target="_blank" rel="noopener">
-        <span class="source-type t-online">Online · Spektrum.de</span>
+        <span class="source-type t-online">Kolumne · Spektrum.de</span>
         <h4>Regeneration nach dem Sport — wie viel Erholung muss sein?</h4>
         <p>Wissenschaftliche Einordnung von Regenerationsmethoden: individuelle Wirksamkeit, Gabbets Akut-Chronisch-Verhältnis und warum keine Methode universell überlegen ist.</p>
         <span class="source-link">Zum Artikel → spektrum.de</span>
