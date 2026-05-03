@@ -1337,10 +1337,13 @@ const secObs = new IntersectionObserver((entries) => {
   entries.forEach(e => {
     if (e.isIntersecting) {
       e.target.classList.add('sec-in');
+      /* Also reveal all child .reveal elements so sections don't appear empty */
+      e.target.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+      e.target.querySelectorAll('.tl-item').forEach(el => el.classList.add('visible'));
       secObs.unobserve(e.target);
     }
   });
-}, { threshold: 0.06, rootMargin: '0px 0px -40px 0px' });
+}, { threshold: 0.04 });
 document.querySelectorAll('section:not(#hero)').forEach(s => secObs.observe(s));
 
 /* ── Scroll reveal (generic .reveal) ────────────────────────── */
