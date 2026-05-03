@@ -537,6 +537,124 @@
       transition: width 1.2s var(--ease-out-expo);
     }
 
+    /* ═══ MATCHER ════════════════════════════════════════════════ */
+    .matcher {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--r-lg); padding: 2rem; margin-bottom: var(--sp-7);
+    }
+    .matcher-header { margin-bottom: 1.5rem; }
+    .matcher-header h3 {
+      font-size: 1.1rem; font-weight: 700; margin-bottom: .4rem;
+      display: flex; align-items: center; gap: .6rem;
+    }
+    .matcher-badge {
+      font-size: .65rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+      background: linear-gradient(135deg, var(--accent-c), var(--accent-v));
+      color: #fff; padding: .15rem .65rem; border-radius: var(--r-pill);
+    }
+    .matcher-header p { font-size: .875rem; color: var(--text-2); }
+    .matcher-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+    .sport-label, .intensity-label {
+      font-size: .6875rem; font-weight: 600; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--text-3); margin-bottom: .5rem;
+    }
+    .sport-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: .4rem; margin-bottom: 1.2rem;
+    }
+    .sport-btn {
+      background: var(--bg-surface); border: 1px solid var(--border);
+      border-radius: var(--r-sm); padding: .5rem .2rem; cursor: pointer;
+      font-size: .68rem; font-weight: 600; color: var(--text-2); text-align: center;
+      display: flex; flex-direction: column; align-items: center; gap: .25rem;
+      transition: all .2s; line-height: 1.3;
+    }
+    .sport-emoji { font-size: 1.25rem; }
+    .sport-btn:hover { border-color: var(--border-hi); color: var(--text-1); }
+    .sport-btn.active { border-color: var(--accent-c); background: rgba(0,208,230,.08); color: var(--accent-c); }
+    .intensity-row { display: flex; gap: .5rem; }
+    .int-btn {
+      flex: 1; padding: .55rem; border-radius: var(--r-sm); border: 1px solid var(--border);
+      background: var(--bg-surface); cursor: pointer;
+      font-size: .8rem; font-weight: 600; color: var(--text-2); transition: all .2s;
+    }
+    .int-btn:hover { border-color: var(--border-hi); color: var(--text-1); }
+    .int-btn.active { border-color: var(--accent-v); background: rgba(155,132,240,.08); color: var(--accent-v); }
+    .matcher-results { display: flex; flex-direction: column; gap: .55rem; }
+    .matcher-placeholder {
+      color: var(--text-3); font-size: .875rem; text-align: center;
+      padding: 2rem 1rem; border: 1px dashed var(--border); border-radius: var(--r-md);
+      line-height: 1.6;
+    }
+    .result-row {
+      display: flex; align-items: center; gap: .7rem; padding: .7rem;
+      border-radius: var(--r-sm); background: var(--bg-surface); border: 1px solid var(--border);
+      transition: border-color .2s;
+    }
+    .result-row:hover { border-color: var(--border-hi); }
+    .result-rank { font-size: .7rem; font-weight: 800; color: var(--text-3); width: 18px; text-align: center; flex-shrink: 0; }
+    .result-rank.gold   { color: #f5a246; }
+    .result-rank.silver { color: #8b949e; }
+    .result-rank.bronze { color: #c06e1a; }
+    .result-icon { font-size: 1rem; flex-shrink: 0; }
+    .result-info { flex: 1; min-width: 0; }
+    .result-name { font-size: .8125rem; font-weight: 600; margin-bottom: .15rem; }
+    .result-reason { font-size: .72rem; color: var(--text-2); line-height: 1.4; }
+    .result-score-wrap { flex-shrink: 0; text-align: right; }
+    .result-score { font-size: .72rem; font-weight: 700; color: var(--accent-c); margin-bottom: .2rem; }
+    .result-bar-track { width: 72px; height: 3px; background: var(--border); border-radius: 2px; overflow: hidden; }
+    .result-bar-fill { height: 100%; border-radius: 2px; background: linear-gradient(90deg, var(--accent-c), var(--accent-v)); transition: width .9s var(--ease-out-expo); }
+
+    /* ═══ TOOL CARDS EXTENDED ════════════════════════════════════ */
+    .tool-specs { display: flex; flex-wrap: wrap; gap: .35rem; }
+    .spec-pill {
+      font-size: .67rem; font-weight: 600;
+      background: var(--bg-surface); border: 1px solid var(--border);
+      border-radius: var(--r-pill); padding: .18rem .65rem; color: var(--text-2);
+    }
+    .accordion-toggle {
+      display: flex; align-items: center; justify-content: space-between;
+      width: 100%; background: none; border: 1px solid var(--border);
+      border-radius: var(--r-sm); padding: .55rem .9rem; cursor: pointer;
+      color: var(--text-2); font-size: .8rem; font-weight: 600; font-family: var(--f-body);
+      transition: border-color .2s, color .2s; margin-top: .5rem;
+    }
+    .accordion-toggle:hover { border-color: var(--border-hi); color: var(--text-1); }
+    .accordion-toggle .arr { transition: transform .3s var(--ease-out-quart); font-size: .7rem; }
+    .accordion-toggle.open { border-color: var(--accent-c); color: var(--accent-c); }
+    .accordion-toggle.open .arr { transform: rotate(180deg); }
+    .accordion-body { max-height: 0; overflow: hidden; transition: max-height .5s var(--ease-out-quart); }
+    .accordion-body.open { max-height: 700px; }
+    .accordion-inner { padding-top: 1rem; display: flex; flex-direction: column; gap: .85rem; }
+    .acc-block h5 { font-size: .68rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--text-3); margin-bottom: .35rem; }
+    .acc-block p { font-size: .8125rem; color: var(--text-2); line-height: 1.65; }
+    .study-box {
+      background: rgba(0,208,230,.06); border: 1px solid rgba(0,208,230,.15);
+      border-left: 3px solid var(--accent-c); border-radius: var(--r-sm); padding: .75rem 1rem;
+    }
+    .study-box .slabel { font-size: .65rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--accent-c); margin-bottom: .3rem; }
+    .study-box p { font-size: .8rem; color: var(--text-2); line-height: 1.6; }
+    .myth-box {
+      background: rgba(245,162,70,.06); border: 1px solid rgba(245,162,70,.15);
+      border-left: 3px solid var(--accent-w); border-radius: var(--r-sm); padding: .75rem 1rem;
+    }
+    .myth-box .mlabel { font-size: .65rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--accent-w); margin-bottom: .3rem; }
+    .myth-box p { font-size: .8rem; color: var(--text-2); line-height: 1.6; }
+    .warn-box {
+      background: rgba(255,80,80,.06); border: 1px solid rgba(255,80,80,.18);
+      border-left: 3px solid #e05555; border-radius: var(--r-sm); padding: .75rem 1rem;
+    }
+    .warn-box .wlabel { font-size: .65rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #e07070; margin-bottom: .3rem; }
+    .warn-box p { font-size: .8rem; color: var(--text-2); line-height: 1.6; }
+    .protocol { display: flex; flex-direction: column; gap: .4rem; }
+    .p-step { display: flex; align-items: flex-start; gap: .55rem; }
+    .p-num {
+      width: 19px; height: 19px; border-radius: 50; flex-shrink: 0; margin-top: .06rem;
+      background: linear-gradient(135deg, var(--accent-c), var(--accent-v));
+      display: flex; align-items: center; justify-content: center;
+      font-size: .62rem; font-weight: 800; color: #fff; border-radius: 50%;
+    }
+    .p-step p { font-size: .8rem; color: var(--text-2); line-height: 1.5; }
+
     /* ═══════════════════════════════════════════════════════════
        TEAM
     ═══════════════════════════════════════════════════════════ */
@@ -647,7 +765,7 @@
   <div class="hero-stats">
     <div>
       <div class="stat-num">6</div>
-      <div class="stat-label">Tools untersucht</div>
+      <div class="stat-label">Tools / Methoden untersucht</div>
     </div>
     <div>
       <div class="stat-num">1</div>
@@ -660,6 +778,10 @@
     <div>
       <div class="stat-num">1</div>
       <div class="stat-label">YouTube-Video</div>
+    </div>
+    <div>
+      <div class="stat-num">1</div>
+      <div class="stat-label">Webseitendokumentation erstellt</div>
     </div>
   </div>
 </section>
@@ -796,129 +918,233 @@
     <div class="tools-intro">
       <div>
         <p class="section-eyebrow reveal">Wissenschaft trifft Praxis</p>
-        <h2 class="section-title reveal" style="transition-delay:.08s;margin-bottom:0">
-          Die untersuchten<br>Reha-Tools
-        </h2>
+        <h2 class="section-title reveal" style="transition-delay:.08s;margin-bottom:0">Die untersuchten<br>Reha-Tools</h2>
       </div>
-      <p class="section-sub reveal" style="transition-delay:.14s;margin-bottom:0">
-        Sechs Methoden, eine Frage:<br>Was sagt die Wissenschaft wirklich?
-      </p>
+      <p class="section-sub reveal" style="transition-delay:.14s;margin-bottom:0">Sechs Methoden, eine Frage:<br>Was sagt die Wissenschaft wirklich?</p>
+    </div>
+
+    <!-- Sport-Reha-Matcher -->
+    <div class="matcher reveal">
+      <div class="matcher-header">
+        <h3>Sport-Reha-Matcher <span class="matcher-badge">Interaktiv</span></h3>
+        <p>Wähle deine Sportart und Belastungsintensität — der Matcher zeigt dir, welche Tools am meisten bringen.</p>
+      </div>
+      <div class="matcher-inner">
+        <div>
+          <div class="sport-label">1 · Sportart wählen</div>
+          <div class="sport-grid">
+            <button class="sport-btn" data-sport="fussball"><span class="sport-emoji">⚽</span>Fußball</button>
+            <button class="sport-btn" data-sport="laufen"><span class="sport-emoji">🏃</span>Laufen</button>
+            <button class="sport-btn" data-sport="kraft"><span class="sport-emoji">🏋️</span>Kraftsport</button>
+            <button class="sport-btn" data-sport="schwimmen"><span class="sport-emoji">🏊</span>Schwimmen</button>
+            <button class="sport-btn" data-sport="radfahren"><span class="sport-emoji">🚴</span>Radfahren</button>
+            <button class="sport-btn" data-sport="basketball"><span class="sport-emoji">🏀</span>Basketball</button>
+            <button class="sport-btn" data-sport="tennis"><span class="sport-emoji">🎾</span>Tennis</button>
+            <button class="sport-btn" data-sport="kampfsport"><span class="sport-emoji">🥋</span>Kampfsport</button>
+          </div>
+          <div class="intensity-label">2 · Intensität</div>
+          <div class="intensity-row">
+            <button class="int-btn" data-int="0">Leicht</button>
+            <button class="int-btn" data-int="1">Mittel</button>
+            <button class="int-btn" data-int="2">Intensiv</button>
+          </div>
+        </div>
+        <div>
+          <div class="intensity-label">Deine Top-Empfehlung</div>
+          <div class="matcher-results" id="matcherResults">
+            <div class="matcher-placeholder">← Sport &amp; Intensität wählen,<br>um die Empfehlung zu sehen.</div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="tools-grid">
 
+      <!-- FASZIENROLLE -->
       <div class="tool-card reveal">
-        <div class="tool-header">
-          <div class="tool-icon">🧊</div>
-          <h3>Eisbad<br><span style="font-weight:400;color:var(--text-2);font-size:.85em">Cold Water Immersion</span></h3>
-        </div>
-        <p>Kurzzeitiges Eintauchen in 10–15 °C kaltes Wasser nach intensiver Belastung. Gehört zu den am besten erforschten Methoden.</p>
-        <ul class="tool-facts">
-          <li>Reduziert Muskelkater (DOMS) messbar</li>
-          <li>Hemmt kurzfristig Entzündungsprozesse</li>
-          <li>Kann Trainingsadaptation langfristig hemmen</li>
-        </ul>
-        <div class="evidence-bar">
-          <div class="evidence-meta">
-            <span>Evidenzlevel</span><span>Hoch</span>
-          </div>
-          <div class="bar-track"><div class="bar-fill" data-width="85"></div></div>
-        </div>
-      </div>
-
-      <div class="tool-card reveal" style="transition-delay:.07s">
-        <div class="tool-header">
-          <div class="tool-icon">🔥</div>
-          <h3>Sauna</h3>
-        </div>
-        <p>Wärmeanwendung als passives Erholungsmittel. Erhöht die Durchblutung und entspannt die Muskulatur mit nachgewiesenen kardiovaskulären Vorteilen.</p>
-        <ul class="tool-facts">
-          <li>Fördert Durchblutung &amp; Muskelentspannung</li>
-          <li>Verbessert subjektives Erholungsgefühl</li>
-          <li>Kardioprotektive Langzeitwirkung belegt</li>
-        </ul>
-        <div class="evidence-bar">
-          <div class="evidence-meta">
-            <span>Evidenzlevel</span><span>Mittel–Hoch</span>
-          </div>
-          <div class="bar-track"><div class="bar-fill" data-width="72"></div></div>
-        </div>
-      </div>
-
-      <div class="tool-card reveal" style="transition-delay:.13s">
-        <div class="tool-header">
-          <div class="tool-icon">💆</div>
-          <h3>Massagepistole<br><span style="font-weight:400;color:var(--text-2);font-size:.85em">Perkussive Therapie</span></h3>
-        </div>
-        <p>Perkussives Gerät für gezielte Muskelstimulation. Im Breitensport beliebt, wissenschaftliche Evidenz noch im Aufbau.</p>
-        <ul class="tool-facts">
-          <li>Verbessert kurzfristig die Beweglichkeit</li>
-          <li>Reduziert gefühlten Muskelkater</li>
-          <li>Evidenz für Leistungssteigerung fehlt</li>
-        </ul>
-        <div class="evidence-bar">
-          <div class="evidence-meta">
-            <span>Evidenzlevel</span><span>Mittel</span>
-          </div>
-          <div class="bar-track"><div class="bar-fill" data-width="55"></div></div>
-        </div>
-      </div>
-
-      <div class="tool-card reveal" style="transition-delay:.2s">
-        <div class="tool-header">
-          <div class="tool-icon">🥗</div>
-          <h3>Ernährung</h3>
-        </div>
-        <p>Gezielte Nährstoffzufuhr im Regenerationsfenster nach dem Training. Protein und Kohlenhydrate spielen die zentrale Rolle.</p>
-        <ul class="tool-facts">
-          <li>Protein (0,3 g/kg KG) direkt nach Training</li>
-          <li>Kohlenhydrate für Glykogenauffüllung</li>
-          <li>Hydration wird systematisch unterschätzt</li>
-        </ul>
-        <div class="evidence-bar">
-          <div class="evidence-meta">
-            <span>Evidenzlevel</span><span>Sehr hoch</span>
-          </div>
-          <div class="bar-track"><div class="bar-fill" data-width="95"></div></div>
-        </div>
-      </div>
-
-      <div class="tool-card reveal" style="transition-delay:.27s">
-        <div class="tool-header">
-          <div class="tool-icon">😴</div>
-          <h3>Schlaf</h3>
-        </div>
-        <p>Der natürlichste Regenerator. Im Tiefschlaf werden Wachstumshormone ausgeschüttet und Muskelreparaturprozesse aktiviert.</p>
-        <ul class="tool-facts">
-          <li>7–9 Stunden optimal für Athleten</li>
-          <li>Schlafmangel erhöht Verletzungsrisiko deutlich</li>
-          <li>Nickerchen können Leistung steigern</li>
-        </ul>
-        <div class="evidence-bar">
-          <div class="evidence-meta">
-            <span>Evidenzlevel</span><span>Sehr hoch</span>
-          </div>
-          <div class="bar-track"><div class="bar-fill" data-width="98"></div></div>
-        </div>
-      </div>
-
-      <div class="tool-card reveal" style="transition-delay:.34s">
-        <div class="tool-header">
-          <div class="tool-icon">🔵</div>
+        <div class="tool-header"><div class="tool-icon">🔵</div>
           <h3>Faszienrolle<br><span style="font-weight:400;color:var(--text-2);font-size:.85em">Foam Rolling</span></h3>
         </div>
-        <p>Selbstmassage mit der Schaumstoffrolle zur Behandlung des myofaszialen Gewebes. Verbreitet im Warm-up und Cool-down.</p>
+        <div class="tool-specs">
+          <span class="spec-pill">⏱ 5–15 Min</span><span class="spec-pill">🔄 2 cm/Sek.</span>
+          <span class="spec-pill">📍 Pre &amp; Post</span><span class="spec-pill">⏸ 30–60 Sek./Gruppe</span>
+        </div>
+        <p>Myofasziale Selbstmassage mit der Schaumstoffrolle. Weit verbreitet im Warm-up und Cool-down — mit solider wissenschaftlicher Basis.</p>
         <ul class="tool-facts">
-          <li>Erhöht kurzfristig die Beweglichkeit</li>
-          <li>Reduziert DOMS moderat</li>
-          <li>Kein negativer Effekt auf Kraft nachgewiesen</li>
+          <li>Verbessert Beweglichkeit um 12–17 % ohne Kraftverlust</li>
+          <li>Reduziert DOMS (Muskelkater) um ca. 6 %</li>
+          <li>Kein negativer Effekt auf Schnellkraft</li>
+          <li>Ideal bei hoher Trainingsfrequenz</li>
         </ul>
         <div class="evidence-bar">
-          <div class="evidence-meta">
-            <span>Evidenzlevel</span><span>Mittel</span>
-          </div>
+          <div class="evidence-meta"><span>Evidenzlevel</span><span>Mittel</span></div>
           <div class="bar-track"><div class="bar-fill" data-width="60"></div></div>
         </div>
+        <button class="accordion-toggle" onclick="toggleAcc(this)">Wissenschaft im Detail <span class="arr">▾</span></button>
+        <div class="accordion-body"><div class="accordion-inner">
+          <div class="acc-block"><h5>Mechanismus</h5><p>Foam Rolling erzeugt Scherkräfte auf das myofasziale Gewebe und aktiviert Mechanorezeptoren. Der Haupteffekt ist neurologischer Natur: über das Gate-Control-Prinzip wird die Schmerzwahrnehmung gehemmt, nicht das Gewebe physisch "gelöst". Gleichzeitig verbessert sich die lokale Durchblutung.</p></div>
+          <div class="study-box"><div class="slabel">🔬 Schlüsselstudie</div><p><strong>Wiewelhove et al. (2019)</strong> – Metaanalyse über 21 Studien: Foam Rolling reduziert DOMS signifikant (~6 %) und verbessert Beweglichkeit um 12–17 %. Kein negativer Effekt auf Muskelkraft oder Sprungkraft nachgewiesen.</p></div>
+          <div class="myth-box"><div class="mlabel">💡 Mythos-Check</div><p><strong>Mythos:</strong> „Faszien werden durch Rollen gelöst." <strong>Fakt:</strong> Faszien sind zu zäh, um durch Körpergewicht verformbar zu sein — der Effekt ist primär neurologisch (Schmerzgating, neuromuskuläre Ansteuerung).</p></div>
+          <div class="acc-block"><h5>Optimales Protokoll</h5><div class="protocol">
+            <div class="p-step"><div class="p-num">1</div><p>Langsam rollen: ~2 cm/Sek., keine schnellen Bewegungen</p></div>
+            <div class="p-step"><div class="p-num">2</div><p>Bei Schmerzpunkt 20–30 Sek. pausieren bis Druck nachlässt</p></div>
+            <div class="p-step"><div class="p-num">3</div><p>Pro Muskelgruppe 30–60 Sek., 2–3 Durchgänge</p></div>
+            <div class="p-step"><div class="p-num">4</div><p>Anschließend aktive Mobilisation der Bereiche</p></div>
+          </div></div>
+        </div></div>
+      </div>
+
+      <!-- MASSAGEPISTOLE -->
+      <div class="tool-card reveal" style="transition-delay:.07s">
+        <div class="tool-header"><div class="tool-icon">💆</div>
+          <h3>Massagepistole<br><span style="font-weight:400;color:var(--text-2);font-size:.85em">Perkussive Therapie</span></h3>
+        </div>
+        <div class="tool-specs">
+          <span class="spec-pill">⏱ 15–30 Sek./Muskel</span><span class="spec-pill">🔊 30–40 Hz</span>
+          <span class="spec-pill">📍 Pre &amp; Post</span>
+        </div>
+        <p>Perkussive Vibration für gezielte Muskelstimulation. Im Breitensport sehr beliebt — die Wissenschaft holt mit guter Evidenz auf.</p>
+        <ul class="tool-facts">
+          <li>Verbessert Beweglichkeit um bis zu 22 % (Einzelanwendung)</li>
+          <li>Reduziert subjektiv wahrgenommenen Muskelkater</li>
+          <li>Frequenz (Hz) entscheidender als Andruckkraft</li>
+          <li>Aktiviert Golgi-Sehnenorgane → Muskelrelaxation</li>
+        </ul>
+        <div class="evidence-bar">
+          <div class="evidence-meta"><span>Evidenzlevel</span><span>Mittel</span></div>
+          <div class="bar-track"><div class="bar-fill" data-width="55"></div></div>
+        </div>
+        <button class="accordion-toggle" onclick="toggleAcc(this)">Wissenschaft im Detail <span class="arr">▾</span></button>
+        <div class="accordion-body"><div class="accordion-inner">
+          <div class="acc-block"><h5>Mechanismus</h5><p>Perkussive Vibration bei 30–40 Hz aktiviert die Golgi-Sehnenorgane im Muskel-Sehnen-Übergang. Diese lösen eine reflektorische Entspannung der Muskulatur aus (autogene Inhibition). Gleichzeitig wird die lokale Durchblutung erhöht und Schmerzsignale durch Vibrationssignale überdeckt.</p></div>
+          <div class="study-box"><div class="slabel">🔬 Schlüsselstudie</div><p><strong>Lee et al. (2022), J. Sports Science & Medicine:</strong> Signifikante Verbesserung der Beweglichkeit um bis zu 22 % nach einer einzigen Anwendung — vergleichbar mit statischem Dehnen, jedoch ohne anschließenden Kraftverlust.</p></div>
+          <div class="myth-box"><div class="mlabel">💡 Mythos-Check</div><p><strong>Mythos:</strong> „Mehr Druck bringt mehr Wirkung." <strong>Fakt:</strong> Die Frequenz (Hz) ist entscheidend — zu viel Druck kann Mikroverletzungen erzeugen. Leichter Kontakt mit richtiger Frequenz ist optimal.</p></div>
+          <div class="warn-box"><div class="wlabel">⚠ Vorsicht</div><p>Nicht direkt auf Gelenke, Knochenkanten, Nerven (z.B. Kniekehle) oder akut entzündete Bereiche anwenden. Bei Verletzungen immer ärztliche Rücksprache einholen.</p></div>
+        </div></div>
+      </div>
+
+      <!-- EISBAD -->
+      <div class="tool-card reveal" style="transition-delay:.13s">
+        <div class="tool-header"><div class="tool-icon">🧊</div>
+          <h3>Eisbad<br><span style="font-weight:400;color:var(--text-2);font-size:.85em">Cold Water Immersion</span></h3>
+        </div>
+        <div class="tool-specs">
+          <span class="spec-pill">🌡 10–15 °C</span><span class="spec-pill">⏱ 10–15 Min</span>
+          <span class="spec-pill">📍 Direkt post</span>
+        </div>
+        <p>Kurzzeitiges Eintauchen in eiskaltes Wasser nach Belastung. Eines der am besten erforschten Regenerationstools im Profisport.</p>
+        <ul class="tool-facts">
+          <li>DOMS-Reduktion signifikant 24–96 h nach Training</li>
+          <li>Vasokonstriktion hemmt Ödembildung im Gewebe</li>
+          <li>Standard-Recovery-Tool in Profiteams nach Spielen</li>
+          <li>Achtung: kann Hypertrophie-Adaptation hemmen</li>
+        </ul>
+        <div class="evidence-bar">
+          <div class="evidence-meta"><span>Evidenzlevel</span><span>Hoch</span></div>
+          <div class="bar-track"><div class="bar-fill" data-width="85"></div></div>
+        </div>
+        <button class="accordion-toggle" onclick="toggleAcc(this)">Wissenschaft im Detail <span class="arr">▾</span></button>
+        <div class="accordion-body"><div class="accordion-inner">
+          <div class="acc-block"><h5>Mechanismus</h5><p>Die Kälte bewirkt eine Vasokonstriktion — weniger Blutfluss, weniger Ödembildung, reduzierte Entzündungsreaktion. Bei der anschließenden Erwärmung setzt eine reaktive Vasodilatation ein ("venöse Rückpumpe"), die metabolische Abfallprodukte wie Laktat effizienter abführt.</p></div>
+          <div class="study-box"><div class="slabel">🔬 Schlüsselstudie</div><p><strong>Machado et al. (2016)</strong> – Metaanalyse über 17 RCTs: CWI ist signifikant effektiver als passive Ruhe für DOMS-Reduktion 24–96 h nach Training. Optimum: 11–15 °C für 11–15 Minuten.</p></div>
+          <div class="warn-box"><div class="wlabel">⚠ Wichtiger Hinweis</div><p><strong>Roberts et al. (2015), J. Physiology:</strong> Regelmäßiges Eisbad nach Krafttraining hemmt den mTOR-Signalweg und kann langfristigen Muskelaufbau um bis zu 20 % reduzieren. In Aufbauphasen gezielt einsetzen!</p></div>
+        </div></div>
+      </div>
+
+      <!-- SAUNA -->
+      <div class="tool-card reveal" style="transition-delay:.2s">
+        <div class="tool-header"><div class="tool-icon">🔥</div>
+          <h3>Sauna</h3>
+        </div>
+        <div class="tool-specs">
+          <span class="spec-pill">🌡 80–100 °C</span><span class="spec-pill">⏱ 15–20 Min</span>
+          <span class="spec-pill">🔁 2–3 Durchgänge</span><span class="spec-pill">📍 Min. 1h post</span>
+        </div>
+        <p>Passives Wärmebad mit tiefen physiologischen Effekten. Regelmäßige Nutzung zeigt beeindruckende Langzeitwirkungen auf Herz, Hormone und Muskelregeneration.</p>
+        <ul class="tool-facts">
+          <li>Heat Shock Proteins (HSP70) reparieren Muskelproteine</li>
+          <li>Wachstumshormon-Ausschüttung +200–300 %</li>
+          <li>Plasma-Volumen-Expansion wie leichtes Ausdauertraining</li>
+          <li>40 % reduziertes Herzkreislauf-Risiko (4×/Woche)</li>
+        </ul>
+        <div class="evidence-bar">
+          <div class="evidence-meta"><span>Evidenzlevel</span><span>Mittel–Hoch</span></div>
+          <div class="bar-track"><div class="bar-fill" data-width="72"></div></div>
+        </div>
+        <button class="accordion-toggle" onclick="toggleAcc(this)">Wissenschaft im Detail <span class="arr">▾</span></button>
+        <div class="accordion-body"><div class="accordion-inner">
+          <div class="acc-block"><h5>Mechanismus</h5><p>Hitze löst die Produktion von Heat Shock Proteins (HSP70/72) aus, die fehlgefaltete Proteine in Muskelzellen reparieren. Die Hypophyse schüttet bei &gt;80 °C signifikant mehr Wachstumshormon aus (+200–300 %). Das Plasmavolumen expandiert — vergleichbar einem leichten Ausdauerreiz.</p></div>
+          <div class="study-box"><div class="slabel">🔬 Schlüsselstudie</div><p><strong>Laukkanen et al. (2018), JAMA Internal Medicine:</strong> Probanden mit 4×/Woche Sauna zeigten 40 % reduziertes kardiovaskuläres Risiko und signifikant erhöhte Ausdauerleistung über 20 Jahre Follow-up.</p></div>
+          <div class="acc-block"><h5>Optimales Protokoll</h5><div class="protocol">
+            <div class="p-step"><div class="p-num">1</div><p>Frühestens 60 Min nach Training (Hypertrophie-Signale laufen noch)</p></div>
+            <div class="p-step"><div class="p-num">2</div><p>2–3 Durchgänge à 15–20 Min bei 80–100 °C</p></div>
+            <div class="p-step"><div class="p-num">3</div><p>Abkühlung zwischen Durchgängen (Kaltdusche oder Frischluft)</p></div>
+            <div class="p-step"><div class="p-num">4</div><p>Danach: 500–750 ml Wasser / Elektrolyte trinken</p></div>
+          </div></div>
+        </div></div>
+      </div>
+
+      <!-- ERNÄHRUNG -->
+      <div class="tool-card reveal" style="transition-delay:.27s">
+        <div class="tool-header"><div class="tool-icon">🥗</div>
+          <h3>Ernährung</h3>
+        </div>
+        <div class="tool-specs">
+          <span class="spec-pill">⏱ Fenster: 30–45 Min</span>
+          <span class="spec-pill">🥩 0,3–0,4 g/kg Protein</span>
+          <span class="spec-pill">💧 150 % Flüssigkeitsausgleich</span>
+        </div>
+        <p>Der stärkste Hebel der Regeneration. Gezielte Nährstoffzufuhr aktiviert molekulare Reparaturprozesse — mit der höchsten Evidenz aller Tools.</p>
+        <ul class="tool-facts">
+          <li>Leucin triggert mTOR → Muskelproteinsynthese</li>
+          <li>1,0–1,2 g/kg KG/h Kohlenhydrate für Glykogen-Resynthese</li>
+          <li>Omega-3 (2–4 g/Tag) hemmt Entzündungszytokine</li>
+          <li>Kreatin (3–5 g/Tag) verbessert ATP-Resynthese</li>
+        </ul>
+        <div class="evidence-bar">
+          <div class="evidence-meta"><span>Evidenzlevel</span><span>Sehr hoch</span></div>
+          <div class="bar-track"><div class="bar-fill" data-width="95"></div></div>
+        </div>
+        <button class="accordion-toggle" onclick="toggleAcc(this)">Wissenschaft im Detail <span class="arr">▾</span></button>
+        <div class="accordion-body"><div class="accordion-inner">
+          <div class="acc-block"><h5>Mechanismus</h5><p>Die essentielle Aminosäure Leucin aktiviert direkt den mTOR-Komplex — den zentralen Schalter der Muskelproteinsynthese. Kohlenhydrate stimulieren Insulinausschüttung, die Nährstoffaufnahme in Muskelzellen beschleunigt. Omega-3-Fettsäuren hemmen proinflammatorische Zytokine (IL-6, TNF-α).</p></div>
+          <div class="study-box"><div class="slabel">🔬 Schlüsselstudie</div><p><strong>Phillips &amp; Van Loon (2011):</strong> Protein + Kohlenhydrate direkt nach Training erhöhen Muskelproteinsynthese um bis zu 50 %. IOC-Konsens (Thomas et al., 2016): Gesamtproteinzufuhr am Tag (1,6–2,2 g/kg KG) ist wichtiger als exaktes Timing.</p></div>
+          <div class="myth-box"><div class="mlabel">💡 Mythos-Check</div><p><strong>Mythos:</strong> „Das anabole Fenster schließt sich nach 30 Min." <strong>Fakt:</strong> Das Fenster ist 2–4 Stunden post-exercise. Die tägliche Gesamtproteinzufuhr schlägt das genaue Timing.</p></div>
+        </div></div>
+      </div>
+
+      <!-- SCHLAF -->
+      <div class="tool-card reveal" style="transition-delay:.34s">
+        <div class="tool-header"><div class="tool-icon">😴</div>
+          <h3>Schlaf</h3>
+        </div>
+        <div class="tool-specs">
+          <span class="spec-pill">⏱ 7–9 Std. optimal</span>
+          <span class="spec-pill">💤 Nap: 20–26 Min</span>
+          <span class="spec-pill">🌡 Zimmer 18–20 °C</span>
+        </div>
+        <p>Der mächtigste Regenerator — kostenlos, ohne Equipment, höchste Evidenz. Kein anderes Tool kann ihn ersetzen.</p>
+        <ul class="tool-facts">
+          <li>70 % der täglichen GH-Ausschüttung im Tiefschlaf</li>
+          <li>+1 h Schlaf → 9 % schnellere Sprintzeiten (Stanford, 2011)</li>
+          <li>&lt;6 h Schlaf → 1,7× höheres Verletzungsrisiko</li>
+          <li>REM-Schlaf konsolidiert motorische Bewegungsmuster</li>
+        </ul>
+        <div class="evidence-bar">
+          <div class="evidence-meta"><span>Evidenzlevel</span><span>Sehr hoch</span></div>
+          <div class="bar-track"><div class="bar-fill" data-width="98"></div></div>
+        </div>
+        <button class="accordion-toggle" onclick="toggleAcc(this)">Wissenschaft im Detail <span class="arr">▾</span></button>
+        <div class="accordion-body"><div class="accordion-inner">
+          <div class="acc-block"><h5>Mechanismus</h5><p>Im Tiefschlaf (N3) werden 70 % der täglichen Wachstumshormone ausgeschüttet, die Gewebereparatur und Muskelwachstum antreiben. REM-Schlaf konsolidiert motorische Gedächtnisinhalte — Bewegungsabläufe werden "eingespeichert". Das Immunsystem produziert nachts die meisten Zytokine zur Reparatur entzündeter Gewebe.</p></div>
+          <div class="study-box"><div class="slabel">🔬 Schlüsselstudie</div><p><strong>Mah et al. (2011), Sleep (Stanford):</strong> Basketballspieler mit 10 h Schlaf verbesserten Sprintzeiten um 9 %, Freiwurfquote um 9 %. <strong>Milewski et al. (2014):</strong> Athleten mit &lt;8 h Schlaf haben 1,7× höheres Verletzungsrisiko.</p></div>
+          <div class="acc-block"><h5>Schlaf-Hacks für Athleten</h5><div class="protocol">
+            <div class="p-step"><div class="p-num">1</div><p>Konstante Schlaf- und Aufstehzeiten — auch am Wochenende</p></div>
+            <div class="p-step"><div class="p-num">2</div><p>Schlafzimmer dunkel, kühl (18–20 °C) und ruhig halten</p></div>
+            <div class="p-step"><div class="p-num">3</div><p>Kein Blaulicht (Handy, TV) 60 Min vor dem Schlafen</p></div>
+            <div class="p-step"><div class="p-num">4</div><p>Power Nap: genau 20–26 Min (kein Tiefschlaf → kein Schlaftrunkenheit)</p></div>
+          </div></div>
+        </div></div>
       </div>
 
     </div>
@@ -1014,6 +1240,91 @@ document.querySelectorAll('.tl-item').forEach((el, i) => {
   tlObs.observe(el);
 });
 
+/* ── Accordion ───────────────────────────────────────────────── */
+function toggleAcc(btn) {
+  const body = btn.nextElementSibling;
+  const isOpen = body.classList.contains('open');
+  btn.classList.toggle('open', !isOpen);
+  body.classList.toggle('open', !isOpen);
+}
+
+/* ── Sport-Reha-Matcher ──────────────────────────────────────── */
+(function() {
+  const TOOLS = [
+    { key:'faszienrolle', name:'Faszienrolle',   icon:'🔵' },
+    { key:'massagepistole', name:'Massagepistole', icon:'💆' },
+    { key:'eisbad',       name:'Eisbad',          icon:'🧊' },
+    { key:'sauna',        name:'Sauna',            icon:'🔥' },
+    { key:'ernaehrung',   name:'Ernährung',        icon:'🥗' },
+    { key:'schlaf',       name:'Schlaf',           icon:'😴' },
+  ];
+  // Scores per sport × intensity [leicht, mittel, intensiv]
+  // order: faszienrolle, massagepistole, eisbad, sauna, ernaehrung, schlaf
+  const S = {
+    fussball:   [[70,65,60,68,78,88],[75,72,75,73,84,92],[82,78,90,75,90,96]],
+    laufen:     [[80,60,55,65,80,87],[84,65,70,70,86,92],[90,68,85,72,93,97]],
+    kraft:      [[58,68,42,75,88,84],[65,75,52,82,93,90],[72,80,60,87,96,95]],
+    schwimmen:  [[58,50,65,68,75,85],[63,56,72,72,82,90],[70,60,80,75,88,94]],
+    radfahren:  [[82,60,58,68,83,88],[86,66,72,72,88,92],[91,70,80,75,93,96]],
+    basketball: [[72,70,65,70,80,88],[77,75,78,74,85,92],[83,80,90,76,91,96]],
+    tennis:     [[74,72,58,68,78,86],[78,76,68,72,83,91],[84,80,76,74,88,95]],
+    kampfsport: [[75,78,72,72,82,88],[80,83,82,75,87,92],[86,88,90,78,92,96]],
+  };
+  const REASONS = {
+    faszienrolle: ['Lockert die Muskulatur schonend nach leichten Einheiten','Reduziert Muskelkater effektiv bei mittlerer Belastung','Unverzichtbar für schnelle Muskelregeneration bei hoher Last'],
+    massagepistole: ['Gezielte Entspannung einzelner Muskelgruppen','Gute lokale Wirkung bei mittlerem Muskelkater','Sehr effektiv bei tiefen Myogelosen nach intensiver Belastung'],
+    eisbad: ['Bei leichten Einheiten oft zu stark — sparsam einsetzen','Bewährt bei mittlerer Belastung für schnelle Recovery','Top-Wahl nach Hochintensiv — Profis nutzen es nach jedem Spiel'],
+    sauna: ['Angenehme Erholung nach leichtem Training','Fördert Durchblutung und GH-Ausschüttung','Besonders effektiv für Hormon- und Geweberegulation post-intensiv'],
+    ernaehrung: ['Grundlage jeder Regeneration — immer relevant','Protein + Carbs direkt nach Training entscheidend','Bei hoher Belastung ist die Ernährung der stärkste Hebel überhaupt'],
+    schlaf: ['Wichtigste Regenerationsphase — nie vernachlässigen','Schlaf schlägt alle anderen Tools bei mittlerer Belastung','Nach intensivem Training ist Schlaf absolut unersetzlich'],
+  };
+  const RANKS = ['gold','silver','bronze','','',''];
+
+  let selectedSport = null, selectedInt = null;
+
+  document.querySelectorAll('.sport-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.sport-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      selectedSport = btn.dataset.sport;
+      render();
+    });
+  });
+  document.querySelectorAll('.int-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.int-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      selectedInt = parseInt(btn.dataset.int);
+      render();
+    });
+  });
+
+  function render() {
+    const el = document.getElementById('matcherResults');
+    if (selectedSport === null || selectedInt === null) return;
+    const scores = S[selectedSport][selectedInt];
+    const ranked = TOOLS.map((t, i) => ({ ...t, score: scores[i] }))
+                        .sort((a, b) => b.score - a.score);
+    el.innerHTML = ranked.map((t, i) => `
+      <div class="result-row">
+        <div class="result-rank ${RANKS[i]}">${i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : (i+1)+'.'}</div>
+        <div class="result-icon">${t.icon}</div>
+        <div class="result-info">
+          <div class="result-name">${t.name}</div>
+          <div class="result-reason">${REASONS[t.key][selectedInt]}</div>
+        </div>
+        <div class="result-score-wrap">
+          <div class="result-score">${t.score}%</div>
+          <div class="result-bar-track"><div class="result-bar-fill" style="width:0" data-w="${t.score}"></div></div>
+        </div>
+      </div>`).join('');
+    // animate bars
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      el.querySelectorAll('.result-bar-fill').forEach(b => { b.style.width = b.dataset.w + '%'; });
+    }));
+  }
+})();
+
 /* ── Evidence bars ───────────────────────────────────────────── */
 const barObs = new IntersectionObserver((entries) => {
   entries.forEach(e => {
@@ -1041,7 +1352,7 @@ document.querySelectorAll('.tool-card').forEach(card => barObs.observe(card));
   let edges    = [];
   let travelers = [];
   let W, H;
-  const SPACING = 110;
+  const SPACING = 130;
   const MAX_EDGE_DIST = SPACING * 1.55;
 
   function resize() {
@@ -1065,7 +1376,7 @@ document.querySelectorAll('.tool-card').forEach(card => barObs.observe(card));
           x: (c - 0.5) * SPACING + (Math.random() - 0.5) * jitter,
           y: (r - 0.5) * SPACING + (Math.random() - 0.5) * jitter,
           brightness: 0.12 + Math.random() * 0.06,
-          blinkCountdown: 3000 + Math.random() * 10000,
+          blinkCountdown: 6000 + Math.random() * 16000,
           blinkPhase: 'idle',
           blinkProgress: 0,
         });
@@ -1096,8 +1407,8 @@ document.querySelectorAll('.tool-card').forEach(card => barObs.observe(card));
     travelers.push({
       a: edge.a, b: edge.b,
       t: Math.random(),
-      speed: (0.00012 + Math.random() * 0.00016) * (Math.random() < 0.5 ? 1 : -1),
-      size: 1.2 + Math.random() * 1.4,
+      speed: (0.00005 + Math.random() * 0.00008) * (Math.random() < 0.5 ? 1 : -1),
+      size: 2.0 + Math.random() * 2.2,
       alpha: 0,
     });
   }
@@ -1110,7 +1421,7 @@ document.querySelectorAll('.tool-card').forEach(card => barObs.observe(card));
       if (n.blinkCountdown <= 0 && n.blinkPhase === 'idle') {
         n.blinkPhase    = 'rise';
         n.blinkProgress = 0;
-        n.blinkCountdown = 4000 + Math.random() * 9000;
+        n.blinkCountdown = 8000 + Math.random() * 14000;
       }
       if (n.blinkPhase === 'rise') {
         n.blinkProgress += dt / 350;
@@ -1167,15 +1478,15 @@ document.querySelectorAll('.tool-card').forEach(card => barObs.observe(card));
 
     /* Nodes */
     nodes.forEach(n => {
-      if (n.brightness > 0.3) {
-        const g = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, 14);
-        g.addColorStop(0, `rgba(${nr},${ng},${nb},${n.brightness * 0.28})`);
+      if (n.brightness > 0.25) {
+        const g = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, 22);
+        g.addColorStop(0, `rgba(${nr},${ng},${nb},${n.brightness * 0.22})`);
         g.addColorStop(1, `rgba(${nr},${ng},${nb},0)`);
         ctx.fillStyle = g;
-        ctx.beginPath(); ctx.arc(n.x, n.y, 14, 0, Math.PI * 2); ctx.fill();
+        ctx.beginPath(); ctx.arc(n.x, n.y, 22, 0, Math.PI * 2); ctx.fill();
       }
-      ctx.beginPath(); ctx.arc(n.x, n.y, 1.6, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(${nr},${ng},${nb},${n.brightness})`;
+      ctx.beginPath(); ctx.arc(n.x, n.y, 2.8, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${nr},${ng},${nb},${n.brightness * 0.75})`;
       ctx.fill();
     });
 
