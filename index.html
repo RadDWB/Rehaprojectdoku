@@ -941,6 +941,10 @@
             <button class="sport-btn" data-sport="basketball"><span class="sport-emoji">🏀</span>Basketball</button>
             <button class="sport-btn" data-sport="tennis"><span class="sport-emoji">🎾</span>Tennis</button>
             <button class="sport-btn" data-sport="kampfsport"><span class="sport-emoji">🥋</span>Kampfsport</button>
+            <button class="sport-btn" data-sport="sprint100"><span class="sport-emoji">⚡</span>100m Sprint</button>
+            <button class="sport-btn" data-sport="stabhoch"><span class="sport-emoji">🏅</span>Stabhoch&shy;sprung</button>
+            <button class="sport-btn" data-sport="lauf400"><span class="sport-emoji">🔥</span>400m Lauf</button>
+            <button class="sport-btn" data-sport="lauf5000"><span class="sport-emoji">🏃</span>5000m Lauf</button>
           </div>
           <div class="intensity-label">2 · Intensität</div>
           <div class="intensity-row">
@@ -1251,15 +1255,16 @@ function toggleAcc(btn) {
 /* ── Sport-Reha-Matcher ──────────────────────────────────────── */
 (function() {
   const TOOLS = [
-    { key:'faszienrolle', name:'Faszienrolle',   icon:'🔵' },
-    { key:'massagepistole', name:'Massagepistole', icon:'💆' },
-    { key:'eisbad',       name:'Eisbad',          icon:'🧊' },
-    { key:'sauna',        name:'Sauna',            icon:'🔥' },
-    { key:'ernaehrung',   name:'Ernährung',        icon:'🥗' },
-    { key:'schlaf',       name:'Schlaf',           icon:'😴' },
+    { key:'faszienrolle',   name:'Faszienrolle',   icon:'🔵' },
+    { key:'massagepistole', name:'Massagepistole',  icon:'💆' },
+    { key:'eisbad',         name:'Eisbad',          icon:'🧊' },
+    { key:'sauna',          name:'Sauna',           icon:'🔥' },
+    { key:'ernaehrung',     name:'Ernährung',       icon:'🥗' },
+    { key:'schlaf',         name:'Schlaf',          icon:'😴' },
   ];
-  // Scores per sport × intensity [leicht, mittel, intensiv]
-  // order: faszienrolle, massagepistole, eisbad, sauna, ernaehrung, schlaf
+
+  // Scores [faszienrolle, massagepistole, eisbad, sauna, ernaehrung, schlaf]
+  // per sport × intensity [leicht, mittel, intensiv]
   const S = {
     fussball:   [[70,65,60,68,78,88],[75,72,75,73,84,92],[82,78,90,75,90,96]],
     laufen:     [[80,60,55,65,80,87],[84,65,70,70,86,92],[90,68,85,72,93,97]],
@@ -1269,35 +1274,100 @@ function toggleAcc(btn) {
     basketball: [[72,70,65,70,80,88],[77,75,78,74,85,92],[83,80,90,76,91,96]],
     tennis:     [[74,72,58,68,78,86],[78,76,68,72,83,91],[84,80,76,74,88,95]],
     kampfsport: [[75,78,72,72,82,88],[80,83,82,75,87,92],[86,88,90,78,92,96]],
+    sprint100:  [[72,78,65,70,82,90],[76,82,78,72,87,94],[80,88,93,68,90,97]],
+    stabhoch:   [[75,72,60,70,80,88],[80,78,72,74,86,92],[84,85,85,73,90,96]],
+    lauf400:    [[75,68,62,72,85,90],[80,72,78,76,90,94],[83,76,93,72,94,97]],
+    lauf5000:   [[82,62,58,72,86,90],[86,66,72,75,91,94],[90,70,82,76,95,98]],
   };
-  const REASONS = {
-    faszienrolle: ['Lockert die Muskulatur schonend nach leichten Einheiten','Reduziert Muskelkater effektiv bei mittlerer Belastung','Unverzichtbar für schnelle Muskelregeneration bei hoher Last'],
-    massagepistole: ['Gezielte Entspannung einzelner Muskelgruppen','Gute lokale Wirkung bei mittlerem Muskelkater','Sehr effektiv bei tiefen Myogelosen nach intensiver Belastung'],
-    eisbad: ['Bei leichten Einheiten oft zu stark — sparsam einsetzen','Bewährt bei mittlerer Belastung für schnelle Recovery','Top-Wahl nach Hochintensiv — Profis nutzen es nach jedem Spiel'],
-    sauna: ['Angenehme Erholung nach leichtem Training','Fördert Durchblutung und GH-Ausschüttung','Besonders effektiv für Hormon- und Geweberegulation post-intensiv'],
-    ernaehrung: ['Grundlage jeder Regeneration — immer relevant','Protein + Carbs direkt nach Training entscheidend','Bei hoher Belastung ist die Ernährung der stärkste Hebel überhaupt'],
-    schlaf: ['Wichtigste Regenerationsphase — nie vernachlässigen','Schlaf schlägt alle anderen Tools bei mittlerer Belastung','Nach intensivem Training ist Schlaf absolut unersetzlich'],
-  };
-  const RANKS = ['gold','silver','bronze','','',''];
 
+  // Short sport context shown above results
+  const SPORT_CTX = {
+    fussball:   'Fußball kombiniert Sprints, Richtungswechsel und Ausdauer. Oberschenkel, Waden und Herzkreislauf stehen im Belastungsfokus.',
+    laufen:     'Laufen erzeugt exzentrische Muskelkontraktionen bei jedem Schritt. Typische Risikozonen: Kniegelenk, Achillessehne, Oberschenkelrückseite.',
+    kraft:      'Krafttraining erzeugt hohe mechanische Spannung im Muskelgewebe — DOMS tritt besonders nach exzentrischen Phasen (Negative) auf.',
+    schwimmen:  'Schwimmen ist gelenkschonend, beansprucht aber Schulter, Rücken und Hüfte intensiv. Ausdauer- und Technikkomponente dominieren.',
+    radfahren:  'Radfahren belastet primär Oberschenkel und Gesäß bei geringer Gelenkbelastung. Metabolische Erschöpfung steht im Vordergrund.',
+    basketball: 'Basketball: explosive Sprünge, schnelle Richtungswechsel, hohes Spieltempo. Knie und Sprunggelenk sind besonders gefährdet.',
+    tennis:     'Tennis fordert Schulter, Unterarm und Beinmuskulatur asymmetrisch. Muskuläre Dysbalancen sind ein häufiges Langzeitproblem.',
+    kampfsport: 'Kampfsport vereint Kraft, Explosivität und Ausdauer. CNS-Erschöpfung und Kontaktverletzungen sind typische Regenerationsfaktoren.',
+    sprint100:  '100m Sprint (Wettkampf): maximale neuromuskuläre Entladung in 10–12 Sek. Die CNS-Erschöpfung überwiegt — vollständige Erholung dauert 24–48 h.',
+    stabhoch:   'Stabhochsprung (Wettkampf): Kombination aus Sprint, Absprung und akrobatischer Körperspannung. Viele Versuche erschöpfen CNS und Schultermuskulatur.',
+    lauf400:    '400m Lauf (Wettkampf): maximale anaerobe Belastung über ~45–50 Sek. Gilt als eine der härtesten Disziplinen — Laktatwerte erreichen extreme Höchstwerte.',
+    lauf5000:   '5000m Lauf (Wettkampf): aerob-anaerobe Mischbelastung über ~13–15 Min. Starke Glykogendepletion, moderate Muskeltraumata, hohe kardiovaskuläre Beanspruchung.',
+  };
+
+  // Sport-specific tool reasons for the 4 competition disciplines (override generic)
+  const SPECIFIC = {
+    sprint100: {
+      faszienrolle:   'Verkürzte Hüftbeuger und Hamstrings nach Sprintbelastung gezielt behandeln — besonders nach vielen Technikwiederholungen oder Serienläufen.',
+      massagepistole: 'Gluteus und Oberschenkelrückseite nach explosiven Sprints lockern. Kurze Anwendung (15–20 Sek./Gruppe) ist ausreichend und wirksam.',
+      eisbad:         'Sehr empfohlen nach dem Wettkampf: reduziert neuromuskuläre Ermüdung und hemmt Mikro-Entzündungen in der hochbelasteten Sprintmuskulatur gezielt.',
+      sauna:          'Erst am Folgetag sinnvoll — nach maximalem CNS-Stress braucht der Körper mindestens 12–24 h Ruhe. Dann 1–2 Saunagänge für tiefe Entspannung.',
+      ernaehrung:     'Protein (0,3 g/kg KG) + schnelle Kohlenhydrate direkt nach Wettkampf — trotz kurzer Distanz ist die Recovery-Ernährung für Folgeläufe entscheidend.',
+      schlaf:         'CNS-Erschöpfung erholt sich primär im Tiefschlaf. Nach einem Wettkampftag mit mehreren Läufen 9+ Stunden für vollständige Regeneration einplanen.',
+    },
+    stabhoch: {
+      faszienrolle:   'Hüftbeuger, Schultern und Thoraxbereich nach Anlauf- und Abdruckphasen gezielt lockern — akkumulierte Spannung aus vielen Wettkampfversuchen.',
+      massagepistole: 'Schulter- und Unterarmmuskulatur gezielt behandeln — wird häufig vergessen, ist beim Stabhochsprung aber durch die Stabhaltung stark beansprucht.',
+      eisbad:         'Ganzkörperliche Recovery nach dem Wettkampftag empfohlen: Schultergelenke und Beinmuskulatur profitieren am meisten von der Kältebehandlung.',
+      sauna:          'Am Folgetag empfehlenswert — fördert Durchblutung von Schultern und Lendenwirbelsäule, die beim Absprung und der Überkopfhaltung extrem belastet werden.',
+      ernaehrung:     'Langer Wettkampftag mit Wartezeiten: leichte Snacks zwischen den Versuchen, danach vollständige Recovery-Mahlzeit mit Protein und Kohlenhydraten.',
+      schlaf:         'Technische Bewegungsabläufe wie der Stabablauf werden im REM-Schlaf neuronal konsolidiert und gefestigt — vor und nach dem Wettkampf besonders relevant.',
+    },
+    lauf400: {
+      faszienrolle:   'Oberschenkel Vorder- und Rückseite sowie Waden nach dem 400m-Wettkampf intensiv bearbeiten — Laktat-induzierter Muskelkater setzt früh und stark ein.',
+      massagepistole: 'Effektiv für lokale Muskelentspannung nach extremem Laktatstress. Oberschenkel und Gesäß sind die Hauptzielgebiete nach einem 400m-Lauf.',
+      eisbad:         'Beste Wahl nach 400m: reduziert akuten laktatbedingten Muskelkater stark und beschleunigt die Recovery für nachfolgende Vor- oder Finalläufe.',
+      sauna:          'Erst am Folgetag — nach dem anaeroben Maximum braucht das System zunächst Ruhe. Sauna am nächsten Tag hilft bei tiefer Muskel- und Geistentspannung.',
+      ernaehrung:     'Direkt nach dem Lauf: schnelle Kohlenhydrate + Protein. Der Glykogenbedarf nach einem maximalen 400m ist trotz kurzer Distanz überraschend hoch.',
+      schlaf:         '400m erzeugt eine der stärksten neuromuskulären Ermüdungen im Laufsport. 9+ Stunden Schlaf sind für die vollständige CNS-Regeneration notwendig.',
+    },
+    lauf5000: {
+      faszienrolle:   '5000m erzeugt ausgeprägte exzentrische Belastung bei jedem Schritt — Waden, Oberschenkel und IT-Band profitieren stark von der Faszienrolle.',
+      massagepistole: 'Gezielt für Tibialis anterior und Gastrocnemius nach der langen Laufbelastung. Weniger kritisch als bei Sprints, aber sinnvoller lokaler Zusatz.',
+      eisbad:         'Gute Wahl nach intensiven 5000m — reduziert Entzündungsreaktion und DOMS in der Laufmuskulatur spürbar, besonders in den ersten 24 Stunden.',
+      sauna:          'Ausdauerathleten profitieren besonders: Plasma-Volumen-Expansion durch regelmäßige Sauna verbessert die Sauerstoffversorgung und Ausdauerleistung langfristig.',
+      ernaehrung:     'Glykogen ist nach 5000m signifikant depletiert: 1,0–1,2 g Kohlenhydrate/kg KG in der ersten Stunde nach dem Lauf priorisieren und danach Protein ergänzen.',
+      schlaf:         'Für Ausdauerathleten der stärkste Regenerationsfaktor — aerobe Enzymsysteme und mitochondriale Reparatur finden primär im Tiefschlaf statt. 8–9 h sind Pflicht.',
+    },
+  };
+
+  // Generic reasons per tool × intensity for standard sports
+  const GENERIC = {
+    faszienrolle:   ['Lockert die Muskulatur schonend und verbessert die Beweglichkeit nach leichten Einheiten ohne nennenswerte Nebeneffekte.','Reduziert Muskelkater und Verspannungen nach mittlerer Belastung messbar — ideal als tägliche Routine nach dem Training.','Unverzichtbar für schnelle Muskelregeneration bei hoher Last: löst tiefe Myogelosen und beschleunigt den Abbau von Entzündungsmarkern.'],
+    massagepistole: ['Gezielte Entspannung einzelner Muskelgruppen nach leichter Belastung — besonders für chronisch verspannte Bereiche hilfreich.','Gute lokale Wirkung bei mittlerem Muskelkater: Golgi-Sehnenorgane werden aktiviert, die Muskulatur entspannt reflektorisch.','Sehr effektiv bei tiefen Myogelosen nach intensiver Belastung — kurze Anwendung pro Gruppe, Frequenz wichtiger als Druck.'],
+    eisbad:         ['Bei leichten Einheiten meist überdimensioniert — besser für moderate und intensive Belastungen vorbehalten.','Bewährt bei mittlerer Belastung: Vasokonstriktion hemmt Ödembildung, die Rückpumpe nach Erwärmung fördert den Laktatabbau.','Top-Wahl nach hochintensiven Einheiten — reduziert DOMS signifikant und beschleunigt die Match-to-Match-Recovery im Profisport.'],
+    sauna:          ['Angenehme Entspannung und Durchblutungsförderung nach leichtem Training — psychologische Erholung nicht unterschätzen.','Fördert Durchblutung, GH-Ausschüttung und Heat-Shock-Protein-Produktion — bei mittlerer Belastung sehr sinnvoll und wirksam.','Besonders effektiv für Hormon- und Geweberegulation: HSP70 repariert Muskelproteine, Plasmavolumen expandiert wie bei Ausdauertraining.'],
+    ernaehrung:     ['Grundlage jeder Regeneration — auch nach leichter Belastung: ausreichend Protein und Kohlenhydrate sichern die Basisregeneration.','Protein + Kohlenhydrate direkt nach dem Training aktivieren den mTOR-Signalweg und starten die Muskelproteinsynthese zuverlässig.','Bei hoher Belastung ist die Ernährung der absolut stärkste Hebel: ohne ausreichende Nährstoffversorgung bremsen alle anderen Tools ihre Wirkung.'],
+    schlaf:         ['Wichtigste Regenerationsphase überhaupt — nie vernachlässigen, auch nach vermeintlich leichten Einheiten.','Schlaf schlägt bei mittlerer Belastung alle anderen Tools: 70% der täglichen Wachstumshormonausschüttung findet im Tiefschlaf statt.','Nach intensivem Training absolut unersetzlich — Schlafdeprivation erhöht das Verletzungsrisiko um den Faktor 1,7 und blockiert jede Adaptation.'],
+  };
+
+  function getReason(sport, toolKey, intensity) {
+    return (SPECIFIC[sport] && SPECIFIC[sport][toolKey])
+      ? SPECIFIC[sport][toolKey]
+      : GENERIC[toolKey][intensity];
+  }
+
+  const MEDAL = ['🥇','🥈','🥉','4.','5.','6.'];
+  const RANK_CLS = ['gold','silver','bronze','','',''];
   let selectedSport = null, selectedInt = null;
 
-  document.querySelectorAll('.sport-btn').forEach(btn => {
+  document.querySelectorAll('.sport-btn').forEach(btn =>
     btn.addEventListener('click', () => {
       document.querySelectorAll('.sport-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       selectedSport = btn.dataset.sport;
       render();
-    });
-  });
-  document.querySelectorAll('.int-btn').forEach(btn => {
+    })
+  );
+  document.querySelectorAll('.int-btn').forEach(btn =>
     btn.addEventListener('click', () => {
       document.querySelectorAll('.int-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       selectedInt = parseInt(btn.dataset.int);
       render();
-    });
-  });
+    })
+  );
 
   function render() {
     const el = document.getElementById('matcherResults');
@@ -1305,20 +1375,24 @@ function toggleAcc(btn) {
     const scores = S[selectedSport][selectedInt];
     const ranked = TOOLS.map((t, i) => ({ ...t, score: scores[i] }))
                         .sort((a, b) => b.score - a.score);
-    el.innerHTML = ranked.map((t, i) => `
+    const ctx = SPORT_CTX[selectedSport] || '';
+    el.innerHTML = `
+      <div style="font-size:.78rem;color:var(--text-2);line-height:1.55;margin-bottom:.75rem;
+        padding:.65rem .85rem;background:var(--bg-root);border-radius:var(--r-sm);
+        border-left:2px solid var(--accent-v);">${ctx}</div>
+      ${ranked.map((t, i) => `
       <div class="result-row">
-        <div class="result-rank ${RANKS[i]}">${i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : (i+1)+'.'}</div>
+        <div class="result-rank ${RANK_CLS[i]}">${MEDAL[i]}</div>
         <div class="result-icon">${t.icon}</div>
         <div class="result-info">
           <div class="result-name">${t.name}</div>
-          <div class="result-reason">${REASONS[t.key][selectedInt]}</div>
+          <div class="result-reason">${getReason(selectedSport, t.key, selectedInt)}</div>
         </div>
         <div class="result-score-wrap">
-          <div class="result-score">${t.score}%</div>
+          <div class="result-score">${t.score} %</div>
           <div class="result-bar-track"><div class="result-bar-fill" style="width:0" data-w="${t.score}"></div></div>
         </div>
-      </div>`).join('');
-    // animate bars
+      </div>`).join('')}`;
     requestAnimationFrame(() => requestAnimationFrame(() => {
       el.querySelectorAll('.result-bar-fill').forEach(b => { b.style.width = b.dataset.w + '%'; });
     }));
