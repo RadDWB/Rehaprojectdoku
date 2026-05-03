@@ -186,13 +186,13 @@
     section { position: relative; z-index: 2; }
 
     /* ── Cinematic section transitions ───────────────────────── */
-    section:not(#hero) {
-      opacity: 0;
-      transform: translateY(64px);
-      transition: opacity .9s cubic-bezier(0.19,1,0.22,1),
-                  transform .9s cubic-bezier(0.19,1,0.22,1);
+    @keyframes secSlideIn {
+      from { opacity: 0; transform: translateY(56px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
-    section.sec-in { opacity: 1; transform: translateY(0); }
+    section:not(#hero).sec-in {
+      animation: secSlideIn .85s cubic-bezier(0.19,1,0.22,1) both;
+    }
 
     .section-eyebrow {
       font-size: .6875rem; font-weight: 600;
@@ -1337,9 +1337,6 @@ const secObs = new IntersectionObserver((entries) => {
   entries.forEach(e => {
     if (e.isIntersecting) {
       e.target.classList.add('sec-in');
-      /* Also reveal all child .reveal elements so sections don't appear empty */
-      e.target.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
-      e.target.querySelectorAll('.tl-item').forEach(el => el.classList.add('visible'));
       secObs.unobserve(e.target);
     }
   });
