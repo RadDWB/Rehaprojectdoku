@@ -307,12 +307,12 @@
     .btn-ghost:hover { border-color: var(--border-hi); }
 
     .hero-stats {
-      display: flex; gap: clamp(.75rem, 3vw, 2.5rem); flex-wrap: nowrap;
+      display: flex; gap: clamp(.75rem, 3vw, 2.5rem); flex-wrap: wrap;
       padding-top: var(--sp-7);
       border-top: 1px solid var(--border);
       opacity: 0; animation: fadeSlideUp .8s .65s var(--ease-out-expo) forwards;
     }
-    .hero-stats > div { flex: 1; min-width: 0; }
+    .hero-stats > div { flex: 1; min-width: 120px; }
     .stat-num {
       font-family: var(--f-display);
       font-size: 2.25rem; font-weight: 700; font-style: italic;
@@ -949,7 +949,8 @@
     @media (max-width: 520px) {
       .team-grid  { grid-template-columns: 1fr; }
       #hero h1    { font-size: clamp(2.5rem, 12vw, 4rem); }
-      .hero-stats { gap: 1.5rem; }
+      .hero-stats { gap: 1.25rem; }
+      .hero-stats > div { flex: 0 0 calc(50% - .625rem); }
       .matcher-results { grid-template-columns: 1fr; }
 
       /* Stepper: auf Mobile vertikal stapeln statt Karussell */
@@ -1205,7 +1206,7 @@
   <div class="hero-stats">
     <div>
       <div class="stat-num">6</div>
-      <div class="stat-label">Tools / Methoden untersucht</div>
+      <div class="stat-label">Tools untersucht</div>
     </div>
     <div>
       <div class="stat-num">1</div>
@@ -1221,7 +1222,7 @@
     </div>
     <div>
       <div class="stat-num">1</div>
-      <div class="stat-label">Webseitendokumentation erstellt</div>
+      <div class="stat-label">eigene Software — Sport-Reha-Matcher</div>
     </div>
   </div>
 </section>
