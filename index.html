@@ -1379,7 +1379,7 @@
 
 <!-- ══ Footer ════════════════════════════════════════════════════ -->
 <footer>
-  <p>© Reha³ · Ben, Lasse &amp; Mick · Goethe Gymnasium Dortmund · v1.2.0</p>
+  <p>© Reha³ · Ben, Lasse &amp; Mick · Goethe Gymnasium Dortmund · v1.3.0</p>
   <div class="footer-links">
     <a href="https://github.com/RadDWB/Rehaprojectdoku" target="_blank">GitHub</a>
     <a href="#hero">Nach oben ↑</a>
@@ -1642,6 +1642,7 @@ function toggleAcc(btn) {
         </div>
       </div>`;
     pb.classList.add('visible');
+    if (window.wrapGlossTerms) window.wrapGlossTerms(pb);
   }
 
   const MEDAL = ['🥇','🥈','🥉','4.','5.','6.'];
@@ -1690,6 +1691,7 @@ function toggleAcc(btn) {
           <div class="result-bar-track"><div class="result-bar-fill" style="width:0" data-w="${t.score}"></div></div>
         </div>
       </div>`).join('')}`;
+    if (window.wrapGlossTerms) window.wrapGlossTerms(el);
     requestAnimationFrame(() => requestAnimationFrame(() => {
       el.querySelectorAll('.result-bar-fill').forEach(b => { b.style.width = b.dataset.w + '%'; });
     }));
@@ -2020,6 +2022,8 @@ document.querySelectorAll('.tool-card').forEach(card => barObs.observe(card));
     tip.style.left = x + 'px';
     tip.style.top  = y + 'px';
   });
+
+  window.wrapGlossTerms = wrapTerms;
 
   /* Run after DOM is ready */
   if (document.readyState === 'loading') {
