@@ -308,12 +308,12 @@
 
     .hero-stats {
       display: flex; flex-wrap: wrap; align-items: flex-start;
-      gap: clamp(.75rem, 3vw, 2rem);
+      gap: clamp(.75rem, 2vw, 1.5rem) clamp(1.25rem, 4vw, 2.5rem);
       padding-top: var(--sp-7);
       border-top: 1px solid var(--border);
       opacity: 0; animation: fadeSlideUp .8s .65s var(--ease-out-expo) forwards;
     }
-    .hero-stats > div { flex: 1; min-width: 100px; }
+    .hero-stats > div { flex: 0 0 auto; }
     .stat-num {
       font-family: var(--f-display);
       font-size: 2.25rem; font-weight: 700; font-style: italic;
@@ -1205,27 +1205,27 @@
     <a href="#tools" class="btn btn-ghost">Reha-Tools entdecken →</a>
   </div>
   <div class="hero-stats">
-    <div style="margin-top:0">
+    <div>
       <div class="stat-num">6</div>
       <div class="stat-label">Tools untersucht</div>
     </div>
-    <div style="margin-top:1.5rem">
+    <div>
       <div class="stat-num">1</div>
       <div class="stat-label">Experten-Interview geführt</div>
     </div>
-    <div style="margin-top:.5rem">
+    <div>
       <div class="stat-num">3</div>
       <div class="stat-label">Teammitglieder</div>
     </div>
-    <div style="margin-top:2rem">
+    <div>
       <div class="stat-num">1</div>
       <div class="stat-label">komplettes Projekt-YouTube-Video</div>
     </div>
-    <div style="margin-top:.75rem">
+    <div>
       <div class="stat-num">1</div>
       <div class="stat-label">eigene Software: Sport-Reha-Matcher</div>
     </div>
-    <div style="margin-top:2.5rem">
+    <div>
       <div class="stat-num">1</div>
       <div class="stat-label">Umfangreiche Webseite zur Projekt-Dokumentation</div>
     </div>
