@@ -692,7 +692,7 @@
     }
     .int-btn:hover { border-color: var(--border-hi); color: var(--text-1); }
     .int-btn.active { border-color: var(--accent-v); background: rgba(155,132,240,.08); color: var(--accent-v); }
-    .matcher-results { display: flex; flex-direction: column; gap: .55rem; }
+    .matcher-results { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: .75rem; }
 
     /* sport profile explanation box */
     .sport-profile-box {
@@ -735,22 +735,24 @@
       line-height: 1.6;
     }
     .result-row {
-      display: flex; align-items: center; gap: .7rem; padding: .7rem;
-      border-radius: var(--r-sm); background: var(--bg-surface); border: 1px solid var(--border);
-      transition: border-color .2s;
+      display: flex; flex-direction: column; gap: .5rem;
+      padding: 1rem 1.1rem;
+      border-radius: var(--r-md); background: var(--bg-surface); border: 1px solid var(--border);
+      transition: border-color .2s, box-shadow .2s;
     }
-    .result-row:hover { border-color: var(--border-hi); }
-    .result-rank { font-size: .7rem; font-weight: 800; color: var(--text-3); width: 18px; text-align: center; flex-shrink: 0; }
+    .result-row:hover { border-color: var(--border-hi); box-shadow: 0 4px 14px rgba(0,0,0,.07); }
+    .result-row-top { display: flex; align-items: baseline; justify-content: space-between; }
+    .result-rank { font-size: .65rem; font-weight: 800; color: var(--text-3); letter-spacing: .04em; }
     .result-rank.gold   { color: #f5a246; }
     .result-rank.silver { color: #8b949e; }
     .result-rank.bronze { color: #c06e1a; }
-    .result-icon { font-size: 1rem; flex-shrink: 0; }
-    .result-info { flex: 1; min-width: 0; }
-    .result-name { font-size: .8125rem; font-weight: 600; margin-bottom: .15rem; }
-    .result-reason { font-size: .72rem; color: var(--text-2); line-height: 1.4; }
-    .result-score-wrap { flex-shrink: 0; text-align: right; }
-    .result-score { font-size: .72rem; font-weight: 700; color: var(--accent-c); margin-bottom: .2rem; }
-    .result-bar-track { width: 72px; height: 3px; background: var(--border); border-radius: 2px; overflow: hidden; }
+    .result-icon { display: none; }
+    .result-score { font-size: 1.5rem; font-weight: 300; color: var(--accent-c); line-height: 1; }
+    .result-score-wrap { display: none; }
+    .result-info { min-width: 0; }
+    .result-name { font-size: .875rem; font-weight: 700; margin-bottom: .25rem; }
+    .result-reason { font-size: .72rem; color: var(--text-2); line-height: 1.45; }
+    .result-bar-track { width: 100%; height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
     .result-bar-fill { height: 100%; border-radius: 2px; background: linear-gradient(90deg, var(--accent-c), var(--accent-v)); transition: width .9s var(--ease-out-expo); }
 
     /* ═══ TOOL CARDS EXTENDED ════════════════════════════════════ */
@@ -1021,6 +1023,53 @@
     }
     #gloss-tip.show { opacity: 1; transform: translateY(0); }
     #gloss-tip strong { color: var(--accent-c); display: block; margin-bottom: .2rem; font-size: .8rem; }
+  /* ═══════════════════════════════════════════════════════════
+     PRINT / PDF
+  ═══════════════════════════════════════════════════════════ */
+  @media print {
+    * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+    /* Nicht drucken */
+    nav, #crystal-bg, .sec-divider, .tl-nav, .tl-progress-bar,
+    .theme-toggle, #quellen-backdrop, #quellen-close,
+    .sport-grid, .intensity-row, .print-btn,
+    .footer-links, .acc2-btn .ch { display: none !important; }
+
+    body { background: #fff !important; color: #111 !important; font-size: 11pt; }
+    a    { color: inherit !important; text-decoration: none !important; }
+
+    /* Sections sauber umbrechen */
+    section { break-before: page; padding: 1.5rem 0 !important; }
+    #hero   { break-before: avoid; }
+
+    /* Alle Accordions aufklappen */
+    .acc2-body, .acc-body {
+      max-height: none !important; overflow: visible !important;
+    }
+
+    /* Stepper: alle Slides untereinander */
+    .tl-stepper  { overflow: visible !important; border: none !important; }
+    .tl-track    { transform: none !important; flex-wrap: wrap !important; height: auto !important; }
+    .tl-slide    { width: 100% !important; break-inside: avoid; border-bottom: 1px solid #ddd; }
+
+    /* Matcher: nur Ergebnisspalte, keine Buttons */
+    .matcher-inner { grid-template-columns: 1fr !important; }
+    .matcher-results { grid-template-columns: 1fr 1fr !important; }
+
+    /* Quellen-Overlay inline anzeigen */
+    #quellen-overlay {
+      position: static !important; opacity: 1 !important;
+      pointer-events: all !important; display: block !important;
+    }
+    #quellen-panel {
+      transform: none !important; max-height: none !important;
+      border-radius: 0 !important; box-shadow: none !important;
+      position: static !important; padding: 1rem 0 !important;
+    }
+
+    footer { border-top: 1px solid #ddd; padding: 1rem 0 !important; background: #fff !important; }
+    .print-btn { display: none !important; }
+  }
   </style>
 </head>
 <body>
@@ -1034,7 +1083,7 @@
     <img src="https://raw.githubusercontent.com/RadDWB/Rehaprojectdoku/main/goethe_logo_end-scaled.jpg"
          alt="Goethe Gymnasium Logo"
          style="height:34px;width:auto;border-radius:4px;object-fit:contain;" />
-    Reha<sup style="font-size:.65em;letter-spacing:0">3</sup>
+    Rehaproject
   </div>
   <ul class="nav-center">
     <li><a href="#projekt">Projekt</a></li>
@@ -1802,8 +1851,24 @@
 
 <!-- ══ Footer ════════════════════════════════════════════════════ -->
 <footer>
+  <div style="display:flex;align-items:center;gap:1.2rem;flex-wrap:wrap">
+    <img id="qr-code" alt="QR-Code zur Website"
+         style="width:64px;height:64px;border-radius:6px;border:1px solid var(--border);
+                background:#fff;padding:3px;flex-shrink:0;" />
+    <p style="font-size:.75rem;color:var(--text-3);line-height:1.5;max-width:160px">
+      Website scannen &amp;<br>direkt aufrufen
+    </p>
+  </div>
   <p>© Reha³ · Ben, Lasse &amp; Mick · Goethe Gymnasium Dortmund · v2.1.0</p>
   <div class="footer-links">
+    <button class="print-btn" onclick="window.print()" aria-label="Seite als PDF drucken"
+      style="background:none;border:1px solid var(--border);border-radius:var(--r-pill);
+             padding:.3rem .9rem;font-size:.8125rem;color:var(--text-2);cursor:pointer;
+             font-family:var(--f-body);transition:border-color .2s,color .2s;"
+      onmouseover="this.style.borderColor='var(--border-hi)';this.style.color='var(--text-1)'"
+      onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text-2)'">
+      Als PDF drucken
+    </button>
     <a href="https://github.com/RadDWB/Rehaprojectdoku" target="_blank">GitHub</a>
     <a href="#hero">Nach oben ↑</a>
   </div>
@@ -1826,6 +1891,13 @@ function closeQuellen() {
   document.body.style.overflow = '';
 }
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeQuellen(); });
+
+/* ── QR Code ─────────────────────────────────────────────────── */
+(function() {
+  const url = encodeURIComponent(window.location.href.split('?')[0]);
+  document.getElementById('qr-code').src =
+    'https://api.qrserver.com/v1/create-qr-code/?size=128x128&margin=4&data=' + url;
+})();
 
 /* ── Theme Toggle ────────────────────────────────────────────── */
 const html   = document.documentElement;
@@ -2132,22 +2204,17 @@ function toggleAcc(btn) {
     const scores = S[selectedSport][selectedInt];
     const ranked = TOOLS.map((t, i) => ({ ...t, score: scores[i] }))
                         .sort((a, b) => b.score - a.score);
-    const ctx = SPORT_CTX[selectedSport] || '';
     el.innerHTML = `
-      <div style="font-size:.78rem;color:var(--text-2);line-height:1.55;margin-bottom:.75rem;
-        padding:.65rem .85rem;background:var(--bg-root);border-radius:var(--r-sm);
-        border-left:2px solid var(--accent-v);">${ctx}</div>
       ${ranked.map((t, i) => `
       <div class="result-row">
-        <div class="result-rank ${RANK_CLS[i]}">${MEDAL[i]}</div>
-        <div class="result-icon">${t.icon}</div>
+        <div class="result-row-top">
+          <div class="result-rank ${RANK_CLS[i]}">${MEDAL[i]} Platz ${i + 1}</div>
+          <div class="result-score">${t.score} %</div>
+        </div>
+        <div class="result-bar-track"><div class="result-bar-fill" style="width:0" data-w="${t.score}"></div></div>
         <div class="result-info">
           <div class="result-name">${t.name}</div>
           <div class="result-reason">${getReason(selectedSport, t.key, selectedInt)}</div>
-        </div>
-        <div class="result-score-wrap">
-          <div class="result-score">${t.score} %</div>
-          <div class="result-bar-track"><div class="result-bar-fill" style="width:0" data-w="${t.score}"></div></div>
         </div>
       </div>`).join('')}`;
     if (window.wrapGlossTerms) window.wrapGlossTerms(el);
