@@ -905,18 +905,53 @@
     /* ═══════════════════════════════════════════════════════════
        RESPONSIVE
     ═══════════════════════════════════════════════════════════ */
+    /* Hamburger button */
+    .nav-hamburger {
+      display: none; background: none; border: none; cursor: pointer;
+      color: var(--text-1); padding: .4rem; border-radius: var(--r-sm);
+      transition: background .2s;
+    }
+    .nav-hamburger:hover { background: var(--bg-surface); }
+
+    /* Mobile full-screen menu */
+    #navMobileMenu {
+      display: none; position: fixed; inset: 0; z-index: 450;
+      background: var(--bg-card);
+      flex-direction: column; align-items: center; justify-content: center;
+      gap: 2rem;
+    }
+    #navMobileMenu.open { display: flex; }
+    #navMobileMenu nav  { display: flex; flex-direction: column; align-items: center; gap: 1.75rem; }
+    #navMobileMenu a    {
+      font-size: 1.4rem; font-weight: 600; color: var(--text-1);
+      text-decoration: none; transition: color .2s;
+    }
+    #navMobileMenu a:hover { color: var(--accent-c); }
+    #navMobileClose {
+      position: absolute; top: 1.25rem; right: 1.5rem;
+      background: none; border: none; cursor: pointer;
+      color: var(--text-2); padding: .4rem;
+    }
+
     @media (max-width: 820px) {
-      .projekt-grid  { grid-template-columns: 1fr; }
+      .projekt-grid    { grid-template-columns: 1fr; }
       .video-container { position: static; }
-      .team-wrap     { grid-template-columns: 1fr; }
-      .team-grid     { grid-template-columns: repeat(3, 1fr); }
-      .tools-intro   { grid-template-columns: 1fr; }
-      .nav-center    { display: none; }
+      .team-wrap       { grid-template-columns: 1fr; }
+      .team-grid       { grid-template-columns: repeat(3, 1fr); }
+      .tools-intro     { grid-template-columns: 1fr; }
+      .nav-center      { display: none; }
+      .nav-hamburger   { display: block; }
+      .matcher-inner   { grid-template-columns: 1fr; }
+      .tl-slide h3     { font-size: 1.05rem; }
+      .tl-slide p      { font-size: .9rem; }
     }
     @media (max-width: 520px) {
-      .team-grid     { grid-template-columns: 1fr; }
-      #hero h1       { font-size: clamp(2.5rem, 12vw, 4rem); }
-      .hero-stats    { gap: 1.5rem; }
+      .team-grid  { grid-template-columns: 1fr; }
+      #hero h1    { font-size: clamp(2.5rem, 12vw, 4rem); }
+      .hero-stats { gap: 1.5rem; }
+      .tl-slide   { padding: .9rem 1rem 1rem; }
+      .tl-table th, .tl-table td { padding: .35rem .4rem; font-size: .72rem; }
+      .matcher-results { grid-template-columns: 1fr; }
     }
 
     /* ═══════════════════════════════════════════════════════════
@@ -1030,17 +1065,18 @@
     * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 
     /* Nicht drucken */
-    nav, #crystal-bg, .sec-divider, .tl-nav, .tl-progress-bar,
+    nav, #navMobileMenu, #crystal-bg, .sec-divider, .tl-nav, .tl-progress-bar,
     .theme-toggle, #quellen-backdrop, #quellen-close,
-    .sport-grid, .intensity-row, .print-btn,
-    .footer-links, .acc2-btn .ch { display: none !important; }
+    .sport-grid, .intensity-row, .intensity-label, .matcher-badge,
+    .print-btn, .footer-links, .acc2-btn .ch,
+    .reveal:not(.revealed) { display: none !important; }
 
-    body { background: #fff !important; color: #111 !important; font-size: 11pt; }
+    body { background: #fff !important; color: #111 !important; font-size: 11pt; margin: 0; }
     a    { color: inherit !important; text-decoration: none !important; }
 
-    /* Sections sauber umbrechen */
-    section { break-before: page; padding: 1.5rem 0 !important; }
-    #hero   { break-before: avoid; }
+    /* Kein Seitenumbruch vor jeder Section — nur gezielt */
+    section { padding: 1rem 0 !important; }
+    #tools, #experte { break-before: page; }
 
     /* Alle Accordions aufklappen */
     .acc2-body, .acc-body {
@@ -1048,15 +1084,14 @@
     }
 
     /* Stepper: alle Slides untereinander */
-    .tl-stepper  { overflow: visible !important; border: none !important; }
-    .tl-track    { transform: none !important; flex-wrap: wrap !important; height: auto !important; }
-    .tl-slide    { width: 100% !important; break-inside: avoid; border-bottom: 1px solid #ddd; }
+    .tl-stepper { overflow: visible !important; border: 1px solid #ddd !important; }
+    .tl-track   { transform: none !important; flex-wrap: wrap !important; height: auto !important; }
+    .tl-slide   { width: 100% !important; break-inside: avoid; border-bottom: 1px solid #eee; }
 
-    /* Matcher: nur Ergebnisspalte, keine Buttons */
-    .matcher-inner { grid-template-columns: 1fr !important; }
-    .matcher-results { grid-template-columns: 1fr 1fr !important; }
+    /* Matcher: keine interaktiven Elemente */
+    .matcher { display: none !important; }
 
-    /* Quellen-Overlay inline anzeigen */
+    /* Quellen-Overlay inline */
     #quellen-overlay {
       position: static !important; opacity: 1 !important;
       pointer-events: all !important; display: block !important;
@@ -1067,8 +1102,15 @@
       position: static !important; padding: 1rem 0 !important;
     }
 
+    /* QR-Code nur im Druck sichtbar */
+    #print-qr {
+      display: flex !important; align-items: center; gap: 1rem;
+      margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid #ddd;
+    }
+    #print-qr img { width: 80px; height: 80px; }
+    #print-qr p   { font-size: 9pt; color: #555; line-height: 1.5; }
+
     footer { border-top: 1px solid #ddd; padding: 1rem 0 !important; background: #fff !important; }
-    .print-btn { display: none !important; }
   }
   </style>
 </head>
@@ -1097,8 +1139,32 @@
     <button class="theme-toggle" id="themeToggle" aria-label="Theme wechseln">
       <span class="t-icon">☽</span><span class="t-label">Dunkelmodus</span>
     </button>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Menü öffnen">
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+        <line x1="3" y1="6"  x2="19" y2="6"/>
+        <line x1="3" y1="11" x2="19" y2="11"/>
+        <line x1="3" y1="16" x2="19" y2="16"/>
+      </svg>
+    </button>
   </div>
 </nav>
+
+<!-- ══ Mobile Menü ════════════════════════════════════════════════ -->
+<div id="navMobileMenu" role="dialog" aria-label="Navigation">
+  <button id="navMobileClose" aria-label="Menü schließen">
+    <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+      <line x1="4" y1="4" x2="18" y2="18"/><line x1="18" y1="4" x2="4" y2="18"/>
+    </svg>
+  </button>
+  <nav>
+    <a href="#projekt"  onclick="closeMobileMenu()">Projekt</a>
+    <a href="#video"    onclick="closeMobileMenu()">Video</a>
+    <a href="#quellen"  onclick="openQuellen(event);closeMobileMenu()">Quellen</a>
+    <a href="#tools"    onclick="closeMobileMenu()">Reha-Tools</a>
+    <a href="#experte"  onclick="closeMobileMenu()">Der Experte</a>
+    <a href="#team"     onclick="closeMobileMenu()">Team</a>
+  </nav>
+</div>
 
 <!-- ══ Hero ══════════════════════════════════════════════════════ -->
 <div style="position:relative;z-index:2;">
@@ -1200,7 +1266,7 @@
               <div class="tl-step">Schritt 05</div>
               <h3>Erkenntnisse &amp; Webdokumentation</h3>
               <p>Alle Ergebnisse fließen in diese Seite. Unanfochten an der Spitze stehen <strong>Schlaf</strong> und <strong>Ernährung</strong> — erst dahinter folgen die spezifischen Tools, die wir untersucht haben:</p>
-              <table class="tl-table">
+              <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;margin-top:.9rem"><table class="tl-table" style="margin-top:0">
                 <thead><tr><th>Tool</th><th>Studienlage</th><th>Wichtigste Erkenntnis</th></tr></thead>
                 <tbody>
                   <tr style="background:rgba(0,208,230,.05)"><td>Schlaf</td><td>Unanfochten #1</td><td>Stärkster Regenerationsfaktor — GH-Ausschüttung, CNS-Erholung &amp; Gewebereparatur finden primär im Tiefschlaf statt (REGman, 2021)</td></tr>
@@ -1210,7 +1276,7 @@
                   <tr><td>Eisbad</td><td>Zweischneidig</td><td>Top für Wettkampf-Recovery; kontraproduktiv bei Muskelaufbau</td></tr>
                   <tr><td>Massagepistole</td><td>Wenig Langzeit</td><td>Wirkt über Schmerzmodulation (Gate-Control) — ähnlich klassischer Massage</td></tr>
                 </tbody>
-              </table>
+              </table></div>
             </div>
           </div>
           <div class="tl-nav">
@@ -1851,13 +1917,9 @@
 
 <!-- ══ Footer ════════════════════════════════════════════════════ -->
 <footer>
-  <div style="display:flex;align-items:center;gap:1.2rem;flex-wrap:wrap">
-    <img id="qr-code" alt="QR-Code zur Website"
-         style="width:64px;height:64px;border-radius:6px;border:1px solid var(--border);
-                background:#fff;padding:3px;flex-shrink:0;" />
-    <p style="font-size:.75rem;color:var(--text-3);line-height:1.5;max-width:160px">
-      Website scannen &amp;<br>direkt aufrufen
-    </p>
+  <div id="print-qr" style="display:none">
+    <img id="qr-code" alt="QR-Code zur Website" style="width:80px;height:80px;background:#fff;padding:3px;" />
+    <p>Live-Website scannen<br>Reha³ — Regeneration im Sport<br>Projektkurs Sport 2026 · Goethe Gymnasium Dortmund</p>
   </div>
   <p>© Reha³ · Ben, Lasse &amp; Mick · Goethe Gymnasium Dortmund · v2.1.0</p>
   <div class="footer-links">
@@ -1869,7 +1931,6 @@
       onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text-2)'">
       Als PDF drucken
     </button>
-    <a href="https://github.com/RadDWB/Rehaprojectdoku" target="_blank">GitHub</a>
     <a href="#hero">Nach oben ↑</a>
   </div>
 </footer>
@@ -1898,6 +1959,15 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeQuellen
   document.getElementById('qr-code').src =
     'https://api.qrserver.com/v1/create-qr-code/?size=128x128&margin=4&data=' + url;
 })();
+
+/* ── Mobile Menu ─────────────────────────────────────────────── */
+function closeMobileMenu() {
+  document.getElementById('navMobileMenu').classList.remove('open');
+}
+document.getElementById('navHamburger').addEventListener('click', () => {
+  document.getElementById('navMobileMenu').classList.add('open');
+});
+document.getElementById('navMobileClose').addEventListener('click', closeMobileMenu);
 
 /* ── Theme Toggle ────────────────────────────────────────────── */
 const html   = document.documentElement;
