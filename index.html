@@ -385,6 +385,15 @@
       line-height: 1.3;
     }
     .tl-slide p { font-size: 1rem; color: var(--text-2); line-height: 1.7; }
+    .tl-slide p + p { margin-top: .6rem; }
+    .tl-table { width: 100%; border-collapse: collapse; font-size: .82rem; margin-top: .9rem; }
+    .tl-table th { font-size: .68rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--text-3); padding: .4rem .6rem; border-bottom: 2px solid var(--border); text-align: left; }
+    .tl-table td { padding: .55rem .6rem; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.5; }
+    .tl-table td:first-child { font-weight: 700; color: var(--accent-c); white-space: nowrap; }
+    .tl-table td:nth-child(2) { font-weight: 600; color: var(--text-1); }
+    .tl-table td:last-child { color: var(--text-2); font-size: .78rem; }
+    .tl-table tr:last-child td { border-bottom: none; }
 
     .tl-nav {
       display: flex; align-items: center; justify-content: center; gap: 1rem;
@@ -1118,27 +1127,37 @@
             <div class="tl-slide">
               <div class="tl-step">Schritt 01</div>
               <h3>Themenfindung &amp; Fragestellung</h3>
-              <p>Das Team entschied sich für Regenerationstools im Sport. Zentrale Frage: Was wirkt wirklich — und was ist Marketing?</p>
+              <p>Uns hat schon früh überrascht, wie komplex Regeneration wirklich ist. Die Sportwissenschaft unterscheidet heute zwischen <strong>metabolischer Erholung</strong> (Stoffwechsel &amp; Energiesysteme), <strong>struktureller Erholung</strong> (Gewebe &amp; Muskeln) und <strong>neurologischer Erholung</strong> (Nervensystem &amp; Schlaf). Diese drei Ebenen wurden unser Leitfaden — und die Frage: Was davon wirkt wirklich, und was ist Marketing?</p>
             </div>
             <div class="tl-slide">
               <div class="tl-step">Schritt 02</div>
               <h3>Literaturrecherche &amp; Studiensichtung</h3>
-              <p>Systematische Recherche zu allen sechs Tools auf Basis aktueller sportwissenschaftlicher Studien und Metaanalysen.</p>
+              <p>Schon früh stießen wir auf einen zentralen Befund: Es gibt kein Wundermittel. Das Bundesinstitut für Sportwissenschaft (BISp) hat im Projekt <em>REGman</em> verschiedene Methoden über Jahre verglichen — Ergebnis: <strong>Schlaf und Ernährung sind die unangefochtenen Säulen</strong>. Ohne diese beiden sind alle anderen Tools deutlich weniger wirksam.</p>
+              <p>Die Deutsche Zeitschrift für Sportmedizin (DZSM) betont zudem, dass Erholung hochindividuell ist und viele Methoden einen Teil ihres Effekts über den Placebo-Mechanismus entfalten — was psychologisch aber trotzdem wertvoll sein kann.</p>
             </div>
             <div class="tl-slide">
               <div class="tl-step">Schritt 03</div>
               <h3>Experten-Interview · Prof. Dr. Ferrauti, RUB</h3>
-              <p>Persönliches Gespräch mit einem Professor der Ruhr-Universität Bochum. Seine Perspektive fließt direkt in die Bewertung ein.</p>
+              <p>Wir haben Prof. Dr. Alexander Ferrauti an der Ruhr-Universität Bochum persönlich interviewt. An der RUB forscht auch Prof. Kellmann intensiv zu Stressregulation im Sport — seine Studien belegen, dass Schlafmangel das Verletzungsrisiko massiv erhöht und die neuromuskuläre Regeneration blockiert. Ferrautis Einschätzungen zur Evidenzlage der einzelnen Tools haben unsere Bewertungen direkt geprägt.</p>
             </div>
             <div class="tl-slide">
               <div class="tl-step">Schritt 04</div>
               <h3>Videoerstellung &amp; Postproduktion</h3>
-              <p>Dreharbeiten, Schnitt und Vertonung des YouTube-Videos als Hauptpräsentationsergebnis des Projekts.</p>
+              <p>Wir haben die wissenschaftlichen Inhalte so aufbereitet, dass sie für Mitschülerinnen und Mitschüler ohne Vorkenntnisse verständlich sind — ohne dabei die Studienlage zu vereinfachen. Dreharbeiten, Schnitt und Vertonung entstanden vollständig in Eigenregie als zentrales Präsentationsergebnis des Projekts.</p>
             </div>
             <div class="tl-slide">
               <div class="tl-step">Schritt 05</div>
-              <h3>Webdokumentation</h3>
-              <p>Zusammenstellung aller Ergebnisse, Quellen und Erkenntnisse in dieser Webseite für die schulische Präsentation und Dokumentation.</p>
+              <h3>Erkenntnisse &amp; Webdokumentation</h3>
+              <p>Alle Ergebnisse fließen in diese Seite. Hier unsere Einschätzung der Studienlage zu den vier spezifischen Tools:</p>
+              <table class="tl-table">
+                <thead><tr><th>Tool</th><th>Studienlage</th><th>Wichtigste Erkenntnis</th></tr></thead>
+                <tbody>
+                  <tr><td>Faszienrolle</td><td>Gut belegt</td><td>Hilft gegen DOMS, kaum Effekt auf Kraft/Schnelligkeit (Arbiza et al., 2023)</td></tr>
+                  <tr><td>Sauna</td><td>Sehr gut</td><td>Verbessert Plasmavolumen-Expansion &amp; HRV — eher systemisch</td></tr>
+                  <tr><td>Eisbad</td><td>Zweischneidig</td><td>Top für Wettkampf-Recovery; kontraproduktiv bei Muskelaufbau</td></tr>
+                  <tr><td>Massagepistole</td><td>Wenig Langzeit</td><td>Wirkt über Schmerzmodulation (Gate-Control) — ähnlich klassischer Massage</td></tr>
+                </tbody>
+              </table>
             </div>
           </div>
           <div class="tl-nav">
@@ -1178,17 +1197,10 @@
     </p>
     <div class="video-container reveal" style="transition-delay:.2s">
       <div class="video-frame">
-        <!--
-          YouTube einbetten: Kommentar entfernen & VIDEO_ID ersetzen:
-          <iframe src="https://www.youtube.com/embed/VIDEO_ID"
-            title="Rehaproject – Regeneration im Sport"
-            frameborder="0" allow="accelerometer; autoplay; clipboard-write;
-            encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        -->
-        <div class="video-placeholder">
-          <div class="play-btn">▶</div>
-          <p>YouTube-Video wird hier eingebettet</p>
-        </div>
+        <iframe src="https://www.youtube.com/embed/gC6Tbv2oUY0"
+          title="Rehaproject – Regeneration im Sport"
+          frameborder="0" allow="accelerometer; autoplay; clipboard-write;
+          encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </div>
     </div>
   </div>
@@ -1375,6 +1387,30 @@
         <p>Pilch, W. et al. · Auswirkungen von Saunagängen auf Herz-Kreislauf-Parameter und Hormonausschüttung bei Athleten.</p>
       </div>
 
+      <!-- ── Weiterführend Deutsch ── -->
+      <p class="source-cat">Weiterführende Literatur · Deutsch</p>
+
+      <a class="source-card" style="text-decoration:none;cursor:pointer" href="https://www.zeitschrift-sportmedizin.de" target="_blank" rel="noopener">
+        <span class="source-type t-online">Fachzeitschrift · DE</span>
+        <h4>Deutsche Zeitschrift für Sportmedizin (DZSM)</h4>
+        <p>Wichtigste deutsche Quelle. Zentraler Artikel: <em>„Wissenslücken und Perspektiven in der Regenerationsforschung"</em> (2021) — Erholung ist hochindividuell, viele Tools wirken auch über Placebo (was psychologisch trotzdem wertvoll ist).</p>
+        <span class="source-link">zeitschrift-sportmedizin.de →</span>
+      </a>
+
+      <a class="source-card" style="text-decoration:none;cursor:pointer" href="https://www.bisp-surf.de" target="_blank" rel="noopener">
+        <span class="source-type t-online">Datenbank · DE</span>
+        <h4>BISp-SURF — Sportinformationsportal</h4>
+        <p>Datenbank des Bundesinstituts für Sportwissenschaft mit tausenden deutschen Studienzusammenfassungen. Das Projekt <em>REGman</em> (Regenerationsmanagement im Spitzensport) verglich über Jahre alle gängigen Methoden — Ergebnis: kein Wundermittel, aber Schlaf &amp; Ernährung sind führend.</p>
+        <span class="source-link">bisp-surf.de →</span>
+      </a>
+
+      <a class="source-card" style="text-decoration:none;cursor:pointer" href="https://www.vbg.de/SharedDocs/Medien-Center/DE/Broschuere/Branchen/Sport/rueckkehr_zum_sport.html" target="_blank" rel="noopener">
+        <span class="source-type t-online">Leitfaden · DE</span>
+        <h4>VBG Fachwissen — Return-to-Competition</h4>
+        <p>Die Verwaltungs-Berufsgenossenschaft veröffentlicht praxisnahe, wissenschaftlich fundierte Leitfäden zur Rehabilitation im Profisport. Besonders der „Return-to-Competition"-Leitfaden ist für den Schulkontext gut aufbereitet.</p>
+        <span class="source-link">vbg.de →</span>
+      </a>
+
       <!-- ── Online ── -->
       <p class="source-cat">Online</p>
 
@@ -1551,6 +1587,11 @@
           <div class="acc-block"><h5>Mechanismus</h5><p>Die Kälte bewirkt eine Vasokonstriktion — weniger Blutfluss, weniger Ödembildung, reduzierte Entzündungsreaktion. Bei der anschließenden Erwärmung setzt eine reaktive Vasodilatation ein ("venöse Rückpumpe"), die metabolische Abfallprodukte wie Laktat effizienter abführt.</p></div>
           <div class="study-box"><div class="slabel">🔬 Schlüsselstudie</div><p><strong>Machado et al. (2016)</strong> – Metaanalyse über 17 RCTs: CWI ist signifikant effektiver als passive Ruhe für DOMS-Reduktion 24–96 h nach Training. Optimum: 11–15 °C für 11–15 Minuten.</p></div>
           <div class="warn-box"><div class="wlabel">⚠ Wichtiger Hinweis</div><p><strong>Roberts et al. (2015), J. Physiology:</strong> Regelmäßiges Eisbad nach Krafttraining hemmt den mTOR-Signalweg und kann langfristigen Muskelaufbau um bis zu 20 % reduzieren. In Aufbauphasen gezielt einsetzen!</p></div>
+          <div class="acc-block" style="margin-top:.75rem;padding:.85rem 1rem;background:rgba(0,208,230,.06);border:1px solid rgba(0,208,230,.2);border-radius:var(--r-sm);">
+            <h5 style="color:var(--accent-c);margin-bottom:.4rem">Die Eisbad-Falle — wann ja, wann nein?</h5>
+            <p style="font-size:.82rem;color:var(--text-2);line-height:1.6"><strong style="color:var(--text-1)">Ziel Muskelaufbau:</strong> Eisbad direkt nach dem Training ist kontraproduktiv. Es unterdrückt genau die Entzündungsreize, die den Muskelwachstums-Reiz auslösen — das Eisbad löscht das Trainingssignal.</p>
+            <p style="font-size:.82rem;color:var(--text-2);line-height:1.6;margin-top:.4rem"><strong style="color:var(--text-1)">Ziel schnelle Wettkampf-Recovery:</strong> Eisbad ist top. Wer morgen wieder spielen oder starten muss (Turnier, Doppelspieltag), profitiert maximal von den akuten Entzündungshemmern und der Schmerzreduktion.</p>
+          </div>
         </div></div>
       </div>
 
@@ -1673,7 +1714,7 @@
 </div>
 
 <!-- ══ Experte ══════════════════════════════════════════════════ -->
-<section id="experte">
+<section id="experte" style="padding: var(--sp-8) 0;">
   <div class="wrap">
     <p class="section-eyebrow reveal">Experten-Interview</p>
     <h2 class="section-title reveal" style="transition-delay:.08s">Der Experte</h2>
@@ -1755,7 +1796,7 @@
 
 <!-- ══ Footer ════════════════════════════════════════════════════ -->
 <footer>
-  <p>© Reha³ · Ben, Lasse &amp; Mick · Goethe Gymnasium Dortmund · v2.0.0</p>
+  <p>© Reha³ · Ben, Lasse &amp; Mick · Goethe Gymnasium Dortmund · v2.1.0</p>
   <div class="footer-links">
     <a href="https://github.com/RadDWB/Rehaprojectdoku" target="_blank">GitHub</a>
     <a href="#hero">Nach oben ↑</a>
