@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<html lang="de" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rehaproject — Regeneration im Sport</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ═══════════════════════════════════════════════════════════
+       DESIGN TOKENS
+    ═══════════════════════════════════════════════════════════ */
+    :root {
+      /* Fonts */
+      --f-display: 'Inter', system-ui, sans-serif;
+      --f-body:    'Inter', system-ui, sans-serif;
+
+      /* Spacing scale */
+      --sp-1: 4px;  --sp-2: 8px;   --sp-3: 12px;  --sp-4: 16px;
+      --sp-5: 24px; --sp-6: 32px;  --sp-7: 48px;  --sp-8: 80px;
+
+      /* Radius */
+      --r-sm: 8px; --r-md: 14px; --r-lg: 20px; --r-pill: 999px;
+
+      /* Motion */
+      --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+      --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    /* ── Dark theme (default) ── */
+    [data-theme="dark"] {
+      --bg-root:    #1c2027;
+      --bg-surface: #20252d;
+      --bg-card:    #262d38;
+      --bg-card-hi: #2d3547;
+      --border:     rgba(255,255,255,0.07);
+      --border-hi:  rgba(0,208,230,0.32);
+      --text-1:     #edf1f8;
+      --text-2:     #7d8fa8;
+      --text-3:     #4c5d72;
+      --accent-c:   #00d0e8;   /* cyan */
+      --accent-v:   #9b84f0;   /* violet */
+      --accent-w:   #f5a246;   /* warm amber */
+      --accent-g:   #4ed9a0;   /* green */
+      --shadow-card: 0 2px 12px rgba(0,0,0,0.3), 0 8px 32px rgba(0,0,0,0.2);
+      --shadow-glow: 0 0 0 1px rgba(0,208,230,0.15), 0 4px 24px rgba(0,208,230,0.08);
+      --nav-bg:     rgba(28,32,39,0.88);
+      --canvas-opacity: 1;
+    }
+
+    /* ── Light theme ── */
+    [data-theme="light"] {
+      --bg-root:    #f2f1ed;
+      --bg-surface: #eceae5;
+      --bg-card:    #ffffff;
+      --bg-card-hi: #f8f7f4;
+      --border:     rgba(0,0,0,0.07);
+      --border-hi:  rgba(0,160,190,0.35);
+      --text-1:     #1a1e26;
+      --text-2:     #5a6780;
+      --text-3:     #95a0b0;
+      --accent-c:   #0099ae;
+      --accent-v:   #6e49e0;
+      --accent-w:   #c47d1a;
+      --accent-g:   #1d9e6c;
+      --shadow-card: 0 2px 8px rgba(0,0,0,0.06), 0 8px 24px rgba(0,0,0,0.06);
+      --shadow-glow: 0 0 0 1px rgba(0,160,190,0.12), 0 4px 16px rgba(0,160,190,0.06);
+      --nav-bg:     rgba(242,241,237,0.88);
+      --canvas-opacity: 0.4;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       RESET & BASE
+    ═══════════════════════════════════════════════════════════ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: var(--f-body);
+      background: var(--bg-root);
+      color: var(--text-1);
+      line-height: 1.7;
+      overflow-x: hidden;
+      transition: background 0.4s var(--ease-out-quart),
+                  color 0.4s var(--ease-out-quart);
+    }
+    a { color: var(--accent-c); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    img { max-width: 100%; display: block; }
+
+    /* Grain overlay */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 1; pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.025;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       CANVAS — Kristallnetz
+    ═══════════════════════════════════════════════════════════ */
+    #crystal-bg {
+      position: fixed; inset: 0; z-index: 0;
+      pointer-events: none;
+      opacity: var(--canvas-opacity);
+      transition: opacity 0.5s ease;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       NAV
+    ═══════════════════════════════════════════════════════════ */
+    nav {
+      position: sticky; top: 0; z-index: 200;
+      height: 62px;
+      background: var(--nav-bg);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 clamp(1.5rem, 5vw, 3.5rem);
+      transition: background 0.4s ease, border-color 0.4s ease;
+    }
+    nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,0.15); }
+
+    .nav-logo {
+      font-family: var(--f-body);
+      font-weight: 600; font-size: .875rem;
+      letter-spacing: .06em; text-transform: uppercase;
+      color: var(--text-1);
+      display: flex; align-items: center; gap: var(--sp-3);
+    }
+    .nav-logo span {
+      display: inline-block;
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--accent-c);
+      box-shadow: 0 0 6px var(--accent-c);
+      animation: pulse 2.4s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.4); opacity: 0.7; }
+    }
+
+    .nav-center {
+      display: flex; gap: clamp(1.2rem, 3vw, 2.4rem);
+      list-style: none;
+    }
+    .nav-center a {
+      font-size: .8125rem; font-weight: 500;
+      letter-spacing: .03em;
+      color: var(--text-2);
+      transition: color .2s ease;
+      position: relative; padding-bottom: 2px;
+    }
+    .nav-center a::after {
+      content: ''; position: absolute; bottom: -1px; left: 0;
+      width: 0; height: 1px; background: var(--accent-c);
+      transition: width .25s var(--ease-out-expo);
+    }
+    .nav-center a:hover { color: var(--text-1); text-decoration: none; }
+    .nav-center a:hover::after { width: 100%; }
+
+    .nav-right { display: flex; align-items: center; gap: var(--sp-3); }
+    .theme-toggle {
+      width: 36px; height: 36px;
+      border-radius: var(--r-sm);
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      color: var(--text-2);
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+      transition: border-color .2s, color .2s, background .2s, transform .15s;
+    }
+    .theme-toggle:hover {
+      border-color: var(--border-hi);
+      color: var(--text-1);
+      transform: rotate(15deg);
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       LAYOUT UTILITIES
+    ═══════════════════════════════════════════════════════════ */
+    .wrap { max-width: 1160px; margin: 0 auto; padding: 0 clamp(1.5rem, 5vw, 3rem); }
+    section { position: relative; z-index: 2; }
+
+    .section-eyebrow {
+      font-size: .6875rem; font-weight: 600;
+      letter-spacing: .15em; text-transform: uppercase;
+      color: var(--accent-c);
+      margin-bottom: var(--sp-3);
+      display: flex; align-items: center; gap: var(--sp-3);
+    }
+    .section-eyebrow::before {
+      content: ''; display: inline-block;
+      width: 20px; height: 1px; background: var(--accent-c);
+    }
+    .section-title {
+      font-family: var(--f-display);
+      font-size: clamp(1.9rem, 4vw, 2.75rem);
+      font-weight: 700; line-height: 1.2;
+      letter-spacing: -.025em;
+      margin-bottom: var(--sp-4);
+    }
+    .section-sub {
+      font-size: .9375rem;
+      color: var(--text-2);
+      max-width: 500px;
+      line-height: 1.75;
+    }
+
+    /* ─── Scroll reveal ── */
+    .reveal {
+      opacity: 0; transform: translateY(28px);
+      transition: opacity .7s var(--ease-out-expo),
+                  transform .7s var(--ease-out-expo);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ═══════════════════════════════════════════════════════════
+       HERO
+    ═══════════════════════════════════════════════════════════ */
+    #hero {
+      min-height: 100svh;
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: flex-start;
+      padding: 7rem clamp(1.5rem, 5vw, 3.5rem) 5rem;
+      max-width: 1160px; margin: 0 auto;
+    }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: var(--sp-2);
+      border: 1px solid var(--border-hi);
+      border-radius: var(--r-pill);
+      padding: .3rem 1rem;
+      font-size: .75rem; font-weight: 500;
+      color: var(--accent-c);
+      margin-bottom: var(--sp-6);
+      opacity: 0; animation: fadeSlideUp .6s .1s var(--ease-out-expo) forwards;
+    }
+    .hero-badge-dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--accent-c); animation: pulse 2s infinite;
+    }
+
+    #hero h1 {
+      font-family: var(--f-display);
+      font-size: clamp(3rem, 8.5vw, 7rem);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -.04em;
+      margin-bottom: var(--sp-6);
+      max-width: 16ch;
+      opacity: 0; animation: fadeSlideUp .8s .2s var(--ease-out-expo) forwards;
+    }
+    #hero h1 em {
+      font-style: normal;
+      background: linear-gradient(135deg, var(--accent-c) 0%, var(--accent-v) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-body {
+      font-size: clamp(.9375rem, 1.5vw, 1.0625rem);
+      color: var(--text-2); max-width: 44ch; line-height: 1.75;
+      margin-bottom: var(--sp-7);
+      opacity: 0; animation: fadeSlideUp .8s .35s var(--ease-out-expo) forwards;
+    }
+
+    .hero-ctas {
+      display: flex; gap: var(--sp-4); flex-wrap: wrap;
+      margin-bottom: var(--sp-8);
+      opacity: 0; animation: fadeSlideUp .8s .5s var(--ease-out-expo) forwards;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: var(--sp-2);
+      padding: .7rem 1.6rem; border-radius: var(--r-md);
+      font-size: .875rem; font-weight: 600; font-family: var(--f-body);
+      cursor: pointer; border: none;
+      transition: transform .18s var(--ease-out-quart), box-shadow .18s ease;
+    }
+    .btn:hover { transform: translateY(-2px); text-decoration: none; }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent-c), var(--accent-v));
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(0,208,230,.25), 0 1px 4px rgba(0,0,0,.2);
+    }
+    .btn-primary:hover { box-shadow: 0 8px 32px rgba(0,208,230,.35), 0 2px 8px rgba(0,0,0,.2); }
+    .btn-ghost {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-1);
+    }
+    .btn-ghost:hover { border-color: var(--border-hi); }
+
+    .hero-stats {
+      display: flex; gap: clamp(2rem, 5vw, 4rem); flex-wrap: wrap;
+      padding-top: var(--sp-7);
+      border-top: 1px solid var(--border);
+      opacity: 0; animation: fadeSlideUp .8s .65s var(--ease-out-expo) forwards;
+    }
+    .stat-num {
+      font-family: var(--f-display);
+      font-size: 2.25rem; font-weight: 700; font-style: italic;
+      color: var(--accent-c); line-height: 1;
+      margin-bottom: .2rem;
+    }
+    .stat-label { font-size: .75rem; color: var(--text-2); letter-spacing: .06em; text-transform: uppercase; }
+
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       PROJEKT
+    ═══════════════════════════════════════════════════════════ */
+    #projekt {
+      background: var(--bg-surface);
+      padding: var(--sp-8) 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .projekt-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(2rem, 6vw, 5rem);
+      align-items: start;
+    }
+
+    /* Timeline */
+    .timeline { position: relative; padding-left: 2rem; }
+    .timeline::before {
+      content: ''; position: absolute; left: 0; top: 6px; bottom: 6px;
+      width: 1px;
+      background: linear-gradient(to bottom,
+        var(--accent-c), var(--accent-v) 60%, transparent);
+    }
+    .tl-item {
+      position: relative; margin-bottom: 2.4rem;
+      opacity: 0; transform: translateX(-16px);
+      transition: opacity .6s var(--ease-out-expo), transform .6s var(--ease-out-expo);
+    }
+    .tl-item.visible { opacity: 1; transform: translateX(0); }
+
+    .tl-dot {
+      position: absolute; left: -2.5rem; top: .35rem;
+      width: 11px; height: 11px; border-radius: 50%;
+      background: var(--bg-root);
+      border: 2px solid var(--accent-c);
+      transition: background .3s;
+    }
+    .tl-item:hover .tl-dot { background: var(--accent-c); }
+
+    .tl-step {
+      font-size: .6875rem; font-weight: 600; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--accent-v);
+      margin-bottom: .25rem;
+    }
+    .tl-item h3 {
+      font-size: 1rem; font-weight: 600; margin-bottom: .35rem;
+      line-height: 1.4;
+    }
+    .tl-item p { font-size: .875rem; color: var(--text-2); line-height: 1.65; }
+
+    /* Video */
+    .video-container { position: sticky; top: 90px; }
+    .video-label {
+      font-size: .6875rem; font-weight: 600; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--text-3);
+      margin-bottom: var(--sp-3);
+    }
+    .video-frame {
+      aspect-ratio: 16/9;
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      box-shadow: var(--shadow-card);
+      position: relative;
+      transition: border-color .3s, box-shadow .3s;
+    }
+    .video-frame:hover {
+      border-color: var(--border-hi);
+      box-shadow: var(--shadow-glow);
+    }
+    .video-frame iframe { width: 100%; height: 100%; display: block; }
+    .video-placeholder {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: var(--sp-3);
+    }
+    .play-btn {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-c), var(--accent-v));
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 0 0 12px rgba(0,208,230,.08);
+      font-size: 1.25rem; color: #fff;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .video-frame:hover .play-btn {
+      transform: scale(1.08);
+      box-shadow: 0 0 0 16px rgba(0,208,230,.12);
+    }
+    .video-placeholder p { font-size: .8125rem; color: var(--text-2); }
+    .video-caption {
+      margin-top: var(--sp-3);
+      font-size: .8125rem; color: var(--text-3);
+      text-align: center; line-height: 1.5;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       QUELLEN
+    ═══════════════════════════════════════════════════════════ */
+    #quellen { padding: var(--sp-8) 0; }
+
+    .sources-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: var(--sp-4);
+      margin-top: var(--sp-7);
+    }
+    .source-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 1.5rem;
+      display: flex; flex-direction: column; gap: .6rem;
+      transition: border-color .25s, transform .25s var(--ease-out-quart),
+                  box-shadow .25s;
+      cursor: default;
+    }
+    .source-card:hover {
+      border-color: var(--border-hi);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-glow);
+    }
+    .source-type {
+      align-self: flex-start;
+      font-size: .6875rem; font-weight: 600; letter-spacing: .1em;
+      text-transform: uppercase; padding: .2rem .7rem;
+      border-radius: var(--r-pill);
+    }
+    .t-studie   { background: rgba(0,208,230,.1);  color: var(--accent-c); }
+    .t-experte  { background: rgba(155,132,240,.1); color: var(--accent-v); }
+    .t-buch     { background: rgba(245,162,70,.1);  color: var(--accent-w); }
+    .t-online   { background: rgba(78,217,160,.1);  color: var(--accent-g); }
+
+    .source-card h4 { font-size: .9375rem; font-weight: 600; line-height: 1.4; }
+    .source-card p  { font-size: .8125rem; color: var(--text-2); line-height: 1.6; flex: 1; }
+    .source-link {
+      font-size: .8125rem; font-weight: 600; color: var(--accent-c);
+      display: flex; align-items: center; gap: .3rem;
+      margin-top: auto;
+      transition: gap .2s;
+    }
+    .source-card:hover .source-link { gap: .5rem; }
+
+    /* ═══════════════════════════════════════════════════════════
+       TOOLS
+    ═══════════════════════════════════════════════════════════ */
+    #tools {
+      background: var(--bg-surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: var(--sp-8) 0;
+    }
+    .tools-intro {
+      display: grid; grid-template-columns: 1fr auto;
+      align-items: end; gap: 2rem; margin-bottom: var(--sp-7);
+    }
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+      gap: var(--sp-5);
+    }
+    .tool-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 1.75rem;
+      transition: border-color .25s, transform .3s var(--ease-out-quart),
+                  box-shadow .25s;
+      display: flex; flex-direction: column; gap: 1rem;
+    }
+    .tool-card:hover {
+      border-color: var(--border-hi);
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-glow);
+    }
+    .tool-header {
+      display: flex; align-items: flex-start;
+      justify-content: space-between; gap: 1rem;
+    }
+    .tool-icon {
+      width: 44px; height: 44px; border-radius: var(--r-sm);
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.25rem; flex-shrink: 0;
+    }
+    .tool-card h3 { font-size: 1rem; font-weight: 600; line-height: 1.35; }
+    .tool-card > p { font-size: .875rem; color: var(--text-2); line-height: 1.65; }
+
+    .tool-facts {
+      list-style: none; display: flex; flex-direction: column; gap: .45rem;
+    }
+    .tool-facts li {
+      font-size: .8125rem; color: var(--text-2);
+      display: flex; align-items: flex-start; gap: .5rem;
+    }
+    .tool-facts li::before {
+      content: '↗'; color: var(--accent-c); font-size: .75rem;
+      margin-top: .1rem; flex-shrink: 0;
+    }
+
+    .evidence-bar { margin-top: auto; }
+    .evidence-meta {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: .4rem;
+    }
+    .evidence-meta span:first-child {
+      font-size: .7rem; color: var(--text-3);
+      letter-spacing: .08em; text-transform: uppercase; font-weight: 500;
+    }
+    .evidence-meta span:last-child { font-size: .75rem; color: var(--text-2); font-weight: 600; }
+    .bar-track {
+      height: 3px; background: var(--border);
+      border-radius: 2px; overflow: hidden;
+    }
+    .bar-fill {
+      height: 100%; border-radius: 2px;
+      background: linear-gradient(90deg, var(--accent-c), var(--accent-v));
+      width: 0; /* animated via JS */
+      transition: width 1.2s var(--ease-out-expo);
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       TEAM
+    ═══════════════════════════════════════════════════════════ */
+    #team { padding: var(--sp-8) 0; }
+    .team-wrap {
+      display: grid; grid-template-columns: 1fr 2fr;
+      gap: clamp(2rem, 6vw, 5rem); align-items: center;
+    }
+    .team-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-4);
+    }
+    .team-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 1.5rem 1rem; text-align: center;
+      transition: border-color .25s, transform .25s var(--ease-out-quart);
+    }
+    .team-card:hover { border-color: var(--border-hi); transform: translateY(-3px); }
+    .avatar {
+      width: 52px; height: 52px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-c), var(--accent-v));
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--f-display); font-size: 1.1rem; font-weight: 700;
+      color: #fff; margin: 0 auto var(--sp-4);
+    }
+    .team-card h4 { font-size: .9rem; font-weight: 600; margin-bottom: .2rem; }
+    .team-card p  { font-size: .75rem; color: var(--text-3); }
+
+    /* ═══════════════════════════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════════════════════════ */
+    footer {
+      position: relative; z-index: 2;
+      border-top: 1px solid var(--border);
+      padding: var(--sp-6) clamp(1.5rem, 5vw, 3.5rem);
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
+      background: var(--bg-surface);
+    }
+    footer p { font-size: .8125rem; color: var(--text-3); }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a { font-size: .8125rem; color: var(--text-2); transition: color .2s; }
+    .footer-links a:hover { color: var(--text-1); text-decoration: none; }
+
+    /* ═══════════════════════════════════════════════════════════
+       RESPONSIVE
+    ═══════════════════════════════════════════════════════════ */
+    @media (max-width: 820px) {
+      .projekt-grid  { grid-template-columns: 1fr; }
+      .video-container { position: static; }
+      .team-wrap     { grid-template-columns: 1fr; }
+      .team-grid     { grid-template-columns: repeat(3, 1fr); }
+      .tools-intro   { grid-template-columns: 1fr; }
+      .nav-center    { display: none; }
+    }
+    @media (max-width: 520px) {
+      .team-grid     { grid-template-columns: 1fr; }
+      #hero h1       { font-size: clamp(2.5rem, 12vw, 4rem); }
+      .hero-stats    { gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ Kristallnetz Canvas ══════════════════════════════════════ -->
+<canvas id="crystal-bg"></canvas>
+
+<!-- ══ Navigation ═══════════════════════════════════════════════ -->
+<nav id="nav">
+  <div class="nav-logo">
+    <img src="https://raw.githubusercontent.com/RadDWB/Rehaprojectdoku/main/goethe_logo_end-scaled.jpg"
+         alt="Goethe Gymnasium Logo"
+         style="height:34px;width:auto;border-radius:4px;object-fit:contain;" />
+    Rehaproject
+  </div>
+  <ul class="nav-center">
+    <li><a href="#projekt">Projekt</a></li>
+    <li><a href="#quellen">Quellen</a></li>
+    <li><a href="#tools">Reha-Tools</a></li>
+    <li><a href="#team">Team</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-toggle" id="themeToggle" aria-label="Theme wechseln">☽</button>
+  </div>
+</nav>
+
+<!-- ══ Hero ══════════════════════════════════════════════════════ -->
+<div style="position:relative;z-index:2;">
+<section id="hero">
+  <div class="hero-badge">
+    <span class="hero-badge-dot"></span>
+    Projektkurs Sport 2026 · Goethe Gymnasium
+  </div>
+  <h1>Regeneration<br>im <em>Leistungs&shy;sport</em></h1>
+  <p class="hero-body">
+    Wir haben die Wirksamkeit von sechs Regenerationstools wissenschaftlich untersucht —
+    von Eisbädern über Sauna bis hin zu Schlaf und Ernährung.
+    Mit Experten-Interview an der Ruhr-Universität Bochum.
+  </p>
+  <div class="hero-ctas">
+    <a href="#projekt" class="btn btn-primary">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      Zum Projekt
+    </a>
+    <a href="#tools" class="btn btn-ghost">Reha-Tools entdecken →</a>
+  </div>
+  <div class="hero-stats">
+    <div>
+      <div class="stat-num">6</div>
+      <div class="stat-label">Tools untersucht</div>
+    </div>
+    <div>
+      <div class="stat-num">1</div>
+      <div class="stat-label">Experten-Interview</div>
+    </div>
+    <div>
+      <div class="stat-num">3</div>
+      <div class="stat-label">Teammitglieder</div>
+    </div>
+    <div>
+      <div class="stat-num">1</div>
+      <div class="stat-label">YouTube-Video</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ Projekt ═══════════════════════════════════════════════════ -->
+<section id="projekt">
+  <div class="wrap" style="padding-top:var(--sp-8);padding-bottom:var(--sp-8);">
+    <div class="projekt-grid">
+
+      <div>
+        <p class="section-eyebrow reveal">Dokumentation</p>
+        <h2 class="section-title reveal" style="transition-delay:.08s">Unser<br>Projektverlauf</h2>
+        <p class="section-sub reveal" style="margin-bottom:var(--sp-7);transition-delay:.14s">
+          Von der ersten Idee über das Experten-Interview bis zum finalen
+          YouTube-Präsentationsvideo — alle Schritte chronologisch dokumentiert.
+        </p>
+
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-step">Schritt 01</div>
+            <h3>Themenfindung &amp; Fragestellung</h3>
+            <p>Das Team entschied sich für Regenerationstools im Sport. Zentrale Frage: Was wirkt wirklich — und was ist Marketing?</p>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-step">Schritt 02</div>
+            <h3>Literaturrecherche &amp; Studiensichtung</h3>
+            <p>Systematische Recherche zu allen sechs Tools auf Basis aktueller sportwissenschaftlicher Studien und Metaanalysen.</p>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-step">Schritt 03</div>
+            <h3>Experten-Interview · Ruhr-Uni Bochum</h3>
+            <p>Persönliches Gespräch mit einem Professor der Ruhr-Universität Bochum. Seine Perspektive fließt direkt in die Bewertung ein.</p>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-step">Schritt 04</div>
+            <h3>Videoerstellung &amp; Postproduktion</h3>
+            <p>Dreharbeiten, Schnitt und Vertonung des YouTube-Videos als Hauptpräsentationsergebnis des Projekts.</p>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-step">Schritt 05</div>
+            <h3>Webdokumentation</h3>
+            <p>Zusammenstellung aller Ergebnisse, Quellen und Erkenntnisse in dieser Webseite für die schulische Bewertung.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="video-container reveal" style="transition-delay:.2s">
+        <p class="video-label">Hauptpräsentation</p>
+        <div class="video-frame">
+          <!--
+            YouTube einbetten: Kommentar entfernen & VIDEO_ID ersetzen:
+            <iframe src="https://www.youtube.com/embed/VIDEO_ID"
+              title="Rehaproject – Regeneration im Sport"
+              frameborder="0" allow="accelerometer; autoplay; clipboard-write;
+              encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          -->
+          <div class="video-placeholder">
+            <div class="play-btn">▶</div>
+            <p>YouTube-Video wird hier eingebettet</p>
+          </div>
+        </div>
+        <p class="video-caption">Das Video fasst alle Projektergebnisse zusammen<br>und ist das zentrale Präsentationsergebnis.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ Quellen ═══════════════════════════════════════════════════ -->
+<section id="quellen">
+  <div class="wrap">
+    <p class="section-eyebrow reveal">Wissenschaftliche Grundlage</p>
+    <h2 class="section-title reveal" style="transition-delay:.08s">Quellenverzeichnis</h2>
+    <p class="section-sub reveal" style="transition-delay:.14s">
+      Alle verwendeten Studien, Interviews und Quellen auf einen Blick.
+      Klicke auf eine Karte, um zur Originalquelle zu gelangen.
+    </p>
+
+    <div class="sources-grid">
+      <div class="source-card reveal">
+        <span class="source-type t-experte">Experten-Interview</span>
+        <h4>Prof. [Name], Ruhr-Universität Bochum</h4>
+        <p>Persönliches Interview zu Regenerationsmethoden und deren physiologischer Wirksamkeit im Leistungssport. Transkript in Bearbeitung.</p>
+        <span class="source-link">Transkript folgt →</span>
+      </div>
+      <div class="source-card reveal" style="transition-delay:.06s">
+        <span class="source-type t-studie">Studie</span>
+        <h4>Cold Water Immersion &amp; Muskelregeneration</h4>
+        <p>Metaanalyse zur Wirksamkeit von Kältebädern auf Muskelkater und Erholungszeit nach intensiven Belastungen.</p>
+        <span class="source-link">Quelle eintragen →</span>
+      </div>
+      <div class="source-card reveal" style="transition-delay:.1s">
+        <span class="source-type t-studie">Studie</span>
+        <h4>Sauna &amp; sportliche Erholung</h4>
+        <p>Untersuchung der Auswirkungen regelmäßiger Saunagänge auf Herzkreislaufsystem und Regenerationszeit im Sport.</p>
+        <span class="source-link">Quelle eintragen →</span>
+      </div>
+      <div class="source-card reveal" style="transition-delay:.14s">
+        <span class="source-type t-online">Onlinequelle</span>
+        <h4>Massagepistolen im Athletenalltag</h4>
+        <p>Überblick aktueller Forschung zu perkussiver Massage und deren Einfluss auf Beweglichkeit und wahrgenommenen Schmerz.</p>
+        <span class="source-link">Quelle eintragen →</span>
+      </div>
+      <div class="source-card reveal" style="transition-delay:.18s">
+        <span class="source-type t-buch">Buch</span>
+        <h4>Schlaf als Regenerationsfaktor</h4>
+        <p>Wissenschaftliche Grundlagen zur Bedeutung von Schlafqualität und -dauer für sportliche Leistungsfähigkeit und Muskelwachstum.</p>
+        <span class="source-link">Quelle eintragen →</span>
+      </div>
+      <div class="source-card reveal" style="transition-delay:.22s">
+        <span class="source-type t-studie">Studie</span>
+        <h4>Faszienrolle &amp; myofasziale Entspannung</h4>
+        <p>RCT-Studie zur Wirksamkeit von Foam Rolling auf Beweglichkeit, Muskeltonus und empfundene Erholung nach dem Sport.</p>
+        <span class="source-link">Quelle eintragen →</span>
+      </div>
+      <div class="source-card reveal" style="transition-delay:.26s">
+        <span class="source-type t-studie">Studie</span>
+        <h4>Ernährung &amp; Post-Exercise Recovery</h4>
+        <p>Einfluss von Protein-, Kohlenhydrat- und Mikronährstoffzufuhr auf die muskuläre Reparatur nach intensivem Training.</p>
+        <span class="source-link">Quelle eintragen →</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ Reha-Tools ════════════════════════════════════════════════ -->
+<section id="tools">
+  <div class="wrap">
+    <div class="tools-intro">
+      <div>
+        <p class="section-eyebrow reveal">Wissenschaft trifft Praxis</p>
+        <h2 class="section-title reveal" style="transition-delay:.08s;margin-bottom:0">
+          Die untersuchten<br>Reha-Tools
+        </h2>
+      </div>
+      <p class="section-sub reveal" style="transition-delay:.14s;margin-bottom:0">
+        Sechs Methoden, eine Frage:<br>Was sagt die Wissenschaft wirklich?
+      </p>
+    </div>
+
+    <div class="tools-grid">
+
+      <div class="tool-card reveal">
+        <div class="tool-header">
+          <div class="tool-icon">🧊</div>
+          <h3>Eisbad<br><span style="font-weight:400;color:var(--text-2);font-size:.85em">Cold Water Immersion</span></h3>
+        </div>
+        <p>Kurzzeitiges Eintauchen in 10–15 °C kaltes Wasser nach intensiver Belastung. Gehört zu den am besten erforschten Methoden.</p>
+        <ul class="tool-facts">
+          <li>Reduziert Muskelkater (DOMS) messbar</li>
+          <li>Hemmt kurzfristig Entzündungsprozesse</li>
+          <li>Kann Trainingsadaptation langfristig hemmen</li>
+        </ul>
+        <div class="evidence-bar">
+          <div class="evidence-meta">
+            <span>Evidenzlevel</span><span>Hoch</span>
+          </div>
+          <div class="bar-track"><div class="bar-fill" data-width="85"></div></div>
+        </div>
+      </div>
+
+      <div class="tool-card reveal" style="transition-delay:.07s">
+        <div class="tool-header">
+          <div class="tool-icon">🔥</div>
+          <h3>Sauna</h3>
+        </div>
+        <p>Wärmeanwendung als passives Erholungsmittel. Erhöht die Durchblutung und entspannt die Muskulatur mit nachgewiesenen kardiovaskulären Vorteilen.</p>
+        <ul class="tool-facts">
+          <li>Fördert Durchblutung &amp; Muskelentspannung</li>
+          <li>Verbessert subjektives Erholungsgefühl</li>
+          <li>Kardioprotektive Langzeitwirkung belegt</li>
+        </ul>
+        <div class="evidence-bar">
+          <div class="evidence-meta">
+            <span>Evidenzlevel</span><span>Mittel–Hoch</span>
+          </div>
+          <div class="bar-track"><div class="bar-fill" data-width="72"></div></div>
+        </div>
+      </div>
+
+      <div class="tool-card reveal" style="transition-delay:.13s">
+        <div class="tool-header">
+          <div class="tool-icon">💆</div>
+          <h3>Massagepistole<br><span style="font-weight:400;color:var(--text-2);font-size:.85em">Perkussive Therapie</span></h3>
+        </div>
+        <p>Perkussives Gerät für gezielte Muskelstimulation. Im Breitensport beliebt, wissenschaftliche Evidenz noch im Aufbau.</p>
+        <ul class="tool-facts">
+          <li>Verbessert kurzfristig die Beweglichkeit</li>
+          <li>Reduziert gefühlten Muskelkater</li>
+          <li>Evidenz für Leistungssteigerung fehlt</li>
+        </ul>
+        <div class="evidence-bar">
+          <div class="evidence-meta">
+            <span>Evidenzlevel</span><span>Mittel</span>
+          </div>
+          <div class="bar-track"><div class="bar-fill" data-width="55"></div></div>
+        </div>
+      </div>
+
+      <div class="tool-card reveal" style="transition-delay:.2s">
+        <div class="tool-header">
+          <div class="tool-icon">🥗</div>
+          <h3>Ernährung</h3>
+        </div>
+        <p>Gezielte Nährstoffzufuhr im Regenerationsfenster nach dem Training. Protein und Kohlenhydrate spielen die zentrale Rolle.</p>
+        <ul class="tool-facts">
+          <li>Protein (0,3 g/kg KG) direkt nach Training</li>
+          <li>Kohlenhydrate für Glykogenauffüllung</li>
+          <li>Hydration wird systematisch unterschätzt</li>
+        </ul>
+        <div class="evidence-bar">
+          <div class="evidence-meta">
+            <span>Evidenzlevel</span><span>Sehr hoch</span>
+          </div>
+          <div class="bar-track"><div class="bar-fill" data-width="95"></div></div>
+        </div>
+      </div>
+
+      <div class="tool-card reveal" style="transition-delay:.27s">
+        <div class="tool-header">
+          <div class="tool-icon">😴</div>
+          <h3>Schlaf</h3>
+        </div>
+        <p>Der natürlichste Regenerator. Im Tiefschlaf werden Wachstumshormone ausgeschüttet und Muskelreparaturprozesse aktiviert.</p>
+        <ul class="tool-facts">
+          <li>7–9 Stunden optimal für Athleten</li>
+          <li>Schlafmangel erhöht Verletzungsrisiko deutlich</li>
+          <li>Nickerchen können Leistung steigern</li>
+        </ul>
+        <div class="evidence-bar">
+          <div class="evidence-meta">
+            <span>Evidenzlevel</span><span>Sehr hoch</span>
+          </div>
+          <div class="bar-track"><div class="bar-fill" data-width="98"></div></div>
+        </div>
+      </div>
+
+      <div class="tool-card reveal" style="transition-delay:.34s">
+        <div class="tool-header">
+          <div class="tool-icon">🔵</div>
+          <h3>Faszienrolle<br><span style="font-weight:400;color:var(--text-2);font-size:.85em">Foam Rolling</span></h3>
+        </div>
+        <p>Selbstmassage mit der Schaumstoffrolle zur Behandlung des myofaszialen Gewebes. Verbreitet im Warm-up und Cool-down.</p>
+        <ul class="tool-facts">
+          <li>Erhöht kurzfristig die Beweglichkeit</li>
+          <li>Reduziert DOMS moderat</li>
+          <li>Kein negativer Effekt auf Kraft nachgewiesen</li>
+        </ul>
+        <div class="evidence-bar">
+          <div class="evidence-meta">
+            <span>Evidenzlevel</span><span>Mittel</span>
+          </div>
+          <div class="bar-track"><div class="bar-fill" data-width="60"></div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ Team ══════════════════════════════════════════════════════ -->
+<section id="team">
+  <div class="wrap">
+    <div class="team-wrap">
+      <div>
+        <p class="section-eyebrow reveal">Hinter dem Projekt</p>
+        <h2 class="section-title reveal" style="transition-delay:.08s">Das Team</h2>
+        <p class="section-sub reveal" style="transition-delay:.14s">
+          Drei Schüler mit einer Leidenschaft für Sport und
+          die Frage, was Regeneration wirklich bedeutet.
+        </p>
+      </div>
+      <div class="team-grid">
+        <div class="team-card reveal">
+          <div class="avatar">A</div>
+          <h4>Mitglied 1</h4>
+          <p>Name eintragen</p>
+        </div>
+        <div class="team-card reveal" style="transition-delay:.08s">
+          <div class="avatar">B</div>
+          <h4>Mitglied 2</h4>
+          <p>Name eintragen</p>
+        </div>
+        <div class="team-card reveal" style="transition-delay:.16s">
+          <div class="avatar">C</div>
+          <h4>Mitglied 3</h4>
+          <p>Name eintragen</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</div><!-- /z-index wrapper -->
+
+<!-- ══ Footer ════════════════════════════════════════════════════ -->
+<footer>
+  <p>© 2025 Rehaproject · Schulprojekt</p>
+  <div class="footer-links">
+    <a href="https://github.com/RadDWB/Rehaprojectdoku" target="_blank">GitHub</a>
+    <a href="#hero">Nach oben ↑</a>
+  </div>
+</footer>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     JAVASCRIPT
+═══════════════════════════════════════════════════════════════ -->
+<script>
+/* ── Theme Toggle ────────────────────────────────────────────── */
+const html   = document.documentElement;
+const toggle = document.getElementById('themeToggle');
+let dark = true;
+toggle.addEventListener('click', () => {
+  dark = !dark;
+  html.setAttribute('data-theme', dark ? 'dark' : 'light');
+  toggle.textContent = dark ? '☽' : '☀';
+});
+
+/* ── Nav scroll shadow ───────────────────────────────────────── */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 20);
+}, { passive: true });
+
+/* ── Scroll reveal (generic .reveal) ────────────────────────── */
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      revealObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+/* ── Timeline items ──────────────────────────────────────────── */
+const tlObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      tlObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.15 });
+document.querySelectorAll('.tl-item').forEach((el, i) => {
+  el.style.transitionDelay = `${i * 0.1}s`;
+  tlObs.observe(el);
+});
+
+/* ── Evidence bars ───────────────────────────────────────────── */
+const barObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const fill = e.target.querySelector('.bar-fill');
+      if (fill) {
+        setTimeout(() => {
+          fill.style.width = fill.dataset.width + '%';
+        }, 200);
+      }
+      barObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('.tool-card').forEach(card => barObs.observe(card));
+
+/* ══════════════════════════════════════════════════════════════
+   KRISTALLNETZ v2.1.22
+══════════════════════════════════════════════════════════════ */
+(function() {
+  const canvas = document.getElementById('crystal-bg');
+  const ctx    = canvas.getContext('2d');
+
+  let nodes    = [];
+  let edges    = [];
+  let travelers = [];
+  let W, H;
+  const SPACING = 110;
+  const MAX_EDGE_DIST = SPACING * 1.55;
+
+  function resize() {
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+    buildGraph();
+  }
+
+  function buildGraph() {
+    nodes    = [];
+    edges    = [];
+    travelers = [];
+
+    const cols = Math.ceil(W / SPACING) + 2;
+    const rows = Math.ceil(H / SPACING) + 2;
+
+    for (let r = 0; r < rows; r++) {
+      for (let c = 0; c < cols; c++) {
+        const jitter = SPACING * 0.28;
+        nodes.push({
+          x: (c - 0.5) * SPACING + (Math.random() - 0.5) * jitter,
+          y: (r - 0.5) * SPACING + (Math.random() - 0.5) * jitter,
+          brightness: 0.12 + Math.random() * 0.06,
+          blinkCountdown: 3000 + Math.random() * 10000,
+          blinkPhase: 'idle',
+          blinkProgress: 0,
+        });
+      }
+    }
+
+    /* Build edges — each node to nearest 2-3 neighbors */
+    for (let i = 0; i < nodes.length; i++) {
+      const dists = [];
+      for (let j = i + 1; j < nodes.length; j++) {
+        const dx = nodes[i].x - nodes[j].x;
+        const dy = nodes[i].y - nodes[j].y;
+        const d  = Math.sqrt(dx*dx + dy*dy);
+        if (d < MAX_EDGE_DIST) dists.push({ j, d });
+      }
+      dists.sort((a, b) => a.d - b.d);
+      dists.slice(0, 3).forEach(({ j }) => edges.push({ a: i, b: j }));
+    }
+
+    /* Seed initial travelers */
+    const seedCount = Math.floor(edges.length * 0.08);
+    for (let k = 0; k < seedCount; k++) spawnTraveler();
+  }
+
+  function spawnTraveler() {
+    if (!edges.length) return;
+    const edge = edges[Math.floor(Math.random() * edges.length)];
+    travelers.push({
+      a: edge.a, b: edge.b,
+      t: Math.random(),
+      speed: (0.00012 + Math.random() * 0.00016) * (Math.random() < 0.5 ? 1 : -1),
+      size: 1.2 + Math.random() * 1.4,
+      alpha: 0,
+    });
+  }
+
+  const TARGET_TRAVELERS = () => Math.max(12, Math.floor(edges.length * 0.07));
+
+  function updateNodes(dt) {
+    nodes.forEach(n => {
+      n.blinkCountdown -= dt;
+      if (n.blinkCountdown <= 0 && n.blinkPhase === 'idle') {
+        n.blinkPhase    = 'rise';
+        n.blinkProgress = 0;
+        n.blinkCountdown = 4000 + Math.random() * 9000;
+      }
+      if (n.blinkPhase === 'rise') {
+        n.blinkProgress += dt / 350;
+        n.brightness = 0.12 + 0.72 * Math.min(n.blinkProgress, 1);
+        if (n.blinkProgress >= 1) { n.blinkPhase = 'fall'; n.blinkProgress = 0; }
+      } else if (n.blinkPhase === 'fall') {
+        n.blinkProgress += dt / 1100;
+        n.brightness = 0.84 - 0.72 * Math.min(n.blinkProgress, 1);
+        if (n.blinkProgress >= 1) { n.blinkPhase = 'idle'; n.brightness = 0.12; }
+      }
+    });
+  }
+
+  function updateTravelers(dt) {
+    travelers = travelers.filter(tr => {
+      tr.t += tr.speed * dt;
+      /* fade */
+      const edge = tr.t < 0 ? 1 - Math.abs(tr.t) / 0.12 : tr.t > 1 ? (1 - (tr.t - 1) / 0.12) : 1;
+      tr.alpha   = Math.max(0, Math.min(1, edge));
+      if (tr.t < -0.12 || tr.t > 1.12) {
+        /* Respawn elsewhere */
+        if (Math.random() < 0.6) spawnTraveler();
+        return false;
+      }
+      return true;
+    });
+    while (travelers.length < TARGET_TRAVELERS()) spawnTraveler();
+  }
+
+  function getColors() {
+    const dark = document.documentElement.getAttribute('data-theme') !== 'light';
+    return {
+      edge:    dark ? 'rgba(80,155,215,0.11)'  : 'rgba(0,100,140,0.08)',
+      node:    dark ? [110, 195, 255]          : [0,  130, 175],
+      travel:  dark ? [0,  220, 255]           : [0,  160, 195],
+    };
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    const c = getColors();
+    const [nr, ng, nb] = c.node;
+    const [tr, tg, tb] = c.travel;
+
+    /* Edges */
+    ctx.lineWidth = 0.5;
+    edges.forEach(e => {
+      const a = nodes[e.a], b = nodes[e.b];
+      ctx.beginPath();
+      ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
+      ctx.strokeStyle = c.edge;
+      ctx.stroke();
+    });
+
+    /* Nodes */
+    nodes.forEach(n => {
+      if (n.brightness > 0.3) {
+        const g = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, 14);
+        g.addColorStop(0, `rgba(${nr},${ng},${nb},${n.brightness * 0.28})`);
+        g.addColorStop(1, `rgba(${nr},${ng},${nb},0)`);
+        ctx.fillStyle = g;
+        ctx.beginPath(); ctx.arc(n.x, n.y, 14, 0, Math.PI * 2); ctx.fill();
+      }
+      ctx.beginPath(); ctx.arc(n.x, n.y, 1.6, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${nr},${ng},${nb},${n.brightness})`;
+      ctx.fill();
+    });
+
+    /* Travelers */
+    travelers.forEach(tv => {
+      const a  = nodes[tv.a], b = nodes[tv.b];
+      const tt = Math.max(0, Math.min(1, tv.t));
+      const x  = a.x + (b.x - a.x) * tt;
+      const y  = a.y + (b.y - a.y) * tt;
+      ctx.beginPath(); ctx.arc(x, y, tv.size, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${tr},${tg},${tb},${tv.alpha * 0.75})`;
+      ctx.fill();
+    });
+  }
+
+  let last = performance.now();
+  function loop(now) {
+    const dt = Math.min(now - last, 50); /* cap at 50ms to avoid jumps */
+    last = now;
+    updateNodes(dt);
+    updateTravelers(dt);
+    draw();
+    requestAnimationFrame(loop);
+  }
+
+  window.addEventListener('resize', resize, { passive: true });
+  resize();
+  requestAnimationFrame(loop);
+})();
+</script>
+
+</body>
+</html>
