@@ -1042,13 +1042,11 @@
         word-break: break-word;
         max-width: 100%;
       }
-      /* Tabelle: normale Wortumbrüche, Wrapper scrollt horizontal */
-      .tl-slide table { word-break: normal; white-space: normal; }
+      /* Tabelle: mittlere Spalte (Studienlage) auf Mobile ausblenden */
+      .tl-table th:nth-child(2),
+      .tl-table td:nth-child(2) { display: none; }
+      .tl-slide table { word-break: normal; white-space: normal; width: 100%; }
       .tl-slide td, .tl-slide th { word-break: normal; white-space: normal; }
-      .tl-slide [style*="overflow-x"] {
-        max-width: 100%;
-        overflow-x: auto !important;
-      }
       .tl-slide:last-child { border-bottom: none; }
       /* Sektionstext voll umbrechen */
       .section-sub { max-width: 100% !important; }
