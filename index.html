@@ -1042,9 +1042,13 @@
         word-break: break-word;
         max-width: 100%;
       }
-      /* Tabelle: mittlere Spalte (Studienlage) auf Mobile ausblenden */
-      .tl-table th:nth-child(2),
-      .tl-table td:nth-child(2) { display: none; }
+      /* Tabelle: mittlere Spalte → nur Zahl 1-6 anzeigen */
+      .tl-table tbody { counter-reset: row-num; }
+      .tl-table tbody tr { counter-increment: row-num; }
+      .tl-table th:nth-child(2) { font-size: 0; width: 22px; padding: .4rem .3rem; text-align: center; }
+      .tl-table th:nth-child(2)::after { content: '#'; font-size: .65rem; letter-spacing: .05em; }
+      .tl-table td:nth-child(2) { font-size: 0; width: 22px; padding: .42rem .3rem; text-align: center; }
+      .tl-table td:nth-child(2)::before { content: counter(row-num); font-size: .8rem; font-weight: 700; color: var(--accent-c); }
       .tl-slide table { word-break: normal; white-space: normal; width: 100%; }
       .tl-slide td, .tl-slide th { word-break: normal; white-space: normal; }
       .tl-slide:last-child { border-bottom: none; }
