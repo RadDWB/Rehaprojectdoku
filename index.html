@@ -1010,25 +1010,42 @@
     }
     @media (max-width: 768px) {
       /* Stepper: vertikal stapeln auf Telefon & iPad */
-      .tl-stepper       { overflow: hidden; border-radius: var(--r-md); }
+      .tl-stepper {
+        overflow: hidden !important;
+        border-radius: var(--r-md);
+        width: 100% !important;
+        max-width: 100% !important;
+      }
       .tl-progress-bar  { display: none; }
       .tl-nav           { display: none; }
-      .tl-track         {
+      .tl-track {
         flex-direction: column !important;
         transform: none !important;
         height: auto !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow: hidden !important;
       }
       .tl-slide {
         width: 100% !important;
         max-width: 100% !important;
+        min-width: 0 !important;
         box-sizing: border-box !important;
         padding: 1rem 1.25rem;
         border-bottom: 1px solid var(--border);
-        overflow-x: hidden;
+        overflow: hidden !important;
       }
-      .tl-slide p, .tl-slide h3 {
+      /* Alle Kinder können nicht breiter als die Karte sein */
+      .tl-slide * {
+        max-width: 100%;
         overflow-wrap: break-word;
         word-break: break-word;
+      }
+      /* Tabellen-Wrapper darf horizontal scrollen */
+      .tl-slide [style*="overflow-x"] {
+        max-width: 100%;
+        overflow-x: auto !important;
+        word-break: normal;
       }
       .tl-slide:last-child { border-bottom: none; }
       /* Sektionstext voll umbrechen */
