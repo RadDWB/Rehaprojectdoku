@@ -1166,9 +1166,16 @@
     border-radius: 3px;
     padding: 0 4px; line-height: 1.6;
     cursor: pointer; text-decoration: none;
-    margin-left: 3px; vertical-align: middle;
+    margin-left: 3px; vertical-align: baseline;
     opacity: .85; white-space: nowrap;
     transition: opacity .15s, background .15s, border-color .15s;
+  }
+  /* Innerhalb von Fact-Listen: Chip als eigener Flex-Item rechts */
+  .tool-facts li .cite-link {
+    margin-left: auto;
+    flex-shrink: 0;
+    align-self: center;
+    vertical-align: unset;
   }
   .cite-link:hover { opacity: 1; background: rgba(0,208,230,.1); border-color: var(--accent-c); text-decoration: none; }
   .source-card.cite-highlight {
