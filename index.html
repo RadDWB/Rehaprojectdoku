@@ -185,7 +185,7 @@
     /* ═══════════════════════════════════════════════════════════
        LAYOUT UTILITIES
     ═══════════════════════════════════════════════════════════ */
-    .wrap { max-width: 1160px; margin: 0 auto; padding: 0 clamp(1.5rem, 5vw, 3rem); }
+    .wrap { max-width: 1160px; margin: 0 auto; padding: 0 clamp(1.25rem, 5vw, 3rem); box-sizing: border-box; width: 100%; }
     section { position: relative; z-index: 2; }
 
     /* ── Cinematic section transitions ───────────────────────── */
@@ -220,6 +220,8 @@
       color: var(--text-2);
       max-width: 500px;
       line-height: 1.75;
+      overflow-wrap: break-word;
+      word-break: break-word;
     }
 
     /* ─── Scroll reveal ── */
@@ -950,7 +952,7 @@
     }
     @media (max-width: 768px) {
       /* Stepper: vertikal stapeln auf Telefon & iPad */
-      .tl-stepper       { overflow: visible; border-radius: var(--r-md); }
+      .tl-stepper       { overflow: hidden; border-radius: var(--r-md); }
       .tl-progress-bar  { display: none; }
       .tl-nav           { display: none; }
       .tl-track         {
@@ -960,10 +962,19 @@
       }
       .tl-slide {
         width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
         padding: 1rem 1.25rem;
         border-bottom: 1px solid var(--border);
+        overflow-x: hidden;
+      }
+      .tl-slide p, .tl-slide h3 {
+        overflow-wrap: break-word;
+        word-break: break-word;
       }
       .tl-slide:last-child { border-bottom: none; }
+      /* Sektionstext voll umbrechen */
+      .section-sub { max-width: 100% !important; }
     }
     @media (max-width: 520px) {
       .team-grid  { grid-template-columns: 1fr; }
