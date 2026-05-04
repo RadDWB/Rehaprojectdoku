@@ -1145,6 +1145,26 @@
 
     footer { border-top: 1px solid #ddd; padding: 1rem 0 !important; background: #fff !important; }
   }
+
+  /* ── Inline-Zitierungen ── */
+  .cite-link {
+    display: inline-flex; align-items: center;
+    font-size: .6rem; font-weight: 700; letter-spacing: .02em;
+    color: var(--accent-c);
+    border: 1px solid rgba(0,208,230,.35);
+    border-radius: 3px;
+    padding: 0 4px; line-height: 1.6;
+    cursor: pointer; text-decoration: none;
+    margin-left: 3px; vertical-align: middle;
+    opacity: .85; white-space: nowrap;
+    transition: opacity .15s, background .15s, border-color .15s;
+  }
+  .cite-link:hover { opacity: 1; background: rgba(0,208,230,.1); border-color: var(--accent-c); text-decoration: none; }
+  .source-card.cite-highlight {
+    outline: 2px solid var(--accent-c);
+    outline-offset: 3px;
+    transition: outline .3s;
+  }
   </style>
 </head>
 <body>
@@ -1287,8 +1307,8 @@
             <div class="tl-slide">
               <div class="tl-step">Schritt 02</div>
               <h3>Literaturrecherche &amp; Studiensichtung</h3>
-              <p>Schon früh stießen wir auf einen zentralen Befund: Es gibt kein Wundermittel. Unser Interviewpartner Prof. Dr. Ferrauti leitete an der RUB gemeinsam mit Prof. Kellmann das neunjährige Forschungsprojekt <em>REGman</em> des BISp (2012–2021) — mit über 15 Teilstudien in Zusammenarbeit mit Spitzensportlern, Olympiastützpunkten und Sportverbänden. Das Ergebnis: <strong>Schlaf und Ernährung sind die unangefochtenen Säulen</strong>. Für komplementäre Tools wie Eisbad, Sauna oder Faszienrolle zeigte sich auf Gruppenebene nur geringe bis triviale Evidenz — auf individueller Ebene aber durchaus moderate Effekte.</p>
-              <p>Die Deutsche Zeitschrift für Sportmedizin (DZSM) betont zudem, dass Erholung hochindividuell ist und viele Methoden einen Teil ihres Effekts über den Placebo-Mechanismus entfalten — was psychologisch aber trotzdem wertvoll sein kann.</p>
+              <p>Schon früh stießen wir auf einen zentralen Befund: Es gibt kein Wundermittel. Unser Interviewpartner Prof. Dr. Ferrauti leitete an der RUB gemeinsam mit Prof. Kellmann das neunjährige Forschungsprojekt <em>REGman</em> des BISp (2012–2021) — mit über 15 Teilstudien in Zusammenarbeit mit Spitzensportlern, Olympiastützpunkten und Sportverbänden. Das Ergebnis: <strong>Schlaf und Ernährung sind die unangefochtenen Säulen</strong><a class="cite-link" onclick="openQuellenAt('src-regman');return false;" href="#">REGman '21</a>. Für komplementäre Tools wie Eisbad, Sauna oder Faszienrolle zeigte sich auf Gruppenebene nur geringe bis triviale Evidenz — auf individueller Ebene aber durchaus moderate Effekte.</p>
+              <p>Die Deutsche Zeitschrift für Sportmedizin (DZSM) betont zudem, dass Erholung hochindividuell ist und viele Methoden einen Teil ihres Effekts über den Placebo-Mechanismus entfalten<a class="cite-link" onclick="openQuellenAt('src-dupuy');return false;" href="#">Dupuy '18</a> — was psychologisch aber trotzdem wertvoll sein kann.</p>
             </div>
             <div class="tl-slide">
               <div class="tl-step">Schritt 03</div>
@@ -1411,7 +1431,7 @@
         <p>Kellmann, M. · Übersicht zu Methoden der Belastungs- und Erholungsüberwachung bei Hochleistungsathleten zur Prävention von Überlastungssyndromen.</p>
       </div>
 
-      <a class="source-card" style="text-decoration:none;cursor:pointer" href="https://pubmed.ncbi.nlm.nih.gov/29755354/" target="_blank" rel="noopener">
+      <a id="src-dupuy" class="source-card" style="text-decoration:none;cursor:pointer" href="https://pubmed.ncbi.nlm.nih.gov/29755354/" target="_blank" rel="noopener">
         <span class="source-type t-studie">Übersicht · 2018</span>
         <h4>An Evidence-Based Approach for Choosing Recovery Techniques</h4>
         <p>Dupuy, O. et al. · <em>Frontiers in Physiology</em> · Evidenzbasierter Vergleich aller gängigen Regenerationsmethoden — eine der meistzitierten Übersichtsarbeiten im Sportbereich.</p>
@@ -1421,14 +1441,14 @@
       <!-- ── Schlaf ── -->
       <p class="source-cat">Schlaf &amp; Regeneration</p>
 
-      <a class="source-card" style="text-decoration:none;cursor:pointer" href="https://pubmed.ncbi.nlm.nih.gov/25315509/" target="_blank" rel="noopener">
+      <a id="src-fullagar" class="source-card" style="text-decoration:none;cursor:pointer" href="https://pubmed.ncbi.nlm.nih.gov/25315509/" target="_blank" rel="noopener">
         <span class="source-type t-studie">Review · 2015</span>
         <h4>Sleep and Athletic Performance</h4>
         <p>Fullagar, H. et al. · <em>Sports Medicine</em> · Umfassende Übersicht zu den Auswirkungen von Schlafmangel auf sportliche Leistung, Reaktionszeit und Verletzungsrisiko.</p>
         <span class="source-link">PubMed →</span>
       </a>
 
-      <a class="source-card" style="text-decoration:none;cursor:pointer" href="https://pubmed.ncbi.nlm.nih.gov/21550729/" target="_blank" rel="noopener">
+      <a id="src-dattilo" class="source-card" style="text-decoration:none;cursor:pointer" href="https://pubmed.ncbi.nlm.nih.gov/21550729/" target="_blank" rel="noopener">
         <span class="source-type t-studie">Originalstudie · 2011</span>
         <h4>Sleep and Muscle Recovery — Endocrinological &amp; Molecular Basis</h4>
         <p>Dattilo, M. et al. · Hormonelle und molekulare Grundlagen für die zentrale Rolle des Schlafs bei der Muskelregeneration (GH, IGF-1, Proteinsynthese).</p>
@@ -1444,20 +1464,20 @@
       <!-- ── Ernährung ── -->
       <p class="source-cat">Ernährung &amp; Muskelregeneration</p>
 
-      <a class="source-card" style="text-decoration:none;cursor:pointer" href="https://pubmed.ncbi.nlm.nih.gov/28642676/" target="_blank" rel="noopener">
+      <a id="src-jager" class="source-card" style="text-decoration:none;cursor:pointer" href="https://pubmed.ncbi.nlm.nih.gov/28642676/" target="_blank" rel="noopener">
         <span class="source-type t-studie">Position Stand · 2017</span>
         <h4>ISSN Position Stand: Protein and Exercise</h4>
         <p>Jäger, R. et al. · <em>Journal of the International Society of Sports Nutrition</em> · Offizielle Empfehlungen zur Proteinzufuhr für Sportler — Timing, Menge, Qualität.</p>
         <span class="source-link">PubMed →</span>
       </a>
 
-      <div class="source-card">
+      <div id="src-thomas" class="source-card">
         <span class="source-type t-studie">Position Stand · 2016</span>
         <h4>Nutrition and Athletic Performance</h4>
         <p>Thomas, D.T. et al. · <em>Academy of Nutrition and Dietetics</em> · Offizielle Ernährungsempfehlungen für Sportler zu Makronährstoffen, Hydratation und Timing.</p>
       </div>
 
-      <div class="source-card">
+      <div id="src-burke" class="source-card">
         <span class="source-type t-studie">Review · 2011</span>
         <h4>Carbohydrates for Training and Competition</h4>
         <p>Burke, L. et al. · Evidenzbasierte Empfehlungen zur Kohlenhydratzufuhr rund ums Training — Glykogenresynthese, Verfügbarkeit und Leistungseffekte.</p>
@@ -1466,14 +1486,14 @@
       <!-- ── Faszienrolle ── -->
       <p class="source-cat">Faszienrolle · Foam Rolling</p>
 
-      <a class="source-card" style="text-decoration:none;cursor:pointer" href="https://pubmed.ncbi.nlm.nih.gov/31040799/" target="_blank" rel="noopener">
+      <a id="src-wiewelhove" class="source-card" style="text-decoration:none;cursor:pointer" href="https://pubmed.ncbi.nlm.nih.gov/31040799/" target="_blank" rel="noopener">
         <span class="source-type t-studie">Metaanalyse · 2019</span>
         <h4>Effects of Foam Rolling on Performance and Recovery</h4>
         <p>Wiewelhove, T. et al. · <em>Frontiers in Physiology</em> · Metaanalyse zu Leistungs- und Erholungseffekten des Foam Rollings — differenziert nach Zeitpunkt und Protokoll.</p>
         <span class="source-link">PubMed →</span>
       </a>
 
-      <a class="source-card" style="text-decoration:none;cursor:pointer" href="https://pubmed.ncbi.nlm.nih.gov/32825976/" target="_blank" rel="noopener">
+      <a id="src-skinner" class="source-card" style="text-decoration:none;cursor:pointer" href="https://pubmed.ncbi.nlm.nih.gov/32825976/" target="_blank" rel="noopener">
         <span class="source-type t-studie">Syst. Review · 2020</span>
         <h4>Foam Rolling — ROM, Recovery &amp; Athletic Performance</h4>
         <p>Skinner, B. et al. · <em>Journal of Bodywork and Movement Therapies</em> · Systematisches Review und Metaanalyse zu Beweglichkeit, Muskelkater und Leistung.</p>
@@ -1489,14 +1509,14 @@
       <!-- ── Massagepistole ── -->
       <p class="source-cat">Massagepistole · Percussive Therapy</p>
 
-      <a class="source-card" style="text-decoration:none;cursor:pointer" href="https://pubmed.ncbi.nlm.nih.gov/37113949/" target="_blank" rel="noopener">
+      <a id="src-ferreira" class="source-card" style="text-decoration:none;cursor:pointer" href="https://pubmed.ncbi.nlm.nih.gov/37113949/" target="_blank" rel="noopener">
         <span class="source-type t-studie">Syst. Review · 2023</span>
         <h4>Effects of Massage Guns on Performance and Recovery</h4>
         <p>Ferreira, R.M. et al. · Systematisches Review zu den Auswirkungen von Massagepistolen auf sportliche Leistung und Erholung.</p>
         <span class="source-link">PubMed →</span>
       </a>
 
-      <a class="source-card" style="text-decoration:none;cursor:pointer" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10069390/" target="_blank" rel="noopener">
+      <a id="src-sams" class="source-card" style="text-decoration:none;cursor:pointer" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10069390/" target="_blank" rel="noopener">
         <span class="source-type t-studie">Syst. Review · 2023</span>
         <h4>Percussive Therapy — Musculoskeletal Performance &amp; Pain</h4>
         <p>Sams, L. et al. · <em>Int. Journal of Sports Physical Therapy</em> · Systematisches Review zur Wirkung perkussiver Geräte auf Muskelleistung und Schmerzempfinden.</p>
@@ -1506,14 +1526,14 @@
       <!-- ── Eisbad ── -->
       <p class="source-cat">Eisbad · Cold Water Immersion</p>
 
-      <a class="source-card" style="text-decoration:none;cursor:pointer" href="https://pubmed.ncbi.nlm.nih.gov/36527593/" target="_blank" rel="noopener">
+      <a id="src-moore" class="source-card" style="text-decoration:none;cursor:pointer" href="https://pubmed.ncbi.nlm.nih.gov/36527593/" target="_blank" rel="noopener">
         <span class="source-type t-studie">Metaanalyse · 2023</span>
         <h4>CWI vs. Other Recovery Modalities — Athletic Performance</h4>
         <p>Moore, E. et al. · <em>Sports Medicine</em> · Systematische Metaanalyse und Meta-Regression: Kältebad im direkten Vergleich zu anderen Erholungsformen.</p>
         <span class="source-link">DOI 10.1007/s40279-022-01800-1 →</span>
       </a>
 
-      <a class="source-card" style="text-decoration:none;cursor:pointer" href="https://pubmed.ncbi.nlm.nih.gov/22002736/" target="_blank" rel="noopener">
+      <a id="src-leeder" class="source-card" style="text-decoration:none;cursor:pointer" href="https://pubmed.ncbi.nlm.nih.gov/22002736/" target="_blank" rel="noopener">
         <span class="source-type t-studie">Metaanalyse · 2012</span>
         <h4>Cold Water Immersion and Recovery — Meta-Analysis</h4>
         <p>Leeder, J. et al. · Metaanalyse zur Wirksamkeit von Kältebädern nach intensiver Belastung auf Muskelkater, Kraft und subjektive Erholung.</p>
@@ -1523,14 +1543,14 @@
       <!-- ── Sauna ── -->
       <p class="source-cat">Sauna &amp; Wärme</p>
 
-      <a class="source-card" style="text-decoration:none;cursor:pointer" href="https://pubmed.ncbi.nlm.nih.gov/17312320/" target="_blank" rel="noopener">
+      <a id="src-scoon" class="source-card" style="text-decoration:none;cursor:pointer" href="https://pubmed.ncbi.nlm.nih.gov/17312320/" target="_blank" rel="noopener">
         <span class="source-type t-studie">Originalstudie · 2007</span>
         <h4>Post-Exercise Sauna Bathing and Endurance Performance</h4>
         <p>Scoon, G.S.M. et al. · Effekt regelmäßiger Saunagänge nach dem Training auf Ausdauerleistung und Blutvolumen bei Ausdauersportlern.</p>
         <span class="source-link">PubMed →</span>
       </a>
 
-      <a class="source-card" style="text-decoration:none;cursor:pointer" href="https://pubmed.ncbi.nlm.nih.gov/29620540/" target="_blank" rel="noopener">
+      <a id="src-laukkanen" class="source-card" style="text-decoration:none;cursor:pointer" href="https://pubmed.ncbi.nlm.nih.gov/29620540/" target="_blank" rel="noopener">
         <span class="source-type t-studie">Review · 2018</span>
         <h4>Sauna Bathing and Systemic Inflammation</h4>
         <p>Laukkanen, T. et al. · Zusammenhang zwischen Saunanutzung und systemischer Entzündung — relevante Biomarker und physiologische Mechanismen.</p>
@@ -1553,7 +1573,7 @@
         <span class="source-link">zeitschrift-sportmedizin.de →</span>
       </a>
 
-      <a class="source-card" style="text-decoration:none;cursor:pointer" href="https://regman.org/" target="_blank" rel="noopener">
+      <a id="src-regman" class="source-card" style="text-decoration:none;cursor:pointer" href="https://regman.org/" target="_blank" rel="noopener">
         <span class="source-type t-online">Forschungsprojekt · DE</span>
         <h4>REGman — Regenerationsmanagement im Spitzensport (BISp, 2012–2021)</h4>
         <p>Ferrauti, A., Kellmann, M., Meyer, T., Pfeiffer, M. · Ruhr-Universität Bochum, Universität des Saarlandes, Universität Mainz · Neunjähriges Multicenterprojekt mit über 15 Teilstudien in Kooperation mit Olympiastützpunkten und Spitzenverbänden. Kernergebnis: Schlaf und Ernährung dominieren; komplementäre Methoden (Eisbad, Sauna, Foam Rolling) zeigen auf Gruppenebene nur geringe Evidenz — aber auf <em>individueller</em> Ebene teils moderate subjektive Effekte. Abschlussveröffentlichung: Wiewelhove et al. (2024), <em>International Journal of Sports Science &amp; Coaching</em>.</p>
@@ -1607,9 +1627,9 @@
         <div class="acc2-body"><div class="acc2-inner">
           <p style="font-size:.875rem;color:var(--text-2);line-height:1.65">Myofasziale Selbstmassage mit der Schaumstoffrolle. Weit verbreitet im Warm-up und Cool-down — mit solider wissenschaftlicher Basis.</p>
           <ul class="tool-facts">
-            <li>Verbessert Beweglichkeit um 12–17 % ohne Kraftverlust</li>
-            <li>Reduziert DOMS (Muskelkater) um ca. 6 %</li>
-            <li>Kein negativer Effekt auf Schnellkraft</li>
+            <li>Verbessert Beweglichkeit um 12–17 % ohne Kraftverlust<a class="cite-link" onclick="openQuellenAt('src-wiewelhove');return false;" href="#">Wiewelhove '19</a></li>
+            <li>Reduziert DOMS (Muskelkater) um ca. 6 %<a class="cite-link" onclick="openQuellenAt('src-wiewelhove');return false;" href="#">Wiewelhove '19</a></li>
+            <li>Kein negativer Effekt auf Schnellkraft<a class="cite-link" onclick="openQuellenAt('src-skinner');return false;" href="#">Skinner '20</a></li>
             <li>Ideal bei hoher Trainingsfrequenz</li>
           </ul>
         </div></div>
@@ -1644,9 +1664,9 @@
         <div class="acc2-body"><div class="acc2-inner">
           <p style="font-size:.875rem;color:var(--text-2);line-height:1.65">Perkussive Vibration für gezielte Muskelstimulation. Im Breitensport sehr beliebt — die Wissenschaft holt mit guter Evidenz auf.</p>
           <ul class="tool-facts">
-            <li>Verbessert Beweglichkeit um bis zu 22 % (Einzelanwendung)</li>
-            <li>Reduziert subjektiv wahrgenommenen Muskelkater</li>
-            <li>Frequenz (Hz) entscheidender als Andruckkraft</li>
+            <li>Verbessert Beweglichkeit um bis zu 22 % (Einzelanwendung)<a class="cite-link" onclick="openQuellenAt('src-ferreira');return false;" href="#">Ferreira '23</a></li>
+            <li>Reduziert subjektiv wahrgenommenen Muskelkater<a class="cite-link" onclick="openQuellenAt('src-sams');return false;" href="#">Sams '23</a></li>
+            <li>Frequenz (Hz) entscheidender als Andruckkraft<a class="cite-link" onclick="openQuellenAt('src-sams');return false;" href="#">Sams '23</a></li>
             <li>Aktiviert Golgi-Sehnenorgane → Muskelrelaxation</li>
           </ul>
         </div></div>
@@ -1676,10 +1696,10 @@
         <div class="acc2-body"><div class="acc2-inner">
           <p style="font-size:.875rem;color:var(--text-2);line-height:1.65">Kurzzeitiges Eintauchen in eiskaltes Wasser nach Belastung. Eines der am besten erforschten Regenerationstools im Profisport.</p>
           <ul class="tool-facts">
-            <li>DOMS-Reduktion signifikant 24–96 h nach Training</li>
-            <li>Vasokonstriktion hemmt Ödembildung im Gewebe</li>
+            <li>DOMS-Reduktion signifikant 24–96 h nach Training<a class="cite-link" onclick="openQuellenAt('src-moore');return false;" href="#">Moore '23</a></li>
+            <li>Vasokonstriktion hemmt Ödembildung im Gewebe<a class="cite-link" onclick="openQuellenAt('src-leeder');return false;" href="#">Leeder '12</a></li>
             <li>Standard-Recovery-Tool in Profiteams nach Spielen</li>
-            <li>Achtung: kann Hypertrophie-Adaptation hemmen</li>
+            <li>Achtung: kann Hypertrophie-Adaptation hemmen<a class="cite-link" onclick="openQuellenAt('src-dupuy');return false;" href="#">Dupuy '18</a></li>
           </ul>
         </div></div>
         <div class="evidence-bar">
@@ -1712,10 +1732,10 @@
         <div class="acc2-body"><div class="acc2-inner">
           <p style="font-size:.875rem;color:var(--text-2);line-height:1.65">Passives Wärmebad mit tiefen physiologischen Effekten. Regelmäßige Nutzung zeigt beeindruckende Langzeitwirkungen auf Herz, Hormone und Muskelregeneration.</p>
           <ul class="tool-facts">
-            <li>Heat Shock Proteins (HSP70) reparieren Muskelproteine</li>
-            <li>Wachstumshormon-Ausschüttung +200–300 %</li>
-            <li>Plasma-Volumen-Expansion wie leichtes Ausdauertraining</li>
-            <li>40 % reduziertes Herzkreislauf-Risiko (4×/Woche)</li>
+            <li>Heat Shock Proteins (HSP70) reparieren Muskelproteine<a class="cite-link" onclick="openQuellenAt('src-laukkanen');return false;" href="#">Laukkanen '18</a></li>
+            <li>Wachstumshormon-Ausschüttung +200–300 %<a class="cite-link" onclick="openQuellenAt('src-laukkanen');return false;" href="#">Laukkanen '18</a></li>
+            <li>Plasma-Volumen-Expansion wie leichtes Ausdauertraining<a class="cite-link" onclick="openQuellenAt('src-scoon');return false;" href="#">Scoon '07</a></li>
+            <li>40 % reduziertes Herzkreislauf-Risiko (4×/Woche)<a class="cite-link" onclick="openQuellenAt('src-laukkanen');return false;" href="#">Laukkanen '18</a></li>
           </ul>
         </div></div>
         <div class="evidence-bar">
@@ -1749,10 +1769,10 @@
         <div class="acc2-body"><div class="acc2-inner">
           <p style="font-size:.875rem;color:var(--text-2);line-height:1.65">Der stärkste Hebel der Regeneration. Gezielte Nährstoffzufuhr aktiviert molekulare Reparaturprozesse — mit der höchsten Evidenz aller Tools.</p>
           <ul class="tool-facts">
-            <li>Leucin triggert mTOR → Muskelproteinsynthese</li>
-            <li>1,0–1,2 g/kg KG/h Kohlenhydrate für Glykogen-Resynthese</li>
-            <li>Omega-3 (2–4 g/Tag) hemmt Entzündungszytokine</li>
-            <li>Kreatin (3–5 g/Tag) verbessert ATP-Resynthese</li>
+            <li>Leucin triggert mTOR → Muskelproteinsynthese<a class="cite-link" onclick="openQuellenAt('src-jager');return false;" href="#">Jäger '17</a></li>
+            <li>1,0–1,2 g/kg KG/h Kohlenhydrate für Glykogen-Resynthese<a class="cite-link" onclick="openQuellenAt('src-burke');return false;" href="#">Burke '11</a></li>
+            <li>Omega-3 (2–4 g/Tag) hemmt Entzündungszytokine<a class="cite-link" onclick="openQuellenAt('src-thomas');return false;" href="#">Thomas '16</a></li>
+            <li>Kreatin (3–5 g/Tag) verbessert ATP-Resynthese<a class="cite-link" onclick="openQuellenAt('src-jager');return false;" href="#">Jäger '17</a></li>
           </ul>
         </div></div>
         <div class="evidence-bar">
@@ -1781,10 +1801,10 @@
         <div class="acc2-body"><div class="acc2-inner">
           <p style="font-size:.875rem;color:var(--text-2);line-height:1.65">Der mächtigste Regenerator — kostenlos, ohne Equipment, höchste Evidenz. Kein anderes Tool kann ihn ersetzen.</p>
           <ul class="tool-facts">
-            <li>70 % der täglichen GH-Ausschüttung im Tiefschlaf</li>
-            <li>+1 h Schlaf → 9 % schnellere Sprintzeiten (Stanford, 2011)</li>
-            <li>&lt;6 h Schlaf → 1,7× höheres Verletzungsrisiko</li>
-            <li>REM-Schlaf konsolidiert motorische Bewegungsmuster</li>
+            <li>70 % der täglichen GH-Ausschüttung im Tiefschlaf<a class="cite-link" onclick="openQuellenAt('src-dattilo');return false;" href="#">Dattilo '11</a></li>
+            <li>+1 h Schlaf → 9 % schnellere Sprintzeiten (Stanford, 2011)<a class="cite-link" onclick="openQuellenAt('src-fullagar');return false;" href="#">Mah '11</a></li>
+            <li>&lt;6 h Schlaf → 1,7× höheres Verletzungsrisiko<a class="cite-link" onclick="openQuellenAt('src-fullagar');return false;" href="#">Fullagar '15</a></li>
+            <li>REM-Schlaf konsolidiert motorische Bewegungsmuster<a class="cite-link" onclick="openQuellenAt('src-dattilo');return false;" href="#">Dattilo '11</a></li>
           </ul>
         </div></div>
         <div class="evidence-bar">
@@ -2018,6 +2038,18 @@ function openQuellen(e) {
 function closeQuellen() {
   document.getElementById('quellen-overlay').classList.remove('open');
   document.body.style.overflow = '';
+}
+function openQuellenAt(srcId) {
+  const overlay = document.getElementById('quellen-overlay');
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  setTimeout(() => {
+    const el = document.getElementById(srcId);
+    if (!el) return;
+    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    el.classList.add('cite-highlight');
+    setTimeout(() => el.classList.remove('cite-highlight'), 2000);
+  }, 350);
 }
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeQuellen(); });
 
