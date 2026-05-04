@@ -655,6 +655,64 @@
       transition: width 1.2s var(--ease-out-expo);
     }
 
+    /* ═══ ALGO PANEL ════════════════════════════════════════════ */
+    .algo-panel {
+      margin-bottom: 1.25rem;
+      border: 1px solid rgba(155,132,240,.28); border-radius: var(--r-md);
+      overflow: hidden;
+    }
+    .algo-toggle {
+      display: flex; align-items: center; justify-content: space-between;
+      width: 100%; padding: .75rem 1.1rem; cursor: pointer;
+      background: rgba(155,132,240,.07); border: none;
+      font-size: .8125rem; font-weight: 700; font-family: var(--f-body);
+      color: var(--accent-v); text-align: left; letter-spacing: .02em;
+      transition: background .2s;
+    }
+    .algo-toggle:hover { background: rgba(155,132,240,.13); }
+    .algo-toggle .ch { font-size: .8rem; transition: transform .3s var(--ease-out-quart); flex-shrink: 0; }
+    .algo-toggle.open .ch { transform: rotate(180deg); }
+    .algo-body { max-height: 0; overflow: hidden; transition: max-height .55s var(--ease-out-quart); background: var(--bg-card); }
+    .algo-body.open { max-height: 900px; }
+    .algo-inner { padding: 1.1rem 1.25rem 1.25rem; display: flex; flex-direction: column; gap: .9rem; }
+
+    .algo-step { display: flex; gap: .75rem; align-items: flex-start; }
+    .algo-num {
+      flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-v), var(--accent-c));
+      color: #fff; font-size: .65rem; font-weight: 800;
+      display: flex; align-items: center; justify-content: center; margin-top: 1px;
+    }
+    .algo-step-text { font-size: .8rem; color: var(--text-2); line-height: 1.6; }
+    .algo-step-text strong { color: var(--text-1); }
+
+    .algo-score-table { width: 100%; border-collapse: collapse; font-size: .76rem; border-radius: var(--r-sm); overflow: hidden; }
+    .algo-score-table th {
+      font-size: .62rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--text-3); padding: .4rem .65rem; background: var(--bg-surface);
+      border-bottom: 1px solid var(--border); text-align: left;
+    }
+    .algo-score-table td { padding: .42rem .65rem; border-bottom: 1px solid var(--border); }
+    .algo-score-table tr:last-child td { border-bottom: none; }
+    .algo-score-table td:first-child { font-weight: 600; color: var(--text-1); }
+    .algo-score-table td:nth-child(2) { color: var(--text-2); font-size: .72rem; }
+    .algo-score-table .sc-val { font-weight: 700; color: var(--accent-c); }
+    .algo-score-table tr.top-rank { background: rgba(0,208,230,.05); }
+    .algo-score-table tr.top-rank td:first-child { color: var(--accent-c); }
+    .algo-rank-badge {
+      display: inline-block; font-size: .58rem; font-weight: 800;
+      padding: .1rem .45rem; border-radius: var(--r-pill);
+      background: linear-gradient(135deg, var(--accent-c), var(--accent-v));
+      color: #fff; margin-left: .35rem; vertical-align: middle;
+    }
+    .algo-note {
+      font-size: .74rem; color: var(--text-3); line-height: 1.55;
+      padding-top: .5rem; border-top: 1px solid var(--border);
+    }
+
+    /* print: hide algo panel */
+    @media print { .algo-panel { display: none !important; } }
+
     /* ═══ MATCHER ════════════════════════════════════════════════ */
     .matcher {
       background: var(--bg-card); border: 1px solid var(--border);
@@ -1899,6 +1957,64 @@
       </p>
     </div>
 
+    <!-- ▸ Algorithmus-Transparenz Panel -->
+    <div class="algo-panel reveal" style="transition-delay:.09s">
+      <button class="algo-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
+        <span>⚙ Wie funktioniert die Berechnung?</span>
+        <span class="ch">▾</span>
+      </button>
+      <div class="algo-body">
+        <div class="algo-inner">
+
+          <div class="algo-step">
+            <div class="algo-num">1</div>
+            <div class="algo-step-text">
+              <strong>Score-Matrix:</strong> Für jede der <strong>12 Sportarten</strong> und jede der <strong>3 Intensitätsstufen</strong> (leicht / mittel / intensiv) ist für alle <strong>6 Tools</strong> ein wissenschaftlich begründeter Punktwert zwischen 0 und 100 hinterlegt — insgesamt 216 Einträge. Die Werte basieren auf den Metaanalysen und Studien aus unserer Literaturrecherche sowie den Einschätzungen von Prof. Dr. Ferrauti (RUB).
+            </div>
+          </div>
+
+          <div class="algo-step">
+            <div class="algo-num">2</div>
+            <div class="algo-step-text">
+              <strong>Lookup &amp; Ranking:</strong> Sobald Sportart und Intensität gewählt sind, liest der Algorithmus die 6 Scores aus der Matrix und sortiert sie absteigend. Das Tool mit dem höchsten Punktwert wird als <em>Empfehlung #1</em> ausgegeben. Bei gleichem Score entscheidet die Reihenfolge in der Ursprungsliste.
+            </div>
+          </div>
+
+          <div class="algo-step">
+            <div class="algo-num">3</div>
+            <div class="algo-step-text">
+              <strong>Balkenbreite:</strong> Der angezeigte Fortschrittsbalken entspricht dem Score-Wert direkt — <code style="font-size:.72rem;background:var(--bg-surface);padding:.1rem .35rem;border-radius:4px;color:var(--accent-c)">Breite = score / 100 × 100 %</code>. Kein weiteres Gewichtungsschema — der Rohwert aus der Matrix ist der finale Score.
+            </div>
+          </div>
+
+          <!-- Beispiel-Tabelle: Fußball / intensiv -->
+          <div>
+            <p style="font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);margin-bottom:.5rem">
+              Beispiel — Fußball · Intensiv
+            </p>
+            <table class="algo-score-table">
+              <thead>
+                <tr><th>Rang</th><th>Tool</th><th>Biologische Begründung</th><th style="text-align:right">Score</th></tr>
+              </thead>
+              <tbody>
+                <tr class="top-rank"><td>#1 <span class="algo-rank-badge">Top</span></td><td>Schlaf</td><td>GH-Ausschüttung, ZNS-Erholung, Gewebereparatur</td><td class="sc-val" style="text-align:right">96</td></tr>
+                <tr class="top-rank"><td>#2</td><td>Eisbad</td><td>Match-to-Match-Recovery, Entzündungshemmung</td><td class="sc-val" style="text-align:right">90</td></tr>
+                <tr class="top-rank"><td>#3</td><td>Ernährung</td><td>Glykogenresynthese, mTOR-Aktivierung</td><td class="sc-val" style="text-align:right">90</td></tr>
+                <tr><td>#4</td><td>Faszienrolle</td><td>DOMS-Reduktion, Beweglichkeit</td><td style="text-align:right;color:var(--text-2)">82</td></tr>
+                <tr><td>#5</td><td>Massagepistole</td><td>Gate-Control, Muskeltonussenkung</td><td style="text-align:right;color:var(--text-2)">78</td></tr>
+                <tr><td>#6</td><td>Sauna</td><td>Systemisch — besser am Folgetag</td><td style="text-align:right;color:var(--text-2)">75</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p class="algo-note">
+            Schlaf und Ernährung erhalten grundsätzlich hohe Scores, da sie die physiologische Basis jeder Regeneration bilden und durch keine andere Maßnahme ersetzt werden können. Sport- und intensitätsspezifische Werte wie das Eisbad bei Fußball (Wettkampfdichte) reflektieren praxisnahe Besonderheiten aus der Sportmedizin.
+          </p>
+
+        </div>
+      </div>
+    </div>
+
     <div class="matcher reveal" style="transition-delay:.1s">
       <div class="matcher-inner">
         <div>
@@ -2048,7 +2164,7 @@
     <img id="qr-code" alt="QR-Code zur Website" style="width:80px;height:80px;background:#fff;padding:3px;" />
     <p>Live-Website scannen<br>Reha³ — Regeneration im Sport<br>Projektkurs Sport 2026 · Goethe Gymnasium Dortmund</p>
   </div>
-  <p>© Reha³ · Ben, Lasse &amp; Mick · Goethe Gymnasium Dortmund · v3.3.1</p>
+  <p>© Reha³ · Ben, Lasse &amp; Mick · Goethe Gymnasium Dortmund · v3.4.0</p>
   <div class="footer-links">
     <button class="print-btn" onclick="window.print()" aria-label="Seite als PDF drucken"
       style="background:none;border:1px solid var(--border);border-radius:var(--r-pill);
