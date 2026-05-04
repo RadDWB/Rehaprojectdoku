@@ -1035,17 +1035,19 @@
         border-bottom: 1px solid var(--border);
         overflow: hidden !important;
       }
-      /* Alle Kinder können nicht breiter als die Karte sein */
-      .tl-slide * {
-        max-width: 100%;
+      /* Nur Textelemente umbrechen */
+      .tl-slide p, .tl-slide h3, .tl-slide h4, .tl-slide h5,
+      .tl-slide li, .tl-slide span, .tl-slide strong, .tl-slide em {
         overflow-wrap: break-word;
         word-break: break-word;
+        max-width: 100%;
       }
-      /* Tabellen-Wrapper darf horizontal scrollen */
+      /* Tabelle: normale Wortumbrüche, Wrapper scrollt horizontal */
+      .tl-slide table { word-break: normal; white-space: normal; }
+      .tl-slide td, .tl-slide th { word-break: normal; white-space: normal; }
       .tl-slide [style*="overflow-x"] {
         max-width: 100%;
         overflow-x: auto !important;
-        word-break: normal;
       }
       .tl-slide:last-child { border-bottom: none; }
       /* Sektionstext voll umbrechen */
