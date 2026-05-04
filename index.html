@@ -1183,6 +1183,28 @@
     outline-offset: 3px;
     transition: outline .3s;
   }
+
+/* ── Tooltips für Fachbegriffe ── */
+.tip {
+  border-bottom: 1px dashed var(--accent-c);
+  cursor: help;
+}
+#tip-box {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  background: var(--bg-card);
+  border: 1px solid var(--border-hi);
+  border-radius: var(--r-sm);
+  padding: .5rem .8rem;
+  font-size: .78rem;
+  color: var(--text-1);
+  line-height: 1.5;
+  max-width: 240px;
+  box-shadow: var(--shadow-card);
+  pointer-events: none;
+}
+#tip-box.vis { display: block; }
   </style>
 </head>
 <body>
@@ -1320,7 +1342,7 @@
             <div class="tl-slide">
               <div class="tl-step">Schritt 01</div>
               <h3>Themenfindung &amp; Fragestellung</h3>
-              <p>Uns hat schon früh überrascht, wie komplex Regeneration wirklich ist. Die Sportwissenschaft unterscheidet heute zwischen <strong>metabolischer Erholung</strong> (Stoffwechsel &amp; Energiesysteme), <strong>struktureller Erholung</strong> (Gewebe &amp; Muskeln) und <strong>neurologischer Erholung</strong> (Nervensystem &amp; Schlaf). Diese drei Ebenen wurden unser Leitfaden — und die Frage: Was davon wirkt wirklich, und was ist Marketing?</p>
+              <p>Uns hat schon früh überrascht, wie komplex Regeneration wirklich ist. Die Sportwissenschaft unterscheidet heute zwischen <strong><span class="tip" data-tip="Den Stoffwechsel betreffend — Energiegewinnung, Laktatabbau und Wiederherstellung der Energiespeicher">metabolischer Erholung</span></strong> (Stoffwechsel &amp; Energiesysteme), <strong>struktureller Erholung</strong> (Gewebe &amp; Muskeln) und <strong>neurologischer Erholung</strong> (Nervensystem &amp; Schlaf). Diese drei Ebenen wurden unser Leitfaden — und die Frage: Was davon wirkt wirklich, und was ist Marketing?</p>
             </div>
             <div class="tl-slide">
               <div class="tl-step">Schritt 02</div>
@@ -1348,9 +1370,9 @@
                   <tr style="background:rgba(0,208,230,.05)"><td>Schlaf</td><td>Unangefochten #1</td><td>Stärkster Regenerationsfaktor — GH-Ausschüttung, CNS-Erholung &amp; Gewebereparatur finden primär im Tiefschlaf statt <a class="cite-link" onclick="openQuellenAt('src-regman');return false;" href="#">REGman '21</a><a class="cite-link" onclick="openQuellenAt('src-dattilo');return false;" href="#">Dattilo '11</a></td></tr>
                   <tr style="background:rgba(0,208,230,.05)"><td>Ernährung</td><td>Unangefochten #2</td><td>Protein + KH nach Training aktivieren mTOR &amp; starten Muskelproteinsynthese — ohne ausreichende Versorgung bremsen alle anderen Tools <a class="cite-link" onclick="openQuellenAt('src-regman');return false;" href="#">REGman '21</a><a class="cite-link" onclick="openQuellenAt('src-jager');return false;" href="#">Jäger '17</a></td></tr>
                   <tr><td>Faszienrolle</td><td>Gut belegt</td><td>Hilft gegen DOMS, kaum Effekt auf Kraft/Schnelligkeit <a class="cite-link" onclick="openQuellenAt('src-wiewelhove');return false;" href="#">Wiewelhove '19</a><a class="cite-link" onclick="openQuellenAt('src-skinner');return false;" href="#">Skinner '20</a></td></tr>
-                  <tr><td>Sauna</td><td>Sehr gut</td><td>Verbessert Plasmavolumen-Expansion &amp; HRV — eher systemisch <a class="cite-link" onclick="openQuellenAt('src-scoon');return false;" href="#">Scoon '07</a><a class="cite-link" onclick="openQuellenAt('src-laukkanen');return false;" href="#">Laukkanen '18</a></td></tr>
+                  <tr><td>Sauna</td><td>Sehr gut</td><td>Verbessert Plasmavolumen-Expansion &amp; <span class="tip" data-tip="Heart Rate Variability — Herzratenvariabilität: Maß für Erholung des autonomen Nervensystems; höhere HRV = besser erholt">HRV</span> — eher systemisch <a class="cite-link" onclick="openQuellenAt('src-scoon');return false;" href="#">Scoon '07</a><a class="cite-link" onclick="openQuellenAt('src-laukkanen');return false;" href="#">Laukkanen '18</a></td></tr>
                   <tr><td>Eisbad</td><td>Zweischneidig</td><td>Top für Wettkampf-Recovery; kontraproduktiv bei Muskelaufbau <a class="cite-link" onclick="openQuellenAt('src-moore');return false;" href="#">Moore '23</a><a class="cite-link" onclick="openQuellenAt('src-leeder');return false;" href="#">Leeder '12</a></td></tr>
-                  <tr><td>Massagepistole</td><td>Wenig Langzeit</td><td>Wirkt über Schmerzmodulation (Gate-Control) — ähnlich klassischer Massage <a class="cite-link" onclick="openQuellenAt('src-ferreira');return false;" href="#">Ferreira '23</a><a class="cite-link" onclick="openQuellenAt('src-sams');return false;" href="#">Sams '23</a></td></tr>
+                  <tr><td>Massagepistole</td><td>Wenig Langzeit</td><td>Wirkt über Schmerzmodulation (<span class="tip" data-tip="Schmerzmodulation: Reize (z.B. Vibration) hemmen Schmerzweiterleitung im Zentralnervensystem">Gate-Control</span>) — ähnlich klassischer Massage <a class="cite-link" onclick="openQuellenAt('src-ferreira');return false;" href="#">Ferreira '23</a><a class="cite-link" onclick="openQuellenAt('src-sams');return false;" href="#">Sams '23</a></td></tr>
                 </tbody>
               </table></div>
             </div>
@@ -1657,7 +1679,7 @@
         </div>
         <button class="acc2-btn acc2-sci" onclick="toggleAcc(this)">🔬 Wissenschaft im Detail <span class="ch">▾</span></button>
         <div class="acc2-body"><div class="acc2-inner">
-          <div class="acc-block"><h5>Mechanismus</h5><p>Foam Rolling erzeugt Scherkräfte auf das myofasziale Gewebe und aktiviert Mechanorezeptoren. Der Haupteffekt ist neurologischer Natur: über das Gate-Control-Prinzip wird die Schmerzwahrnehmung gehemmt, nicht das Gewebe physisch "gelöst". Gleichzeitig verbessert sich die lokale Durchblutung.</p></div>
+          <div class="acc-block"><h5>Mechanismus</h5><p>Foam Rolling erzeugt Scherkräfte auf das <span class="tip" data-tip="Muskeln (myo) und Faszien (Bindegewebe) gemeinsam betreffend">myofasziale</span> Gewebe und aktiviert Mechanorezeptoren. Der Haupteffekt ist neurologischer Natur: über das <span class="tip" data-tip="Schmerztheorie: Berührungsreize können Schmerzweiterleitung im Rückenmark hemmen und so Schmerz reduzieren">Gate-Control-Prinzip</span> wird die Schmerzwahrnehmung gehemmt, nicht das Gewebe physisch "gelöst". Gleichzeitig verbessert sich die lokale Durchblutung.</p></div>
           <div class="study-box"><div class="slabel">🔬 Schlüsselstudie</div><p><strong>Wiewelhove et al. (2019)</strong><a class="cite-link" onclick="openQuellenAt('src-wiewelhove');return false;" href="#">Wiewelhove '19</a> – Metaanalyse über 21 Studien: Foam Rolling reduziert DOMS signifikant (~6 %) und verbessert Beweglichkeit um 12–17 %. Kein negativer Effekt auf Muskelkraft oder Sprungkraft nachgewiesen.</p></div>
           <div class="myth-box"><div class="mlabel">💡 Mythos-Check</div><p><strong>Mythos:</strong> „Faszien werden durch Rollen gelöst." <strong>Fakt:</strong> Faszien sind zu zäh, um durch Körpergewicht verformbar zu sein — der Effekt ist primär neurologisch (Schmerzgating, neuromuskuläre Ansteuerung).</p></div>
           <div class="acc-block"><h5>Optimales Protokoll</h5><div class="protocol">
@@ -1694,7 +1716,7 @@
         </div>
         <button class="acc2-btn acc2-sci" onclick="toggleAcc(this)">🔬 Wissenschaft im Detail <span class="ch">▾</span></button>
         <div class="acc2-body"><div class="acc2-inner">
-          <div class="acc-block"><h5>Mechanismus</h5><p>Perkussive Vibration bei 30–40 Hz aktiviert die Golgi-Sehnenorgane im Muskel-Sehnen-Übergang. Diese lösen eine reflektorische Entspannung der Muskulatur aus (autogene Inhibition). Gleichzeitig wird die lokale Durchblutung erhöht und Schmerzsignale durch Vibrationssignale überdeckt.</p></div>
+          <div class="acc-block"><h5>Mechanismus</h5><p>Perkussive Vibration bei 30–40 Hz aktiviert die Golgi-Sehnenorgane im Muskel-Sehnen-Übergang. Diese lösen eine reflektorische Entspannung der Muskulatur aus (<span class="tip" data-tip="Reflexartige Muskelentspannung: Golgi-Sehnenorgane melden Überspannung und hemmen reflexartig die Muskelkontraktion">autogene Inhibition</span>). Gleichzeitig wird die lokale Durchblutung erhöht und Schmerzsignale durch Vibrationssignale überdeckt.</p></div>
           <div class="study-box"><div class="slabel">🔬 Schlüsselstudie</div><p><strong>Lee et al. (2022), J. Sports Science & Medicine:</strong><a class="cite-link" onclick="openQuellenAt('src-ferreira');return false;" href="#">Ferreira '23</a> Signifikante Verbesserung der Beweglichkeit um bis zu 22 % nach einer einzigen Anwendung — vergleichbar mit statischem Dehnen, jedoch ohne anschließenden Kraftverlust.</p></div>
           <div class="myth-box"><div class="mlabel">💡 Mythos-Check</div><p><strong>Mythos:</strong> „Mehr Druck bringt mehr Wirkung." <strong>Fakt:</strong> Die Frequenz (Hz) ist entscheidend — zu viel Druck kann Mikroverletzungen erzeugen. Leichter Kontakt mit richtiger Frequenz ist optimal.</p></div>
           <div class="warn-box"><div class="wlabel">⚠ Vorsicht</div><p>Nicht direkt auf Gelenke, Knochenkanten, Nerven (z.B. Kniekehle) oder akut entzündete Bereiche anwenden. Bei Verletzungen immer ärztliche Rücksprache einholen.</p></div>
@@ -1715,7 +1737,7 @@
           <p style="font-size:.875rem;color:var(--text-2);line-height:1.65">Kurzzeitiges Eintauchen in eiskaltes Wasser nach Belastung. Eines der am besten erforschten Regenerationstools im Profisport.</p>
           <ul class="tool-facts">
             <li>DOMS-Reduktion signifikant 24–96 h nach Training<a class="cite-link" onclick="openQuellenAt('src-moore');return false;" href="#">Moore '23</a></li>
-            <li>Vasokonstriktion hemmt Ödembildung im Gewebe<a class="cite-link" onclick="openQuellenAt('src-leeder');return false;" href="#">Leeder '12</a></li>
+            <li>Vasokonstriktion hemmt <span class="tip" data-tip="Ödem = Flüssigkeitsansammlung im Gewebe; entsteht nach Verletzungen oder intensiver Belastung durch Entzündungsreaktionen">Ödembildung</span> im Gewebe<a class="cite-link" onclick="openQuellenAt('src-leeder');return false;" href="#">Leeder '12</a></li>
             <li>Standard-Recovery-Tool in Profiteams nach Spielen</li>
             <li>Achtung: kann Hypertrophie-Adaptation hemmen<a class="cite-link" onclick="openQuellenAt('src-dupuy');return false;" href="#">Dupuy '18</a></li>
           </ul>
@@ -1726,7 +1748,7 @@
         </div>
         <button class="acc2-btn acc2-sci" onclick="toggleAcc(this)">🔬 Wissenschaft im Detail <span class="ch">▾</span></button>
         <div class="acc2-body"><div class="acc2-inner">
-          <div class="acc-block"><h5>Mechanismus</h5><p>Die Kälte bewirkt eine Vasokonstriktion — weniger Blutfluss, weniger Ödembildung, reduzierte Entzündungsreaktion. Bei der anschließenden Erwärmung setzt eine reaktive Vasodilatation ein ("venöse Rückpumpe"), die metabolische Abfallprodukte wie Laktat effizienter abführt.</p></div>
+          <div class="acc-block"><h5>Mechanismus</h5><p>Die Kälte bewirkt eine Vasokonstriktion — weniger Blutfluss, weniger <span class="tip" data-tip="Ödem = Flüssigkeitsansammlung im Gewebe; entsteht nach Verletzungen oder intensiver Belastung durch Entzündungsreaktionen">Ödembildung</span>, reduzierte Entzündungsreaktion. Bei der anschließenden Erwärmung setzt eine reaktive Vasodilatation ein ("venöse Rückpumpe"), die metabolische Abfallprodukte wie Laktat effizienter abführt.</p></div>
           <div class="study-box"><div class="slabel">🔬 Schlüsselstudie</div><p><strong>Machado et al. (2016)</strong><a class="cite-link" onclick="openQuellenAt('src-leeder');return false;" href="#">Leeder '12</a> – Metaanalyse über 17 RCTs: CWI ist signifikant effektiver als passive Ruhe für DOMS-Reduktion 24–96 h nach Training. Optimum: 11–15 °C für 11–15 Minuten.</p></div>
           <div class="warn-box"><div class="wlabel">⚠ Wichtiger Hinweis</div><p><strong>Roberts et al. (2015), J. Physiology:</strong> Regelmäßiges Eisbad nach Krafttraining hemmt den mTOR-Signalweg und kann langfristigen Muskelaufbau um bis zu 20 % reduzieren. In Aufbauphasen gezielt einsetzen!</p></div>
           <div class="acc-block" style="margin-top:.75rem;padding:.85rem 1rem;background:rgba(0,208,230,.06);border:1px solid rgba(0,208,230,.2);border-radius:var(--r-sm);">
@@ -1762,7 +1784,7 @@
         </div>
         <button class="acc2-btn acc2-sci" onclick="toggleAcc(this)">🔬 Wissenschaft im Detail <span class="ch">▾</span></button>
         <div class="acc2-body"><div class="acc2-inner">
-          <div class="acc-block"><h5>Mechanismus</h5><p>Hitze löst die Produktion von Heat Shock Proteins (HSP70/72) aus, die fehlgefaltete Proteine in Muskelzellen reparieren. Die Hypophyse schüttet bei &gt;80 °C signifikant mehr Wachstumshormon aus (+200–300 %). Das Plasmavolumen expandiert — vergleichbar einem leichten Ausdauerreiz.</p></div>
+          <div class="acc-block"><h5>Mechanismus</h5><p>Hitze löst die Produktion von Heat Shock Proteins (HSP70/72) aus, die fehlgefaltete Proteine in Muskelzellen reparieren. Die <span class="tip" data-tip="Hirnanhangdrüse — steuert u.a. die Ausschüttung von Wachstumshormon (GH) und anderen Hormonen">Hypophyse</span> schüttet bei &gt;80 °C signifikant mehr Wachstumshormon aus (+200–300 %). Das Plasmavolumen expandiert — vergleichbar einem leichten Ausdauerreiz.</p></div>
           <div class="study-box"><div class="slabel">🔬 Schlüsselstudie</div><p><strong>Laukkanen et al. (2018), JAMA Internal Medicine:</strong><a class="cite-link" onclick="openQuellenAt('src-laukkanen');return false;" href="#">Laukkanen '18</a> Probanden mit 4×/Woche Sauna zeigten 40 % reduziertes kardiovaskuläres Risiko und signifikant erhöhte Ausdauerleistung über 20 Jahre Follow-up.</p></div>
           <div class="acc-block"><h5>Optimales Protokoll</h5><div class="protocol">
             <div class="p-step"><div class="p-num">1</div><p>Frühestens 60 Min nach Training (Hypertrophie-Signale laufen noch)</p></div>
@@ -1785,7 +1807,7 @@
         </div>
         <button class="acc2-btn acc2-desc" onclick="toggleAcc(this)">↗ Übersicht &amp; Wirkung <span class="ch">▾</span></button>
         <div class="acc2-body"><div class="acc2-inner">
-          <p style="font-size:.875rem;color:var(--text-2);line-height:1.65">Der stärkste Hebel der Regeneration. Gezielte Nährstoffzufuhr aktiviert molekulare Reparaturprozesse — mit der höchsten Evidenz aller Tools.</p>
+          <p style="font-size:.875rem;color:var(--text-2);line-height:1.65">Der stärkste Hebel der Regeneration. Gezielte Nährstoffzufuhr aktiviert <span class="tip" data-tip="Reparatur auf Zellebene — Proteine, Enzyme und beschädigte Strukturen werden durch biochemische Prozesse wiederhergestellt">molekulare Reparaturprozesse</span> — mit der höchsten Evidenz aller Tools.</p>
           <ul class="tool-facts">
             <li>Leucin triggert mTOR → Muskelproteinsynthese<a class="cite-link" onclick="openQuellenAt('src-jager');return false;" href="#">Jäger '17</a></li>
             <li>1,0–1,2 g/kg KG/h Kohlenhydrate für Glykogen-Resynthese<a class="cite-link" onclick="openQuellenAt('src-burke');return false;" href="#">Burke '11</a></li>
@@ -1800,7 +1822,7 @@
         <button class="acc2-btn acc2-sci" onclick="toggleAcc(this)">🔬 Wissenschaft im Detail <span class="ch">▾</span></button>
         <div class="acc2-body"><div class="acc2-inner">
           <div class="acc-block"><h5>Mechanismus</h5><p>Die essentielle Aminosäure Leucin aktiviert direkt den mTOR-Komplex — den zentralen Schalter der Muskelproteinsynthese. Kohlenhydrate stimulieren Insulinausschüttung, die Nährstoffaufnahme in Muskelzellen beschleunigt. Omega-3-Fettsäuren hemmen proinflammatorische Zytokine (IL-6, TNF-α).</p></div>
-          <div class="study-box"><div class="slabel">🔬 Schlüsselstudie</div><p><strong>Phillips &amp; Van Loon (2011):</strong><a class="cite-link" onclick="openQuellenAt('src-jager');return false;" href="#">Jäger '17</a> Protein + Kohlenhydrate direkt nach Training erhöhen Muskelproteinsynthese um bis zu 50 %. IOC-Konsens (Thomas et al., 2016):<a class="cite-link" onclick="openQuellenAt('src-thomas');return false;" href="#">Thomas '16</a> Gesamtproteinzufuhr am Tag (1,6–2,2 g/kg KG) ist wichtiger als exaktes Timing.</p></div>
+          <div class="study-box"><div class="slabel">🔬 Schlüsselstudie</div><p><strong>Phillips &amp; Van Loon (2011):</strong><a class="cite-link" onclick="openQuellenAt('src-jager');return false;" href="#">Jäger '17</a> Protein + Kohlenhydrate direkt nach Training erhöhen Muskelproteinsynthese um bis zu 50 %. <span class="tip" data-tip="Offizielles Positionspapier des Internationalen Olympischen Komitees zu Ernährung und Leistung">IOC-Konsens</span> (Thomas et al., 2016):<a class="cite-link" onclick="openQuellenAt('src-thomas');return false;" href="#">Thomas '16</a> Gesamtproteinzufuhr am Tag (1,6–2,2 g/kg KG) ist wichtiger als exaktes Timing.</p></div>
           <div class="myth-box"><div class="mlabel">💡 Mythos-Check</div><p><strong>Mythos:</strong> „Das anabole Fenster schließt sich nach 30 Min." <strong>Fakt:</strong> Das Fenster ist 2–4 Stunden post-exercise. Die tägliche Gesamtproteinzufuhr schlägt das genaue Timing.</p></div>
         </div></div>
       </div>
@@ -2745,6 +2767,31 @@ document.querySelectorAll('.tool-card').forEach(card => barObs.observe(card));
   } else {
     wrapTerms(document.body);
   }
+})();
+
+/* ── Tooltip-Engine ── */
+(function(){
+  const box = document.createElement('div');
+  box.id = 'tip-box';
+  document.body.appendChild(box);
+  function pos(e) {
+    const x = e.clientX ?? (e.touches && e.touches[0].clientX) ?? 0;
+    const y = e.clientY ?? (e.touches && e.touches[0].clientY) ?? 0;
+    const tw = box.offsetWidth, th = box.offsetHeight;
+    const vw = window.innerWidth, vh = window.innerHeight;
+    box.style.left = Math.min(x + 14, vw - tw - 8) + 'px';
+    box.style.top  = (y - th - 10 < 4 ? y + 18 : y - th - 10) + 'px';
+  }
+  document.querySelectorAll('.tip').forEach(el => {
+    el.addEventListener('mouseenter', e => { box.textContent = el.dataset.tip; box.classList.add('vis'); pos(e); });
+    el.addEventListener('mousemove', pos);
+    el.addEventListener('mouseleave', () => box.classList.remove('vis'));
+    el.addEventListener('touchstart', e => {
+      box.textContent = el.dataset.tip; box.classList.add('vis');
+      pos(e.touches[0]); e.preventDefault();
+    }, { passive: false });
+    el.addEventListener('touchend', () => setTimeout(() => box.classList.remove('vis'), 2000));
+  });
 })();
 </script>
 
