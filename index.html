@@ -1455,7 +1455,7 @@
               </table></div>
               <p style="margin-top:1rem;font-size:.78rem;color:var(--text-3);line-height:1.6;border-top:1px solid var(--border);padding-top:.75rem">
                 Alle verwendeten Studien und Quellen sowie einen Hinweis zum Einsatz von KI-Werkzeugen findest du im vollständigen
-                <a href="#quellen" style="color:var(--accent-c);font-weight:600;text-decoration:none">Quellenverzeichnis →</a>
+                <a href="#quellen" onclick="openQuellen(event)" style="color:var(--accent-c);font-weight:600;text-decoration:none">Quellenverzeichnis →</a>
               </p>
             </div>
           </div>
@@ -2942,31 +2942,5 @@ document.querySelectorAll('.tool-card').forEach(card => barObs.observe(card));
 })();
 </script>
 
-<section id="quellen" style="padding:4rem 0 6rem;border-top:1px solid var(--border)">
-  <div class="wrap" style="max-width:860px">
-    <p class="section-eyebrow">Wissenschaftliche Grundlage</p>
-    <h2 class="section-title" style="margin-bottom:2rem">Quellenverzeichnis</h2>
-    <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:1.1rem;font-size:.9rem;line-height:1.7;color:var(--text-2)">
-      <li><strong>REGman '21</strong> — Ferrauti, A., Kellmann, M., Wiewelhove, T. et al. (2012–2021). <em>REGman – Optimization of Training and Competition: Management of Regeneration in Elite Sports</em>. BISp. → <a href="https://regman.org/" target="_blank" rel="noopener" style="color:var(--accent-c)">regman.org</a></li>
-      <li><strong>Dupuy '18</strong> — Dupuy, O. et al. (2018). An Evidence-Based Approach for Choosing Post-exercise Recovery Techniques. <em>Frontiers in Physiology</em>, 9, 403. → <a href="https://www.frontiersin.org/journals/physiology/articles/10.3389/fphys.2018.00403/full" target="_blank" rel="noopener" style="color:var(--accent-c)">Volltext Open Access</a></li>
-      <li><strong>Jäger '17</strong> — Jäger, R. et al. (2017). International Society of Sports Nutrition Position Stand: protein and exercise. <em>JISSN</em>, 14, 20. → <a href="https://jissn.biomedcentral.com/articles/10.1186/s12970-017-0177-8" target="_blank" rel="noopener" style="color:var(--accent-c)">Volltext Open Access</a></li>
-      <li><strong>Wiewelhove '19</strong> — Wiewelhove, T. et al. (2019). A Meta-Analysis of the Effects of Foam Rolling on Performance and Recovery. <em>Frontiers in Physiology</em>, 10, 376. → <a href="https://www.frontiersin.org/journals/physiology/articles/10.3389/fphys.2019.00376/full" target="_blank" rel="noopener" style="color:var(--accent-c)">Volltext Open Access</a></li>
-      <li><strong>Skinner '20</strong> — Skinner, B. et al. (2020). Systematic review and meta-analysis of foam rolling effects. <em>Journal of Bodywork and Movement Therapies</em>, 24 (4), 105–122. DOI: 10.1016/j.jbmt.2020.01.007 [kein Volltext frei zugänglich]</li>
-      <li><strong>Ferreira '23</strong> — Ferreira, R.M. et al. (2023). Effects of massage guns on performance and recovery: a systematic review. → <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10532323/" target="_blank" rel="noopener" style="color:var(--accent-c)">Volltext Open Access (PMC)</a></li>
-      <li><strong>Sams '23</strong> — Sams, L. et al. (2023). The Effect Of Percussive Therapy On Musculoskeletal Performance and Experiences of Pain. <em>Int. Journal of Sports Physical Therapy</em>, 18 (2). → <a href="https://ijspt.scholasticahq.com/article/73795-the-effect-of-percussive-therapy-on-musculoskeletal-performance-and-experiences-of-pain-a-systematic-literature-review" target="_blank" rel="noopener" style="color:var(--accent-c)">Volltext Open Access</a></li>
-      <li><strong>Dattilo '11</strong> — Dattilo, M. et al. (2011). Sleep and muscle recovery: Endocrinological and molecular basis for a new and promising hypothesis. <em>Medical Hypotheses</em>, 77 (2), 220–222. DOI: 10.1016/j.mehy.2011.04.017 [kein Volltext frei zugänglich]</li>
-      <li><strong>Scoon '07</strong> — Scoon, G.S. et al. (2007). Effect of post-exercise sauna bathing on the endurance performance of competitive male runners. <em>Journal of Science and Medicine in Sport</em>, 10 (4), 259–262. DOI: 10.1016/j.jsams.2006.06.009 [kein Volltext frei zugänglich]</li>
-      <li><strong>Laukkanen '18</strong> — Laukkanen, T. et al. (2018). Sauna bathing and cardiovascular outcomes: a prospective cohort study. <em>BMC Medicine</em>, 16, 219. DOI: 10.1186/s12916-018-1198-0 [kein Volltext frei zugänglich]</li>
-      <li><strong>Moore '23</strong> — Moore, E. et al. (2023). Cold-water immersion and recovery from strenuous exercise. <em>Sports Medicine</em>. DOI: 10.1007/s40279-022-01800-1 [kein Volltext frei zugänglich]</li>
-      <li><strong>Leeder '12</strong> — Leeder, J. et al. (2012). Cold water immersion and recovery from strenuous exercise: a meta-analysis. <em>British Journal of Sports Medicine</em>, 46 (4), 233–240. DOI: 10.1136/bjsports-2011-090061 [kein Volltext frei zugänglich]</li>
-
-      <li><strong>Fullagar '15</strong> — Fullagar, H.H.K. et al. (2015). Sleep and Athletic Performance: The Effects of Sleep Loss on Exercise Performance, and Physiological and Cognitive Responses to Exercise. <em>Sports Medicine</em>, 45 (2), 161–186. DOI: 10.1007/s40279-014-0260-0 [kein Volltext frei zugänglich]</li>
-
-      <li><strong>Thomas '16</strong> — Thomas, D.T., Erdman, K.A., Burke, L.M. (2016). Position of the Academy of Nutrition and Dietetics, Dietitians of Canada, and the American College of Sports Medicine: Nutrition and Athletic Performance. <em>Journal of the Academy of Nutrition and Dietetics</em>, 116 (3), 501–528. DOI: 10.1016/j.jand.2015.12.006 [kein Volltext frei zugänglich]</li>
-
-      <li><strong>Burke '11</strong> — Burke, L.M. et al. (2011). Carbohydrates for training and competition. <em>Journal of Sports Sciences</em>, 29 (S1), S17–S27. DOI: 10.1080/02640414.2011.585473 [kein Volltext frei zugänglich]</li>
-    </ul>
-  </div>
-</section>
 </body>
 </html>
