@@ -1515,221 +1515,6 @@
 </div>
 
 <!-- ══ Quellen Overlay ════════════════════════════════════════════ -->
-<div id="quellen-overlay" role="dialog" aria-modal="true" aria-label="Quellenverzeichnis">
-  <div id="quellen-backdrop" onclick="closeQuellen()"></div>
-  <div id="quellen-panel">
-    <button id="quellen-close" onclick="closeQuellen()" aria-label="Schließen">✕ Schließen</button>
-
-    <p class="section-eyebrow">Wissenschaftliche Grundlage</p>
-    <h2 class="section-title">Quellenverzeichnis</h2>
-    <p class="section-sub">
-      Alle verwendeten Studien, Interviews und Quellen auf einen Blick.
-      Klicke auf eine Karte, um zur Originalquelle zu gelangen.
-    </p>
-
-    <div class="sources-grid">
-
-      <!-- ── Experten-Interview ── -->
-      <p class="source-cat">Experten-Interview</p>
-
-      <div class="source-card">
-        <span class="source-type t-experte">Interview</span>
-        <h4>Prof. Dr. Alexander Ferrauti · Ruhr-Universität Bochum</h4>
-        <p>Lehr- und Forschungsbereich Trainingswissenschaft, Fakultät für Sportwissenschaft. Persönliches Interview zu Regenerationsmethoden und deren physiologischer Wirksamkeit im Sport.</p>
-      </div>
-
-      <!-- ── Grundlagen & Übertraining ── -->
-      <p class="source-cat">Grundlagen · Regeneration &amp; Übertraining</p>
-
-      <div class="source-card">
-        <span class="source-type t-studie">Konsensusdokument · 2013</span>
-        <h4>Prevention, Diagnosis and Treatment of the Overtraining Syndrome</h4>
-        <p>Meeusen, R. et al. · <em>European Journal of Sport Science</em> · Grundlegendes Konsensusdokument zu Übertraining, Belastungssteuerung und Erholungsmanagement im Sport.</p>
-      </div>
-
-      <div class="source-card">
-        <span class="source-type t-studie">Review · 2010</span>
-        <h4>Preventing Overtraining — Stress/Recovery Monitoring</h4>
-        <p>Kellmann, M. · Übersicht zu Methoden der Belastungs- und Erholungsüberwachung bei Hochleistungsathleten zur Prävention von Überlastungssyndromen.</p>
-      </div>
-
-      <a id="src-dupuy" class="source-card" style="text-decoration:none;cursor:pointer" href="https://www.frontiersin.org/journals/physiology/articles/10.3389/fphys.2018.00403/full" target="_blank" rel="noopener">
-        <span class="source-type t-studie">Übersicht · 2018</span>
-        <h4>An Evidence-Based Approach for Choosing Recovery Techniques</h4>
-        <p>Dupuy, O. et al. · <em>Frontiers in Physiology</em> · Evidenzbasierter Vergleich aller gängigen Regenerationsmethoden — eine der meistzitierten Übersichtsarbeiten im Sportbereich.</p>
-        <span class="source-link">Frontiers Open Access →</span>
-      </a>
-
-      <!-- ── Schlaf ── -->
-      <p class="source-cat">Schlaf &amp; Regeneration</p>
-
-      <div id="src-fullagar" class="source-card">
-        <span class="source-type t-studie">Review · 2015</span>
-        <h4>Sleep and Athletic Performance</h4>
-        <p>Fullagar, H. et al. · <em>Sports Medicine</em> · Umfassende Übersicht zu den Auswirkungen von Schlafmangel auf sportliche Leistung, Reaktionszeit und Verletzungsrisiko.</p>
-      </div>
-
-      <div id="src-dattilo" class="source-card">
-        <span class="source-type t-studie">Originalstudie · 2011</span>
-        <h4>Sleep and Muscle Recovery — Endocrinological &amp; Molecular Basis</h4>
-        <p>Dattilo, M. et al. · Hormonelle und molekulare Grundlagen für die zentrale Rolle des Schlafs bei der Muskelregeneration (GH, IGF-1, Proteinsynthese).</p>
-      </div>
-
-      <div class="source-card">
-        <span class="source-type t-studie">Review · 2017</span>
-        <h4>Sleep and Inflammation</h4>
-        <p>Simpson, N. et al. · Zusammenhang zwischen Schlafdauer, -qualität und systemischer Entzündungsreaktion — relevant für Regeneration nach intensiver Belastung.</p>
-      </div>
-
-      <!-- ── Ernährung ── -->
-      <p class="source-cat">Ernährung &amp; Muskelregeneration</p>
-
-      <a id="src-jager" class="source-card" style="text-decoration:none;cursor:pointer" href="https://jissn.biomedcentral.com/articles/10.1186/s12970-017-0177-8" target="_blank" rel="noopener">
-        <span class="source-type t-studie">Position Stand · 2017</span>
-        <h4>ISSN Position Stand: Protein and Exercise</h4>
-        <p>Jäger, R. et al. · <em>Journal of the International Society of Sports Nutrition</em> · Offizielle Empfehlungen zur Proteinzufuhr für Sportler — Timing, Menge, Qualität.</p>
-        <span class="source-link">BioMed Central Open Access →</span>
-      </a>
-
-      <div id="src-thomas" class="source-card">
-        <span class="source-type t-studie">Position Stand · 2016</span>
-        <h4>Nutrition and Athletic Performance</h4>
-        <p>Thomas, D.T. et al. · <em>Academy of Nutrition and Dietetics</em> · Offizielle Ernährungsempfehlungen für Sportler zu Makronährstoffen, Hydratation und Timing.</p>
-      </div>
-
-      <div id="src-burke" class="source-card">
-        <span class="source-type t-studie">Review · 2011</span>
-        <h4>Carbohydrates for Training and Competition</h4>
-        <p>Burke, L. et al. · Evidenzbasierte Empfehlungen zur Kohlenhydratzufuhr rund ums Training — Glykogenresynthese, Verfügbarkeit und Leistungseffekte.</p>
-      </div>
-
-      <!-- ── Faszienrolle ── -->
-      <p class="source-cat">Faszienrolle · Foam Rolling</p>
-
-      <a id="src-wiewelhove" class="source-card" style="text-decoration:none;cursor:pointer" href="https://www.frontiersin.org/journals/physiology/articles/10.3389/fphys.2019.00376/full" target="_blank" rel="noopener">
-        <span class="source-type t-studie">Metaanalyse · 2019</span>
-        <h4>Effects of Foam Rolling on Performance and Recovery</h4>
-        <p>Wiewelhove, T. et al. · <em>Frontiers in Physiology</em> · Metaanalyse zu Leistungs- und Erholungseffekten des Foam Rollings — differenziert nach Zeitpunkt und Protokoll.</p>
-        <span class="source-link">Frontiers Open Access →</span>
-      </a>
-
-      <div id="src-skinner" class="source-card">
-        <span class="source-type t-studie">Syst. Review · 2020</span>
-        <h4>Foam Rolling — ROM, Recovery &amp; Athletic Performance</h4>
-        <p>Skinner, B. et al. · <em>Journal of Bodywork and Movement Therapies</em> · Systematisches Review und Metaanalyse zu Beweglichkeit, Muskelkater und Leistung.</p>
-      </div>
-
-      <div class="source-card">
-        <span class="source-type t-studie">Originalstudie · 2021</span>
-        <h4>Foam Rolling vs. Stretching — Performance Parameters</h4>
-        <p>Konrad, A. et al. · Direktvergleich von Foam Rolling und statischem Dehnen auf Kraft, Flexibilität und neuromuskuläre Parameter.</p>
-      </div>
-
-      <!-- ── Massagepistole ── -->
-      <p class="source-cat">Massagepistole · Percussive Therapy</p>
-
-      <a id="src-ferreira" class="source-card" style="text-decoration:none;cursor:pointer" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10532323/" target="_blank" rel="noopener">
-        <span class="source-type t-studie">Syst. Review · 2023</span>
-        <h4>Effects of Massage Guns on Performance and Recovery</h4>
-        <p>Ferreira, R.M. et al. · Systematisches Review zu den Auswirkungen von Massagepistolen auf sportliche Leistung und Erholung.</p>
-        <span class="source-link">PMC Open Access →</span>
-      </a>
-
-      <a id="src-sams" class="source-card" style="text-decoration:none;cursor:pointer" href="https://ijspt.scholasticahq.com/article/73795-the-effect-of-percussive-therapy-on-musculoskeletal-performance-and-experiences-of-pain-a-systematic-literature-review" target="_blank" rel="noopener">
-        <span class="source-type t-studie">Syst. Review · 2023</span>
-        <h4>Percussive Therapy — Musculoskeletal Performance &amp; Pain</h4>
-        <p>Sams, L. et al. · <em>Int. Journal of Sports Physical Therapy</em> · Systematisches Review zur Wirkung perkussiver Geräte auf Muskelleistung und Schmerzempfinden.</p>
-        <span class="source-link">DOI 10.26603/001c.73795 →</span>
-      </a>
-
-      <!-- ── Eisbad ── -->
-      <p class="source-cat">Eisbad · Cold Water Immersion</p>
-
-      <div id="src-moore" class="source-card">
-        <span class="source-type t-studie">Metaanalyse · 2023</span>
-        <h4>CWI vs. Other Recovery Modalities — Athletic Performance</h4>
-        <p>Moore, E. et al. · <em>Sports Medicine</em> · Systematische Metaanalyse und Meta-Regression: Kältebad im direkten Vergleich zu anderen Erholungsformen.</p>
-      </div>
-
-      <div id="src-leeder" class="source-card">
-        <span class="source-type t-studie">Metaanalyse · 2012</span>
-        <h4>Cold Water Immersion and Recovery — Meta-Analysis</h4>
-        <p>Leeder, J. et al. · Metaanalyse zur Wirksamkeit von Kältebädern nach intensiver Belastung auf Muskelkater, Kraft und subjektive Erholung.</p>
-      </div>
-
-      <!-- ── Sauna ── -->
-      <p class="source-cat">Sauna &amp; Wärme</p>
-
-      <div id="src-scoon" class="source-card">
-        <span class="source-type t-studie">Originalstudie · 2007</span>
-        <h4>Post-Exercise Sauna Bathing and Endurance Performance</h4>
-        <p>Scoon, G.S.M. et al. · Effekt regelmäßiger Saunagänge nach dem Training auf Ausdauerleistung und Blutvolumen bei Ausdauersportlern.</p>
-      </div>
-
-      <div id="src-laukkanen" class="source-card">
-        <span class="source-type t-studie">Review · 2018</span>
-        <h4>Sauna Bathing and Systemic Inflammation</h4>
-        <p>Laukkanen, T. et al. · Zusammenhang zwischen Saunanutzung und systemischer Entzündung — relevante Biomarker und physiologische Mechanismen.</p>
-      </div>
-
-      <div class="source-card">
-        <span class="source-type t-studie">Studie · 2013</span>
-        <h4>Effects of Sauna on Cardiovascular &amp; Hormonal Responses</h4>
-        <p>Pilch, W. et al. · Auswirkungen von Saunagängen auf Herz-Kreislauf-Parameter und Hormonausschüttung bei Athleten.</p>
-      </div>
-
-      <!-- ── Weiterführend Deutsch ── -->
-      <p class="source-cat">Weiterführende Literatur · Deutsch</p>
-
-      <a class="source-card" style="text-decoration:none;cursor:pointer" href="https://www.zeitschrift-sportmedizin.de" target="_blank" rel="noopener">
-        <span class="source-type t-online">Fachzeitschrift · DE</span>
-        <h4>Deutsche Zeitschrift für Sportmedizin (DZSM)</h4>
-        <p>Wichtigste deutsche Quelle. Zentraler Artikel: <em>„Wissenslücken und Perspektiven in der Regenerationsforschung"</em> (2021) — Erholung ist hochindividuell, viele Tools wirken auch über Placebo (was psychologisch trotzdem wertvoll ist).</p>
-        <span class="source-link">zeitschrift-sportmedizin.de →</span>
-      </a>
-
-      <a id="src-regman" class="source-card" style="text-decoration:none;cursor:pointer" href="https://regman.org/" target="_blank" rel="noopener">
-        <span class="source-type t-online">Forschungsprojekt · DE</span>
-        <h4>REGman — Regenerationsmanagement im Spitzensport (BISp, 2012–2021)</h4>
-        <p>Ferrauti, A., Kellmann, M., Meyer, T., Pfeiffer, M. · Ruhr-Universität Bochum, Universität des Saarlandes, Universität Mainz · Neunjähriges Multicenterprojekt mit über 15 Teilstudien in Kooperation mit Olympiastützpunkten und Spitzenverbänden. Kernergebnis: Schlaf und Ernährung dominieren; komplementäre Methoden (Eisbad, Sauna, Foam Rolling) zeigen auf Gruppenebene nur geringe Evidenz — aber auf <em>individueller</em> Ebene teils moderate subjektive Effekte. Abschlussveröffentlichung: Wiewelhove et al. (2024), <em>International Journal of Sports Science &amp; Coaching</em>.</p>
-        <span class="source-link">regman.org →</span>
-      </a>
-
-      <a class="source-card" style="text-decoration:none;cursor:pointer" href="https://www.vbg.de/SharedDocs/Medien-Center/DE/Broschuere/Branchen/Sport/rueckkehr_zum_sport.html" target="_blank" rel="noopener">
-        <span class="source-type t-online">Leitfaden · DE</span>
-        <h4>VBG Fachwissen — Return-to-Competition</h4>
-        <p>Die Verwaltungs-Berufsgenossenschaft veröffentlicht praxisnahe, wissenschaftlich fundierte Leitfäden zur Rehabilitation im Profisport. Besonders der „Return-to-Competition"-Leitfaden ist für den Schulkontext gut aufbereitet.</p>
-        <span class="source-link">vbg.de →</span>
-      </a>
-
-      <!-- ── Online ── -->
-      <p class="source-cat">Online</p>
-
-      <a class="source-card" style="text-decoration:none;cursor:pointer" href="https://www.spektrum.de/kolumne/regeneration-nach-dem-sport-wie-viel-erholung-muss-sein/1915714" target="_blank" rel="noopener">
-        <span class="source-type t-online">Kolumne · Spektrum.de</span>
-        <h4>Regeneration nach dem Sport — wie viel Erholung muss sein?</h4>
-        <p>Wissenschaftliche Einordnung von Regenerationsmethoden: individuelle Wirksamkeit, Gabbets Akut-Chronisch-Verhältnis und warum keine Methode universell überlegen ist.</p>
-        <span class="source-link">Zum Artikel → spektrum.de</span>
-      </a>
-
-      <!-- ── KI-Werkzeuge ── -->
-      <p class="source-cat">KI-Werkzeuge · Transparenzhinweis</p>
-
-      <div class="source-card" style="border-color: rgba(155,132,240,.35); background: rgba(155,132,240,.04);">
-        <span class="source-type" style="background:rgba(155,132,240,.15);color:var(--accent-v)">Werkzeug · KI</span>
-        <h4>Claude (Anthropic) &amp; Grok (xAI)</h4>
-        <p>
-          Bei der <strong>Programmierung dieser Website</strong> und bei der <strong>Erstellung von Grafiken und Animationen</strong> in unseren Videos haben wir KI-Tools genutzt — konkret Claude Code (Anthropic) und Grok (xAI).
-        </p>
-        <p style="margin-top:.55rem; padding-top:.55rem; border-top: 1px solid var(--border); font-size:.8rem; color:var(--text-2); line-height:1.6;">
-          <strong style="color:var(--text-1)">Wichtig:</strong> Die inhaltliche Arbeit — also die Auswahl der Themen, die Literaturrecherche, die Auswertung der Studien, die Struktur der Website, die redaktionellen Texte und die Gesamtstrategie des Projekts — haben wir vollständig selbst erarbeitet. Die KI war ein technisches Hilfsmittel, keine inhaltliche Quelle.
-        </p>
-      </div>
-
-    </div>
-  </div>
-</div>
-
 <!-- ══ Reha-Tools ════════════════════════════════════════════════ -->
 <section id="tools">
   <div class="wrap">
@@ -2941,6 +2726,222 @@ document.querySelectorAll('.tool-card').forEach(card => barObs.observe(card));
   });
 })();
 </script>
+
+
+<div id="quellen-overlay" role="dialog" aria-modal="true" aria-label="Quellenverzeichnis">
+  <div id="quellen-backdrop" onclick="closeQuellen()"></div>
+  <div id="quellen-panel">
+    <button id="quellen-close" onclick="closeQuellen()" aria-label="Schließen">✕ Schließen</button>
+
+    <p class="section-eyebrow">Wissenschaftliche Grundlage</p>
+    <h2 class="section-title">Quellenverzeichnis</h2>
+    <p class="section-sub">
+      Alle verwendeten Studien, Interviews und Quellen auf einen Blick.
+      Klicke auf eine Karte, um zur Originalquelle zu gelangen.
+    </p>
+
+    <div class="sources-grid">
+
+      <!-- ── Experten-Interview ── -->
+      <p class="source-cat">Experten-Interview</p>
+
+      <div class="source-card">
+        <span class="source-type t-experte">Interview</span>
+        <h4>Prof. Dr. Alexander Ferrauti · Ruhr-Universität Bochum</h4>
+        <p>Lehr- und Forschungsbereich Trainingswissenschaft, Fakultät für Sportwissenschaft. Persönliches Interview zu Regenerationsmethoden und deren physiologischer Wirksamkeit im Sport.</p>
+      </div>
+
+      <!-- ── Grundlagen & Übertraining ── -->
+      <p class="source-cat">Grundlagen · Regeneration &amp; Übertraining</p>
+
+      <div class="source-card">
+        <span class="source-type t-studie">Konsensusdokument · 2013</span>
+        <h4>Prevention, Diagnosis and Treatment of the Overtraining Syndrome</h4>
+        <p>Meeusen, R. et al. · <em>European Journal of Sport Science</em> · Grundlegendes Konsensusdokument zu Übertraining, Belastungssteuerung und Erholungsmanagement im Sport.</p>
+      </div>
+
+      <div class="source-card">
+        <span class="source-type t-studie">Review · 2010</span>
+        <h4>Preventing Overtraining — Stress/Recovery Monitoring</h4>
+        <p>Kellmann, M. · Übersicht zu Methoden der Belastungs- und Erholungsüberwachung bei Hochleistungsathleten zur Prävention von Überlastungssyndromen.</p>
+      </div>
+
+      <a id="src-dupuy" class="source-card" style="text-decoration:none;cursor:pointer" href="https://www.frontiersin.org/journals/physiology/articles/10.3389/fphys.2018.00403/full" target="_blank" rel="noopener">
+        <span class="source-type t-studie">Übersicht · 2018</span>
+        <h4>An Evidence-Based Approach for Choosing Recovery Techniques</h4>
+        <p>Dupuy, O. et al. · <em>Frontiers in Physiology</em> · Evidenzbasierter Vergleich aller gängigen Regenerationsmethoden — eine der meistzitierten Übersichtsarbeiten im Sportbereich.</p>
+        <span class="source-link">Frontiers Open Access →</span>
+      </a>
+
+      <!-- ── Schlaf ── -->
+      <p class="source-cat">Schlaf &amp; Regeneration</p>
+
+      <div id="src-fullagar" class="source-card">
+        <span class="source-type t-studie">Review · 2015</span>
+        <h4>Sleep and Athletic Performance</h4>
+        <p>Fullagar, H. et al. · <em>Sports Medicine</em> · Umfassende Übersicht zu den Auswirkungen von Schlafmangel auf sportliche Leistung, Reaktionszeit und Verletzungsrisiko.</p>
+      </div>
+
+      <div id="src-dattilo" class="source-card">
+        <span class="source-type t-studie">Originalstudie · 2011</span>
+        <h4>Sleep and Muscle Recovery — Endocrinological &amp; Molecular Basis</h4>
+        <p>Dattilo, M. et al. · Hormonelle und molekulare Grundlagen für die zentrale Rolle des Schlafs bei der Muskelregeneration (GH, IGF-1, Proteinsynthese).</p>
+      </div>
+
+      <div class="source-card">
+        <span class="source-type t-studie">Review · 2017</span>
+        <h4>Sleep and Inflammation</h4>
+        <p>Simpson, N. et al. · Zusammenhang zwischen Schlafdauer, -qualität und systemischer Entzündungsreaktion — relevant für Regeneration nach intensiver Belastung.</p>
+      </div>
+
+      <!-- ── Ernährung ── -->
+      <p class="source-cat">Ernährung &amp; Muskelregeneration</p>
+
+      <a id="src-jager" class="source-card" style="text-decoration:none;cursor:pointer" href="https://jissn.biomedcentral.com/articles/10.1186/s12970-017-0177-8" target="_blank" rel="noopener">
+        <span class="source-type t-studie">Position Stand · 2017</span>
+        <h4>ISSN Position Stand: Protein and Exercise</h4>
+        <p>Jäger, R. et al. · <em>Journal of the International Society of Sports Nutrition</em> · Offizielle Empfehlungen zur Proteinzufuhr für Sportler — Timing, Menge, Qualität.</p>
+        <span class="source-link">BioMed Central Open Access →</span>
+      </a>
+
+      <div id="src-thomas" class="source-card">
+        <span class="source-type t-studie">Position Stand · 2016</span>
+        <h4>Nutrition and Athletic Performance</h4>
+        <p>Thomas, D.T. et al. · <em>Academy of Nutrition and Dietetics</em> · Offizielle Ernährungsempfehlungen für Sportler zu Makronährstoffen, Hydratation und Timing.</p>
+      </div>
+
+      <div id="src-burke" class="source-card">
+        <span class="source-type t-studie">Review · 2011</span>
+        <h4>Carbohydrates for Training and Competition</h4>
+        <p>Burke, L. et al. · Evidenzbasierte Empfehlungen zur Kohlenhydratzufuhr rund ums Training — Glykogenresynthese, Verfügbarkeit und Leistungseffekte.</p>
+      </div>
+
+      <!-- ── Faszienrolle ── -->
+      <p class="source-cat">Faszienrolle · Foam Rolling</p>
+
+      <a id="src-wiewelhove" class="source-card" style="text-decoration:none;cursor:pointer" href="https://www.frontiersin.org/journals/physiology/articles/10.3389/fphys.2019.00376/full" target="_blank" rel="noopener">
+        <span class="source-type t-studie">Metaanalyse · 2019</span>
+        <h4>Effects of Foam Rolling on Performance and Recovery</h4>
+        <p>Wiewelhove, T. et al. · <em>Frontiers in Physiology</em> · Metaanalyse zu Leistungs- und Erholungseffekten des Foam Rollings — differenziert nach Zeitpunkt und Protokoll.</p>
+        <span class="source-link">Frontiers Open Access →</span>
+      </a>
+
+      <div id="src-skinner" class="source-card">
+        <span class="source-type t-studie">Syst. Review · 2020</span>
+        <h4>Foam Rolling — ROM, Recovery &amp; Athletic Performance</h4>
+        <p>Skinner, B. et al. · <em>Journal of Bodywork and Movement Therapies</em> · Systematisches Review und Metaanalyse zu Beweglichkeit, Muskelkater und Leistung.</p>
+      </div>
+
+      <div class="source-card">
+        <span class="source-type t-studie">Originalstudie · 2021</span>
+        <h4>Foam Rolling vs. Stretching — Performance Parameters</h4>
+        <p>Konrad, A. et al. · Direktvergleich von Foam Rolling und statischem Dehnen auf Kraft, Flexibilität und neuromuskuläre Parameter.</p>
+      </div>
+
+      <!-- ── Massagepistole ── -->
+      <p class="source-cat">Massagepistole · Percussive Therapy</p>
+
+      <a id="src-ferreira" class="source-card" style="text-decoration:none;cursor:pointer" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10532323/" target="_blank" rel="noopener">
+        <span class="source-type t-studie">Syst. Review · 2023</span>
+        <h4>Effects of Massage Guns on Performance and Recovery</h4>
+        <p>Ferreira, R.M. et al. · Systematisches Review zu den Auswirkungen von Massagepistolen auf sportliche Leistung und Erholung.</p>
+        <span class="source-link">PMC Open Access →</span>
+      </a>
+
+      <a id="src-sams" class="source-card" style="text-decoration:none;cursor:pointer" href="https://ijspt.scholasticahq.com/article/73795-the-effect-of-percussive-therapy-on-musculoskeletal-performance-and-experiences-of-pain-a-systematic-literature-review" target="_blank" rel="noopener">
+        <span class="source-type t-studie">Syst. Review · 2023</span>
+        <h4>Percussive Therapy — Musculoskeletal Performance &amp; Pain</h4>
+        <p>Sams, L. et al. · <em>Int. Journal of Sports Physical Therapy</em> · Systematisches Review zur Wirkung perkussiver Geräte auf Muskelleistung und Schmerzempfinden.</p>
+        <span class="source-link">DOI 10.26603/001c.73795 →</span>
+      </a>
+
+      <!-- ── Eisbad ── -->
+      <p class="source-cat">Eisbad · Cold Water Immersion</p>
+
+      <div id="src-moore" class="source-card">
+        <span class="source-type t-studie">Metaanalyse · 2023</span>
+        <h4>CWI vs. Other Recovery Modalities — Athletic Performance</h4>
+        <p>Moore, E. et al. · <em>Sports Medicine</em> · Systematische Metaanalyse und Meta-Regression: Kältebad im direkten Vergleich zu anderen Erholungsformen.</p>
+      </div>
+
+      <div id="src-leeder" class="source-card">
+        <span class="source-type t-studie">Metaanalyse · 2012</span>
+        <h4>Cold Water Immersion and Recovery — Meta-Analysis</h4>
+        <p>Leeder, J. et al. · Metaanalyse zur Wirksamkeit von Kältebädern nach intensiver Belastung auf Muskelkater, Kraft und subjektive Erholung.</p>
+      </div>
+
+      <!-- ── Sauna ── -->
+      <p class="source-cat">Sauna &amp; Wärme</p>
+
+      <div id="src-scoon" class="source-card">
+        <span class="source-type t-studie">Originalstudie · 2007</span>
+        <h4>Post-Exercise Sauna Bathing and Endurance Performance</h4>
+        <p>Scoon, G.S.M. et al. · Effekt regelmäßiger Saunagänge nach dem Training auf Ausdauerleistung und Blutvolumen bei Ausdauersportlern.</p>
+      </div>
+
+      <div id="src-laukkanen" class="source-card">
+        <span class="source-type t-studie">Review · 2018</span>
+        <h4>Sauna Bathing and Systemic Inflammation</h4>
+        <p>Laukkanen, T. et al. · Zusammenhang zwischen Saunanutzung und systemischer Entzündung — relevante Biomarker und physiologische Mechanismen.</p>
+      </div>
+
+      <div class="source-card">
+        <span class="source-type t-studie">Studie · 2013</span>
+        <h4>Effects of Sauna on Cardiovascular &amp; Hormonal Responses</h4>
+        <p>Pilch, W. et al. · Auswirkungen von Saunagängen auf Herz-Kreislauf-Parameter und Hormonausschüttung bei Athleten.</p>
+      </div>
+
+      <!-- ── Weiterführend Deutsch ── -->
+      <p class="source-cat">Weiterführende Literatur · Deutsch</p>
+
+      <a class="source-card" style="text-decoration:none;cursor:pointer" href="https://www.zeitschrift-sportmedizin.de" target="_blank" rel="noopener">
+        <span class="source-type t-online">Fachzeitschrift · DE</span>
+        <h4>Deutsche Zeitschrift für Sportmedizin (DZSM)</h4>
+        <p>Wichtigste deutsche Quelle. Zentraler Artikel: <em>„Wissenslücken und Perspektiven in der Regenerationsforschung"</em> (2021) — Erholung ist hochindividuell, viele Tools wirken auch über Placebo (was psychologisch trotzdem wertvoll ist).</p>
+        <span class="source-link">zeitschrift-sportmedizin.de →</span>
+      </a>
+
+      <a id="src-regman" class="source-card" style="text-decoration:none;cursor:pointer" href="https://regman.org/" target="_blank" rel="noopener">
+        <span class="source-type t-online">Forschungsprojekt · DE</span>
+        <h4>REGman — Regenerationsmanagement im Spitzensport (BISp, 2012–2021)</h4>
+        <p>Ferrauti, A., Kellmann, M., Meyer, T., Pfeiffer, M. · Ruhr-Universität Bochum, Universität des Saarlandes, Universität Mainz · Neunjähriges Multicenterprojekt mit über 15 Teilstudien in Kooperation mit Olympiastützpunkten und Spitzenverbänden. Kernergebnis: Schlaf und Ernährung dominieren; komplementäre Methoden (Eisbad, Sauna, Foam Rolling) zeigen auf Gruppenebene nur geringe Evidenz — aber auf <em>individueller</em> Ebene teils moderate subjektive Effekte. Abschlussveröffentlichung: Wiewelhove et al. (2024), <em>International Journal of Sports Science &amp; Coaching</em>.</p>
+        <span class="source-link">regman.org →</span>
+      </a>
+
+      <a class="source-card" style="text-decoration:none;cursor:pointer" href="https://www.vbg.de/SharedDocs/Medien-Center/DE/Broschuere/Branchen/Sport/rueckkehr_zum_sport.html" target="_blank" rel="noopener">
+        <span class="source-type t-online">Leitfaden · DE</span>
+        <h4>VBG Fachwissen — Return-to-Competition</h4>
+        <p>Die Verwaltungs-Berufsgenossenschaft veröffentlicht praxisnahe, wissenschaftlich fundierte Leitfäden zur Rehabilitation im Profisport. Besonders der „Return-to-Competition"-Leitfaden ist für den Schulkontext gut aufbereitet.</p>
+        <span class="source-link">vbg.de →</span>
+      </a>
+
+      <!-- ── Online ── -->
+      <p class="source-cat">Online</p>
+
+      <a class="source-card" style="text-decoration:none;cursor:pointer" href="https://www.spektrum.de/kolumne/regeneration-nach-dem-sport-wie-viel-erholung-muss-sein/1915714" target="_blank" rel="noopener">
+        <span class="source-type t-online">Kolumne · Spektrum.de</span>
+        <h4>Regeneration nach dem Sport — wie viel Erholung muss sein?</h4>
+        <p>Wissenschaftliche Einordnung von Regenerationsmethoden: individuelle Wirksamkeit, Gabbets Akut-Chronisch-Verhältnis und warum keine Methode universell überlegen ist.</p>
+        <span class="source-link">Zum Artikel → spektrum.de</span>
+      </a>
+
+      <!-- ── KI-Werkzeuge ── -->
+      <p class="source-cat">KI-Werkzeuge · Transparenzhinweis</p>
+
+      <div class="source-card" style="border-color: rgba(155,132,240,.35); background: rgba(155,132,240,.04);">
+        <span class="source-type" style="background:rgba(155,132,240,.15);color:var(--accent-v)">Werkzeug · KI</span>
+        <h4>Claude (Anthropic) &amp; Grok (xAI)</h4>
+        <p>
+          Bei der <strong>Programmierung dieser Website</strong> und bei der <strong>Erstellung von Grafiken und Animationen</strong> in unseren Videos haben wir KI-Tools genutzt — konkret Claude Code (Anthropic) und Grok (xAI).
+        </p>
+        <p style="margin-top:.55rem; padding-top:.55rem; border-top: 1px solid var(--border); font-size:.8rem; color:var(--text-2); line-height:1.6;">
+          <strong style="color:var(--text-1)">Wichtig:</strong> Die inhaltliche Arbeit — also die Auswahl der Themen, die Literaturrecherche, die Auswertung der Studien, die Struktur der Website, die redaktionellen Texte und die Gesamtstrategie des Projekts — haben wir vollständig selbst erarbeitet. Die KI war ein technisches Hilfsmittel, keine inhaltliche Quelle.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
 
 </body>
 </html>
